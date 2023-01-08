@@ -1,4 +1,84 @@
+\usepackage{amsmath,amsfonts,amsthm,mathtools,amssymb,bbm}
+\usepackage{graphicx,geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{relsize}
+\usepackage{tikz, float}
+%\geometry{margin=0.75in}
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{lemma}{Lemma}[theorem]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{prop}{Proposition}[section]
+%\newtheorem*{prf}{Proof}
+\newtheorem*{notation}{Notation}
+\newtheorem*{obs}{Observations}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
 
+\title{Topics in Applied Stochastic Processes}
+\author{Siva Athreya}
+\date{Spring 2023}
+\hypersetup{
+    colorlinks=true, 
+    linkcolor=blue, 
+    filecolor=magenta,      
+    urlcolor=cyan, 
+    pdftitle={Lecture notes}, 
+    pdfpagemode=FullScreen
+}
+
+%\setlength{\oddsidemargin}{0.5 in}
+%\setlength{\evensidemargin}{0.5 in}
+%\setlength{\topmargin}{0.75 in}
+%\setlength{\textwidth}{6.5 in}
+%\setlength{\textheight}{8.5 in}
+%\setlength{\headsep}{0.75 in}
+%\setlength{\parindent}{0 in}
+%\setlength{\parskip}{0.1 in}
+
+\fancyhead[E]{\chaptername \hfill \thepage}
+\fancyhead[O]{\thepage \hfill \sectioname}
+
+\renewcommand{\chaptername}{Week}
+
+\newcommand{\scribe}[1]{
+    \chapter{Finite Length Random Walks on $\Z$}
+    \begin{center}
+        \vbox{    
+            {\sc Scribe: #1} 
+        }
+    \end{center}
+}
+
+\newcommand{\E}{\mathop{\mathrm{E}}}
+\newcommand{\Var}{{\mathrm{Var}}}
+\newcommand{\one}{\mathlarger{\mathbbm{1}}}
+
+
+\def\R{\mathbb R}
+\def\E{\mathbb E}
+\def\P{\mathbb P}
+\def\Q{\mathbb Q}
+\def\N{\mathbb N}
+\def\Z{\mathbb Z}
+\def\O{\Omega}
+\def\o{\omega}
+\def\s{\sigma}
+\def\F{\mathcal F}
+\def\var{\text{Var}}
+\def\f{\frac}
+\def\A{\mathcal A}
+\def\ex{{\bf Example.\ }}
+\def\lb{\ ;\ }
+
+\newcommand\blfootnote[1]{%
+    \begin{NoHyper}%
+        \renewcommand\thefootnote{}\footnote{#1}%
+        \addtocounter{footnote}{-1}%
+    \end{NoHyper}%
+}
 \newcommand{\lecture}[2]{
    \begin{center}
       \vbox{    
