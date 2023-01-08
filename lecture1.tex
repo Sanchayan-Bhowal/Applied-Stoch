@@ -1,13 +1,13 @@
 \documentclass[main]{subfiles}
 
 \begin{document}
-\chapter*{Lecture 1} %Set chapter name
-\addcontentsline{toc}{chapter}{Introduction to Random Walks} %Set chapter title
+\chapter*{Lecture 1: Finite length random walks on $\Z$} %Set chapter name
+\addcontentsline{toc}{chapter}{Lecture 1} %Set chapter title
 \setcounter{chapter}{1} %Set chapter counter
 \setcounter{section}{0}
 
 %The content goes here
-\lecture{Siva Athreya}{Srivatsa B, Atreya Chodhury, Venkat Trivikram{$^\dagger$}}
+\lecture{Siva Athreya}{Srivatsa B, Venkat Trivikram{$^\dagger$}}
 
 \blfootnote{$^\dagger$ added illustrations}
 \vspace{-0.75cm}
@@ -32,6 +32,13 @@ $$ S_k:\O_N\to\Z\lb S_k(\o):=\sum_{i=1}^kX_k(\o)\lb S_0(\o):=0 \text{ for all } 
 \begin{definition}
     Fix $ N\in\N $. The sequence of random variables $ \{S_k\}_{k=1}^N $ on $ (\O_N,\F_N, \P_N) $ is called a (symmetric) simple random walk on $\Z$, of finite length $ N $, starting at $ 0 $.
 \end{definition}
+
+\begin{figure}[H]
+    \centering
+    \caption{Three possible trajectories for $(S_{n})_{n=0}^{N}$}
+    \includegraphics{threerw.png}
+\end{figure}
+
 In what follows, we suppress the subscript $ N $ while referring to the probability space $ (\O_N,\F_N, \P_N) $, and we assume that $ N\in\N $ is fixed.
 %\newpage
 \begin{obs}
@@ -53,11 +60,11 @@ In what follows, we suppress the subscript $ N $ while referring to the probabil
             \end{proof}
             \item[(b)](Independent increments) For $ 1\le k_1\le k_2\le \ldots\le N $, $ \{S_{k_i}-S_{k_{i-1}}:1\le i\le N\} $ are independent random variables.
 
-            % \input{figure1.tex}
-
             \begin{proof}
                 Observe that, for $ 1\le k<l\le N $, we have $ S_l-S_k=\sum_{i=k+1}^lX_i $. Therefore, if $ 1\le a<b\le c<d\le N $, we see that $ S_b-S_a $ and $ S_d-S_c $ are functions of disjoint sets of independent random variables, and hence the claim is true.
             \end{proof}
+
+            \input{figure1.tex}
 
             \item[(c)](Stationary in increments) For $ 1\le k<m\le N $, $ \P(S_m-S_k=\alpha)=\P(S_{m-k}=\alpha)$ for every $ \alpha\in\Z $.
 
@@ -196,7 +203,7 @@ In this setting, $ S_N^V $ is interpreted as the ``total gain".
 \begin{itemize}
     \item[1.]Show that $ \{X_k\}_{k=1}^N $ are independent.
     \item[2.]Show that $ \{S_n\}_{n=0}^N $ satisfies the Markov property.
-    \item[3.]For $ 1\le k<m\le N $, $ \P(S_m=b\ |\ S_k=a)=\P(S_{m-k}=b-a) $.
+    \item[3.]For $ 1\le k<m\le N $, show that $ \P(S_m=b\ |\ S_k=a)=\P(S_{m-k}=b-a) $.
     \item[4.]Show that $ \E[S_n^2]=\sum_{i=1}^n\E[X_i^2] $.
     \item[5.]
         \begin{itemize}
