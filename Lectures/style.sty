@@ -7,7 +7,7 @@
 \usepackage{tikz, float, import}
 \graphicspath{{../simulations/images/}}
 %\geometry{margin=0.75in}
-\newtheorem{theorem}{Theorem}
+\newtheorem{theorem}{Theorem}[section]
 \newtheorem{definition}{Definition}[section]
 \newtheorem{lemma}{Lemma}[theorem]
 \newtheorem{corollary}{Corollary}[theorem]
@@ -39,8 +39,8 @@
 %\setlength{\parindent}{0 in}
 %\setlength{\parskip}{0.1 in}
 
-\fancyhead[E]{\chaptername \hfill \thepage}
-\fancyhead[O]{\thepage \hfill \sectioname}
+
+\fancyhead{\thepage \hfill \sectioname}
 
 \renewcommand{\chaptername}{Week}
 
@@ -53,24 +53,19 @@
     \end{center}
 }
 
-\newcommand{\E}{\mathop{\mathrm{E}}}
-\newcommand{\Var}{{\mathrm{Var}}}
+
+\newcommand{\Var}{{\operatorname{Var}}}
 \newcommand{\one}{\mathlarger{\mathbbm{1}}}
 
 
 \def\R{\mathbb R}
-\def\E{\mathbb E}
-\def\P{\mathbb P}
+\def\E{\mathbf E}
+\def\P{\mathbf P}
 \def\Q{\mathbb Q}
 \def\N{\mathbb N}
 \def\Z{\mathbb Z}
-\def\O{\Omega}
-\def\o{\omega}
-\def\s{\sigma}
-\def\F{\mathcal F}
-\def\var{\text{Var}}
-\def\f{\frac}
-\def\A{\mathcal A}
+\def\SF{\mathcal F}
+\def\SA{\mathcal A}
 \def\ex{{\bf Example.\ }}
 \def\lb{\ ;\ }
 

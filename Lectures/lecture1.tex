@@ -1,9 +1,7 @@
 \documentclass[main]{subfiles}
 
 \begin{document}
-\chapter*{Lecture 1: Finite length random walks on $\Z$} %Set chapter name
-\addcontentsline{toc}{chapter}{Lecture 1} %Set chapter title
-\setcounter{chapter}{1} %Set chapter counter
+\chapter{Finite length random walks on $\Z$} %Set chapter name
 \setcounter{section}{0}
 
 %The content goes here
@@ -19,18 +17,18 @@ Random walks serve as very useful models in many applications. They are simple t
     $ \N=\{k\in\Z:k\ge 1\} $ and $ \N_{0}=\N \cup \{0\} $\\
 \end{notation}
 We now proceed to construct what is called a ``simple random walk" on $ \Z $ of finite length $ N\in\N $.
-The sample space $ \O_N $ and the event space $ \F_N $ are described below.
-$$ \O_N:=\{(\o_1,\ldots,\o_N):\o_i\in\{-1,1\}\ \forall\ 1\le i\le N\} $$
-$$ \F_N:=\{A:A\subseteq \O_N\} $$
+The sample space $ \Omega_N $ and the event space $ \SF_N $ are described below.
+$$ \Omega_N:=\{(\omega_1,\ldots,\omega_N):\omega_i\in\{-1,1\}\ \forall\ 1\le i\le N\} $$
+$$ \SF_N:=\{A:A\subseteq \Omega_N\} $$
 
-The probability function $ \P_N:\O_N\to [0,1] $ is defined as
+The probability function $ \P_N:\Omega_N\to [0,1] $ is defined as
 $$ \P_N(A):=\lvert A\rvert\ 2^{-N} $$
 
-We also define random variables $ X_k $ and $ S_k $ on $ \O_N $ for $ 1\le k\le N $ as
-$$ X_k:\O_N\to\{-1,1\}\lb X_k(\o):=\o_k$$
-$$ S_k:\O_N\to\Z\lb S_k(\o):=\sum_{i=1}^kX_k(\o)\lb S_0(\o):=0 \text{ for all } \o\in\O_N$$
+We also define random variables $ X_k $ and $ S_k $ on $ \Omega_N $ for $ 1\le k\le N $ as
+$$ X_k:\Omega_N\to\{-1,1\}\lb X_k(\omega):=\omega_k$$
+$$ S_k:\Omega_N\to\Z\lb S_k(\omega):=\sum_{i=1}^kX_k(\omega)\lb S_0(\omega):=0 \text{ for all } \omega\in\Omega_N$$
 \begin{definition}
-    Fix $ N\in\N $. The sequence of random variables $ \{S_k\}_{k=1}^N $ on $ (\O_N,\F_N, \P_N) $ is called a (symmetric) simple random walk on $\Z$, of finite length $ N $, starting at $ 0 $.
+    Fix $ N\in\N $. The sequence of random variables $ \{S_k\}_{k=1}^N $ on $ (\Omega_N,\SF_N, \P_N) $ is called a (symmetric) simple random walk on $\Z$, of finite length $ N $, starting at $ 0 $.
 \end{definition}
 
 \begin{figure}[H]
@@ -39,7 +37,7 @@ $$ S_k:\O_N\to\Z\lb S_k(\o):=\sum_{i=1}^kX_k(\o)\lb S_0(\o):=0 \text{ for all } 
     \includegraphics{threerw.png}
 \end{figure}
 
-In what follows, we suppress the subscript $ N $ while referring to the probability space $ (\O_N,\F_N, \P_N) $, and we assume that $ N\in\N $ is fixed.
+In what follows, we suppress the subscript $ N $ while referring to the probability space $ (\Omega_N,\SF_N, \P_N) $, and we assume that $ N\in\N $ is fixed.
 %\newpage
 \begin{obs}
     $\,$ \normalfont
@@ -47,10 +45,10 @@ In what follows, we suppress the subscript $ N $ while referring to the probabil
         \item[(a)] $\{X_k\}_{k=1}^N $ are iid, i.e. independent and identically distributed.
             \begin{proof}
                 \begin{align*}
-                    \P(X_k=1)=\P(\{\o\in\O:\o_k=1\}) & =2^{-N} |\{\o\in\O:\o_k=1\}| \\
-                                                     & =2^{-N}2^{N-1}               \\
-                                                     & =\frac{1}{2}                 \\
-                                                     & =\P(X_k=-1)
+                    \P(X_k=1)=\P(\{\omega\in\Omega:\omega_k=1\}) & =2^{-N} |\{\omega\in\Omega:\omega_k=1\}| \\
+                                                                 & =2^{-N}2^{N-1}                           \\
+                                                                 & =\frac{1}{2}                             \\
+                                                                 & =\P(X_k=-1)
                 \end{align*}
                 So $ \{X_k\}_{k=1}^N $ are identically distributed. Independence is left as an exercise.
             \end{proof}
@@ -79,18 +77,18 @@ In what follows, we suppress the subscript $ N $ while referring to the probabil
                 Left as an exercise.
             \end{proof}
 
-            \item[(f)](Moments) For $ 1\le k\le N $, we have $ \E[X_k]=\E[S_k]=0 $ and $ \var[S_k]=k $.
+            \item[(f)](Moments) For $ 1\le k\le N $, we have $ \E[X_k]=\E[S_k]=0 $ and $ \Var[S_k]=k $.
 
             \begin{proof}
                 By definition of expected value, $ \E[X_k]= 1(1/2) -1(1/2) =0 $. By linearity of expected values, $ \E[S_k]=\sum_{i=1}^k\E[X_i]=0 $.
 
-                Since $ \E[S_k]=0 $, $ \var[S_k]=\E[(\sum_{i=1}^kX_i)^2]=\sum_{i=1}^k\E[X_k^2]=k$. As an exercise, show that $ \E[(\sum_{i=1}^kX_i)^2]=\sum_{i=1}^k\E[X_k^2] $.
+                Since $ \E[S_k]=0 $, $ \Var[S_k]=\E[(\sum_{i=1}^kX_i)^2]=\sum_{i=1}^k\E[X_k^2]=k$. As an exercise, show that $ \E[(\sum_{i=1}^kX_i)^2]=\sum_{i=1}^k\E[X_k^2] $.
             \end{proof}
 
             \item[(g)](Distribution of $ S_n $) For $ x\in\{-n, -n+2, \ldots, n-2, n\} $, we have \[\P(S_n=x)=\P(S_n=-x)=\binom{n}{\frac{n+x}{2}}2^{-n}\]
 
             \begin{proof}
-                We only provide a sketch of the proof, which is left as an exercise. For $ 0\le j\le N $, $ \{S_n=2j-n\}=\{S_n=j-(n-j)\} $. So there must be a total of $ j $ steps to the right and $ n-j $ steps to the left. Therefore \[\P(S_n=2j-n)=2^{-N}\ |\{\o\in\O:\cdots\}|=2^{-n}\binom{n}{j}\]
+                We only provide a sketch of the proof, which is left as an exercise. For $ 0\le j\le N $, $ \{S_n=2j-n\}=\{S_n=j-(n-j)\} $. So there must be a total of $ j $ steps to the right and $ n-j $ steps to the left. Therefore \[\P(S_n=2j-n)=2^{-N}\ |\{\omega\in\Omega:\cdots\}|=2^{-n}\binom{n}{j}\]
             \end{proof}
 
             \item[(h)](Mode) The mode of the above distribution is achieved in the middle, i.e. at $ x=0 $ and at $ x=1,-1 $ for $ S_{2n} $ and $ S_{2n-1} $ respectively.
@@ -100,9 +98,9 @@ In what follows, we suppress the subscript $ N $ while referring to the probabil
             \end{proof}
 
             \item[(i)](Stirling's formula) Using Stirling's approximation, for large $ n $, we have
-            \[\binom{2n}{n}=\f{2n!}{n!n!}\sim\f{(2n)^{2n}e^{-2n}\sqrt{4\pi n}}{n^{2n}e^{-2n}\sqrt{2\pi n}\sqrt{2\pi n}}\sim\f{2^{2n}}{\sqrt{\pi n}}\tag{$ \ast $}\]
+            \[\binom{2n}{n}=\frac{2n!}{n!n!}\sim\frac{(2n)^{2n}e^{-2n}\sqrt{4\pi n}}{n^{2n}e^{-2n}\sqrt{2\pi n}\sqrt{2\pi n}}\sim\frac{2^{2n}}{\sqrt{\pi n}}\tag{$ \ast $}\]
             Therefore,
-            \[\P(S_{2n}=0)=\binom{2n}{n}\f{1}{2^{2n}}\sim\f{1}{\sqrt{\pi n}}\text{\quad as\quad $ n\to\infty $}\]
+            \[\P(S_{2n}=0)=\binom{2n}{n}\frac{1}{2^{2n}}\sim\frac{1}{\sqrt{\pi n}}\text{\quad as\quad $ n\to\infty $}\]
             This approximation, although correct, has a caveat - we chose to keep $ N $ fixed, but as $ n\to\infty $, we must also let $ N\to\infty $, and this requires subtler arguments. A few consequences of this approximation are mentioned in the exercises.\\
 
             %            As an exercise, use $ (\ast) $ to show the following.
@@ -117,29 +115,29 @@ In what follows, we suppress the subscript $ N $ while referring to the probabil
 
 Motivation for this section comes from the classic Gambler's ruin problem. We can interpret a simple random walk as a fair game between two players, where in round $ k $, a player wins the amount $ X_k $. Then $ S_n $ denotes the capital of one player over the other after $ n $ rounds.\\
 
-We would like to answer the following question - ``Is it possible to stop the game in a favorite moment, i.e., can clever stopping lead to a positive expected gain?". In other words, can we design a $ T(\o) $ for every $ \o\in\O $ such that $ \E[S_T] > 0 $? Of course, the decision to stop may only depend on the trajectory until that time: no ``insider knowledge” about the future of the trajectory is permitted.\\
+We would like to answer the following question - ``Is it possible to stop the game in a favorite moment, i.e., can clever stopping lead to a positive expected gain?". In other words, can we design a $ T(\omega) $ for every $ \omega\in\Omega $ such that $ \E[S_T] > 0 $? Of course, the decision to stop may only depend on the trajectory until that time: no ``insider knowledge” about the future of the trajectory is permitted.\\
 
 To formalize this setting, we make the following definition.\\
 
 \begin{definition}
-    An event $ A\subseteq\O $ is said to be observable by time $ n $ if it is a (possibly empty) union of basic / elementary events of the form \[\{\o\in\O:\o_1=o_1,\ldots,\o_n=o_n\}\] where $ o_i\in\{-1,1\} $ for $ 1\le i\le n $.
+    An event $ A\subseteq\Omega $ is said to be observable by time $ n $ if it is a (possibly empty) union of basic / elementary events of the form \[\{\omega\in\Omega:\omega_1=o_1,\ldots,\omega_n=o_n\}\] where $ o_i\in\{-1,1\} $ for $ 1\le i\le n $.
 \end{definition}
 
-We also define $ \A_0=\{\phi, \O\} $ and set \[\A_n:=\{A\in\F:A \text{ is observable by time }n\}.\]
-Immediately, we observe that \[\{\phi, \O\}=\A_0\subseteq\A_1\subseteq\ldots\subseteq\A_{N-1}\subseteq\A_N=\F \]
+We also define $ \SA_0=\{\phi, \Omega\} $ and set \[\SA_n:=\{A\in\SF:A \text{ is observable by time }n\}.\]
+Immediately, we observe that \[\{\phi, \Omega\}=\SA_0\subseteq\SA_1\subseteq\ldots\subseteq\SA_{N-1}\subseteq\SA_N=\SF \]
 
-As an easy exercise, verify that each $ \A_n $ is closed with respect to taking complement, union and intersection. Such a sequence $ \{\A_i\}_{i=0}^N $ is called a \textit{filtration}.
+As an easy exercise, verify that each $ \SA_n $ is closed with respect to taking complement, union and intersection. Such a sequence $ \{\SA_i\}_{i=0}^N $ is called a \textit{filtration}.
 
 \begin{definition}
-    A function $ T:\O\to\{0, 1, \ldots, N\}\cup\{\infty\} $ is called a stopping time if for each $ 0\le n\le N $,  \[\{T=n\}=\{\o\in\O:T(\o)=n\}\in\A_n\]
+    A function $ T:\Omega\to\{0, 1, \ldots, N\}\cup\{\infty\} $ is called a stopping time if for each $ 0\le n\le N $,  \[\{T=n\}=\{\omega\in\Omega:T(\omega)=n\}\in\SA_n\]
 \end{definition}
 
-\ex For $ a\in\Z $, let $ \s_a=\inf\{n: S_n=a, 0\le n\le N\} $ denote the \textit{first} hitting time of $ a $. As an exercise, show that $ \s_a $ is a stopping time.\\
+\ex For $ a\in\Z $, let $ \sigma_a=\inf\{n: S_n=a, 0\le n\le N\} $ denote the \textit{first} hitting time of $ a $. As an exercise, show that $ \sigma_a $ is a stopping time.\\
 
 \ex For $ a\in\Z $, let $ L_a=\max\{n: S_n=a, 0\le n\le N\}$ denote the \textit{last} hitting time of $ a $. As an exercise, show that $ L_a $ is NOT a stopping time.
 
 \begin{theorem}
-    Let $ T:\O\to\{0,1,\ldots,N\} $ be a stopping time. Then \[\E[S_T]=0\] where $ S_T:\O\to\Z $ maps $ \o\mapsto S_{T(\o)}(\o) $.
+    Let $ T:\Omega\to\{0,1,\ldots,N\} $ be a stopping time. Then \[\E[S_T]=0\] where $ S_T:\Omega\to\Z $ maps $ \omega\mapsto S_{T(\omega)}(\omega) $.
 \end{theorem}
 
 \begin{proof}
@@ -161,9 +159,9 @@ As an easy exercise, verify that each $ \A_n $ is closed with respect to taking 
     \]
     \[\E[X_k\one\{T\ge k\}]=\P(X_k=1,T\ge k)-\P(X_k=-1,T\ge k) \tag{$ \dagger\dagger $}\]
     Now,
-    \[\{T\ge k\}=\{T<k\}^c=\bigg(\bigcup_{l=0}^{k-1}\{T=l\}\bigg)^c\in\A_{k-1}\]
-    Using the fact that $ \{T\ge k\}\in\A_{k-1} $, one can show that (details left as an exercise)
-    \[\P(X_k=1,T\ge k)=\P(X_k=-1,T\ge k)=\f{1}{2}\P(T\ge k)\]
+    \[\{T\ge k\}=\{T<k\}^c=\bigg(\bigcup_{l=0}^{k-1}\{T=l\}\bigg)^c\in\SA_{k-1}\]
+    Using the fact that $ \{T\ge k\}\in\SA_{k-1} $, one can show that (details left as an exercise)
+    \[\P(X_k=1,T\ge k)=\P(X_k=-1,T\ge k)=\frac{1}{2}\P(T\ge k)\]
     Substituting the above values in $ (\dagger) $ and $ (\dagger\dagger) $, we finally have
     \[\E[S_T]=0\]
 \end{proof}
@@ -171,8 +169,8 @@ As an easy exercise, verify that each $ \A_n $ is closed with respect to taking 
 As an exercise, compute $ \Var[S_T] $.\\
 
 \begin{definition}
-    A bet sequence / game system is a sequence of random variables $ V_k:\O\to\R $ such that
-    \[\{V_k=c\}\in\A_{k-1}\text{ for every }c\in\R\text{ and }1\le k\le N\]
+    A bet sequence / game system is a sequence of random variables $ V_k:\Omega\to\R $ such that
+    \[\{V_k=c\}\in\SA_{k-1}\text{ for every }c\in\R\text{ and }1\le k\le N\]
 \end{definition}
 
 \begin{theorem}
@@ -183,7 +181,7 @@ As an exercise, compute $ \Var[S_T] $.\\
 In this setting, $ S_N^V $ is interpreted as the ``total gain".
 
 \begin{proof}
-    Since $ \O $ is finite, we may write
+    Since $ \Omega $ is finite, we may write
     \[\text{Range}(V_k)=\{c_i^k:1\le i\le m_k\}\text{ where }c_i^k\in\R\]
     \[V_k=\sum_{i=1}^{m_k}c_i^k\one\{V_k=c_i^k\}\]
     Now, since $ \E[X_k]=0 $, and since $ X_k\perp\mathlarger{\one}\{V_k=c_i^k\} $, we get
@@ -206,10 +204,10 @@ In this setting, $ S_N^V $ is interpreted as the ``total gain".
             \item[(a)]Show that for any $ a,b\in\R $, \[\P(a\le S_n < b)\le (b-a)\ \P(S_n\in\{-1,0,1\}).\]
             \item[(b)]Using (a), conclude that \[\P(a\le S_n < b) \to 0 \text{$\quad$ as$\quad$ } n\to\infty.\] Thus, we observe that the walk exits any finite interval as $ n\to\infty $.
         \end{itemize}
-        \item[6.]Verify that each $ \A_n $, $ 0\le n\le N $, is closed with respect to taking complement, union and intersection.
-        \item[7.]For $ a\in\Z $, let $ \s_a=\inf\{n: S_n=a, 0\le n\le N\} $. Show that $ \s_a $ is a stopping time.
+        \item[6.]Verify that each $ \SA_n $, $ 0\le n\le N $, is closed with respect to taking complement, union and intersection.
+        \item[7.]For $ a\in\Z $, let $ \sigma_a=\inf\{n: S_n=a, 0\le n\le N\} $. Show that $ \sigma_a $ is a stopping time.
         \item[8.]For $ a\in\Z $, let $ L_a=\max\{n: S_n=a, 0\le n\le N\}$. Show that $ L_a $ is not a stopping time.
-        \item[9.]Let $ T:\O\to\{0,1,\ldots,N\} $ be a stopping time. Compute $ \Var[S_T] $.
+        \item[9.]Let $ T:\Omega\to\{0,1,\ldots,N\} $ be a stopping time. Compute $ \Var[S_T] $.
         \item[10.]Show that $ X_k $ and $ \mathlarger{\one\{T\ge k\}} $ are independent.
 \end{itemize}
 

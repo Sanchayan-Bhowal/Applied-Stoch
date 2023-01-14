@@ -1,0 +1,36 @@
+\documentclass[main]{subfiles}
+
+\begin{document}
+\setcounter{chapter}{1} %Set chapter counter as week-1
+\chapter{More on random walks} %Set chapter name
+\setcounter{section}{0}
+
+\lecture{Siva Athreya}{Sanchayan Bhowal, Venkat Trivikram}
+
+\begin{theorem}
+    Let $T:\Omega\rightarrow{0,1,\ldots,N}$ be a stopping time. Then,
+    $$\E[S_T^2]=E[T].$$
+\end{theorem}
+\begin{proof}
+    $$
+        \begin{aligned}
+            S_T^2 & =\sum_{k=1}^N S_k^2 \one\{T=k\}                         \\
+                  & =\sum_{k=1}^N (S_k^2-S_{k-1}^2) \one\{T\geq k\}         \\
+                  & =\sum_{k=1}^N (X_k+S_{k-1})^2-S_{k-1}^2 \one\{T\geq k\} \\
+                  & =\sum_{k=1}^N (1+2X_kS_{k-1}) \one\{T\geq k\}           \\
+        \end{aligned}
+    $$
+    Now, consider $V_k=S_{k-1} \one\{T\geq k\}$. Note that this is a bet sequence. Hence,
+    $$
+        \begin{aligned}
+            \E[S_T^2] & =\E\left[\sum_{k=1}^N\one\{T\geq k\}\right]+2\sum_{k=1}^N\E[X_k V_k] \\
+                      & =\sum_{k=1}^N \P(T\geq k)+0                                          \\
+                      & =E[T]
+        \end{aligned}
+    $$
+\end{proof}
+
+
+\section{Reflection Principle}
+
+\end{document}
