@@ -18,21 +18,26 @@ func <- function(x) dnorm(x, mean = 0, sd = sqrt(N))
 df <- data.frame(rand = s)
 
 library(ggplot2)
+library(plotly)
 library(hrbrthemes)
-windows()
-p <- ggplot(df, aes(x = rand)) + # input data in ggplot2
+
+p <- ggplotly(ggplot(df, aes(x = rand)) + # input data in ggplot2
     geom_histogram(
         mapping = aes(y = ..density..), # plotting normalised histogram
         binwidth = 15, # setting class size
-        fill = "#69b3a2", color = "#e9ecef", alpha = 0.9 # setting colors
+        fill = "#69b3a2", color = "#e9ecef", alpha = 0.9
     ) +
-    stat_function(
-        fun = func,
-        color = "#B3697A", lwd = 1.5
-    ) + # density function
     xlab("") +
     ylab("") +
     labs(title = "Random Walk distribution with normal curve") +
-    theme(plot.title = element_text(size = 20, face = "bold", hjust = 0.5))
+    theme(plot.title = element_text(size = 10, face = "bold", hjust = 0.5)))
+v <- seq(min(s), max(s), 1)
+p <- p %>% add_lines(x = v, y = func(v), line = list(color = "#B3697A"))
+
+htmlwidgets::saveWidget(
+                widget = p, #the plotly object
+                file = "figure.html", #the path & file name
+                selfcontained = TRUE #creates a single html file
+                )
 
 print(p)
