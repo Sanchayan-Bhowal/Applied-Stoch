@@ -1,3 +1,5 @@
+# Written by: Sanchayan Bhowal(bmat2023)
+
 n <- 10000 # no. of simulations
 N <- 5000 # length of the walk
 s <- c() # vector to contain S_k for n simulations
@@ -32,12 +34,15 @@ p <- ggplotly(ggplot(df, aes(x = rand)) + # input data in ggplot2
     labs(title = "Random Walk distribution with normal curve") +
     theme(plot.title = element_text(size = 10, face = "bold", hjust = 0.5)))
 v <- seq(min(s), max(s), 1)
-p <- p %>% add_lines(x = v, y = func(v), line = list(color = "#B3697A"))
+p <- p %>% add_lines(
+    x = v, y = func(v),
+    line = list(color = "#B3697A")
+) # creates the curve of the normal distribution
 
 htmlwidgets::saveWidget(
-                widget = p, #the plotly object
-                file = "figure.html", #the path & file name
-                selfcontained = TRUE #creates a single html file
-                )
+    widget = p, # the plotly object
+    file = "normal_approx.html", # the path & file name
+    selfcontained = TRUE # creates a single html file
+)
 
 print(p)
