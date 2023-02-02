@@ -1,0 +1,238 @@
+\documentclass[main]{subfiles}
+
+\begin{document}
+%Set chapter counter as week-1
+\chapPreamble{3}{January 27, 2023}{Random Walks on Graphs}
+%Set chapter name
+
+\lecture{Siva Athreya}{Abhiti Mishra, Devesh Bajaj}
+
+\section{Introduction}
+
+\begin{itemize}
+  \item {A random walk on a graph is basically a reversible Markov chain on the graph.}
+  \item {many results of random walks will hold true for general markov chains but we will not go into it}
+  \item {we will study some of the geometric properties of the Graph which translate to different properties of the Random walks}
+\end{itemize}
+$\Gamma=(V,E)$\\
+$V \equiv \mathrm{Vertex~ set} $ = finite or countably infinite set.\\
+$E \equiv \mathrm{Edge ~set} $ = $E \subset \mathcal{P}(V) = \{ \{x,y\}:|x,y \in V,x\neq y \} $.\\(No self loops, No multiple edges)
+
+\begin{enumerate}
+
+  \item $x \in V;y \in V$ is a neighbour of x in $ \{x,y\} \in E$ $(x \sim y)$
+
+  \item A path $\gamma \in \Gamma $ is any sequence $\{x_{i}\}_{i=0} ^{n}$  such that $x_{i-1} \sim x_{i}$ in $\Gamma$ for some $n\geq1,x_{i} \in V,1\leq i \leq n $\\
+        $ \bullet \gamma$ is a loop if $x_{0}=x_{n}$\\
+        $ \bullet \gamma$ is self avoiding if $x_{i}\neq x_{j} ~\forall~ i\neq j $.
+
+  \item ``chemical metric" $ d:V\times V \longrightarrow [0,\infty)\bigcup\{\infty\} $\\
+        $d(x,x)=0$,
+        \begin{equation*}
+          d(x,y)=
+          \begin{cases}
+            \text{length of smallest path from x to y} \\
+            \infty \text{ if no path exixts}           \\
+          \end{cases}
+        \end{equation*}
+  \item $\Gamma$ is connected if $d(x,y)<\infty,\forall x,y \in V$ \textbf{(H1 property)}
+        \item$\Gamma$ is locally finite if $\forall x \in V ,\\ N(x) =\{y \in V |y \sim x\} $
+        $\Rightarrow |N(x)| < \infty $ \textbf{(H2 property)}
+  \item  we say $\Gamma$ has a bounded geometry if $\sup_{x\in V} |N(x)| < \infty $ \textbf{(H3 property)}
+\end{enumerate}
+
+\begin{definition}
+  $\forall~ x,y \in V$, we assume that thre is a weight $\mu_{xy}$ such that:\\
+  \begin{enumerate}
+    \item $\mu_{xy}=\mu_{yx}$
+    \item $\mu_{xy} \geq 0$
+    \item  if $x\neq y$ then, $\mu_{xy}>0 \Leftrightarrow x \sim y$
+  \end{enumerate}
+  we will call $(\Gamma,\mu)$ a weighted graph. \\
+  Using property 3 above, $E=\{\{x,y\} | x,y \in V, \mu_{xy}>0,x \neq y $\}\\
+\end{definition}
+
+
+
+\begin{definition}
+  $(\Gamma,\mu)$ has bounded weights if $\exists~ \: C_{1},C_{2}>0$ such that $C_{1}<\mu_{xy} \leq C_{2}$ $\forall~ x,y \in V, x \neq y.$ This is called the
+  \textbf{(H4 Property)}.\\
+\end{definition}
+
+\begin{definition}
+  $(\Gamma,\mu)$ has controlled weights if $\exists~ c>0$ such that $\frac{\mu_{xy}}{\mu_x} \geq c^{-1}$ $\forall~ x,y \in V, x \neq y$. This is called the
+  \textbf{(H5 Property)}.\\
+\end{definition}
+
+
+
+Define for $x \in V$:
+$\mu_{x}= \sum_{y \sim x} \mu_{xy} $
+
+\begin{definition}
+  Natural weights:
+  \begin{equation*}
+    \mu_{xy}=
+    \begin{cases}
+      1 ~\mathrm{if}~ x \sim y \\
+      0 ~\mathrm{otherwise}    \\
+    \end{cases}
+  \end{equation*}
+\end{definition}
+
+
+\begin{lemma} Suppose ($\Gamma,\mu$) is a weighted graph then,\\
+  \begin{enumerate}
+
+    \item (H3), (H5) holds.\\
+    \item $\forall x \in V,n>0 $ ,$B(x,n) =\{ y \in V | d (x,y) \leq n \}$  (balls are not exponentially large)\\
+    \item $\forall x \in V,n\geq 0$,$\mu (B(x,n)) = \sum_{y \in B(x,n)} \mu_{y} \leq 2 \mu_{x}(c_{2})^{n}$  (Balls have bounded weights)\\
+  \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+  \begin{enumerate}
+    \item Take $x \in V$.
+          $$N(x)= c \sum_{y \in V} \frac{1}{c} 1_{\{x \sim y\}}$$
+          $$\leq c \sum_{y \in V} \frac{\mu_{xy}}{\mu_x} 1_{\{x \sim y\}}$$
+          $$=c \frac{1}{\mu_x} \sum_{y \in V} \mu_{xy}=c$$
+    \item $S(x,n)=\{y \in V |d(x,y)=n\}$
+          \begin{align*}
+            |S(x,n) | & \leq c |S(x,n-1)| ~~\forall~ n \geq 1 \\
+          \end{align*}
+          Arguing inductively,
+          \begin{align*}
+            |B(x,n)| & = \sum_{k=0}^n |S(x,k)|           \\
+                     & \leq \sum_{k=0}^n c^k             \\
+                     & = \frac{c^{n+1}-1}{c-1} \leq 2c^n
+          \end{align*}
+    \item $n=1$. \begin{align*}
+            \mu(B(x,1)) & =\mu_x +\sum_{y \sim x} \mu_y          \\
+                        & \leq c \sum_{y \sim x} \mu_{xy} +\mu_x \\
+                        & = c \mu_x +\mu_x
+          \end{align*}
+
+          Second step follows from the H5 assumption. \\
+          We also note
+          $$\mu (B(x,2))= \sum_{y \in B(x,2)} \mu_y =\mu (B(x,1))+ \sum_{y \sim x} \sum_{z \sim y} \mu_z$$
+          Therefore
+          \begin{align*}
+            \mu (B(x,2)) & \leq \mu_x + c \mu_x +\sum_{y \sim x} c \sum_{z \sim y} \mu_{zy} \\
+                         & = \mu_x +c \mu_x c \sum_{y \sim x} \mu_y                         \\
+                         & \leq \mu_x +c \mu_x +c^2 \mu_x
+          \end{align*}
+  \end{enumerate}
+\end{proof}
+
+\ex $V=\Z^d$. Take $x,y \in V, |x-y|=\sum_{i=1}^d |x_i -y_i|$\\
+$E=\{(x,y) | |x-y|=1\}$. $\mu_{xy}=1$ whenever $(x,y) \in E$. $N(x)= 2d ~~ \forall x \in V$
+\\
+$|B(x,n)| \sim n^d \leq 2 c^n ~~ \forall c \geq 2$. \\
+\ex \textbf{Rooted Binary Tree}-
+Let the root be $B_0 =\{ \rho \}$.\\
+$\forall~ n \geq 1, B_n= \{0,1\}^n$ \\
+$$ V= \cup_{n=1}^{\infty} B_n \cup \{\rho \}$$
+For $x \in B_n, n \geq 2, x=(x_1, \ldots, x_n), x_i \in \{0,1\}$. \\
+Let the parent of $x$ be- $\alpha(x)=(x_1, \ldots, x_{n-1})$ \\
+For $n=1, x \in B_1, \alpha(x)=\rho$ \\
+$$E=\{(x, \alpha(x)) |~ x\in V, x \notin B_0\}$$
+$$|N(\rho)|=2, |N(x)|=3 ~~ \forall~ x \notin B_0$$
+
+\textbf{Canopy Tree}\\
+$$\bar{V}=\{x \in V | x=(x_1, \ldots, x_n) ~\mathrm{and}~ x_i=0 ~~\forall~ 1 \leq i \leq n ~\mathrm{for some}~ n \geq 1\} \cup \{ \rho \}$$
+$f(x)$ is the element in $\bar{V}$ closest to $x$.\\
+$V_{canopy}$ is a subset of $V$ such that-
+$$V_{canopy}=\{x \in V |~ d(x,f(x)) \leq d(\rho, f(x))\}$$
+Observe that in the canopy tree, there is only one self-avoiding path to infinity, but the size of the balls $B(\rho ,n)$ still grows exponentially. It shows that one does not need too many paths to infinity for the size of your graph to grow exponentially. Denoted by $\mathbb{T}^2_{canopy}$ \\
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Random Walks on Weighted Graphs}
+ (This section will be done as a discrete time reversible Markov Chain)\\
+Formally, $X_n$ jumps from $x \sim y_i$ with probability proportional to $\mu_{xy_i}$. It stays at $x$ with probability proportional to $\mu_{xx}$.
+
+Our graph is denoted by $\Gamma=(V,E)$. We assume there are no isolated edges that is $\{\mu_x \neq 0 ~~ \forall x \in V\}$. Also assume H(1) and H(2).
+$$\Omega= \{f : \N \cup \{0\} \to V\} \equiv V^{\N \cup \{0\}}$$
+$\forall~ n \geq 0$, $X_n: \Omega \to V$ where $X_n(\omega)= \omega(n)$\\
+Let $\mathcal{A}_n \equiv$ observable events upto time $n$ (all events that can be derived from $X_1, \ldots ,X_n$). This will be a filtration. \\
+
+$$\mathcal{F} \equiv \cup_{n \geq 1} ~ \mathcal{A}_n$$
+Set $\mathcal{P} (x,y)=\frac{\mu_{xy}}{\mu_x} ~~ \forall x,y \in V$ .\\
+$\forall x\ \in V$, there exists a unique $\mathcal{P}^x (.)$ on $(\Omega,\mathcal{F})$. \\
+(Existence can be shown using Kolmogorov consistency theorem). \\
+$\forall~ n \geq 1$
+$$\mathbb{P}^x (X_n=x_n,X_{n-1}=x_{n-1},\ldots, X_0=x_0)= 1_{\{x\}} (x_0) \prod_{i=1}^n P(x_n, x_{n-1})$$
+\begin{align*}
+  \mathbb{P}^x (X_1=y) & = \mathbb{P}^x (X_1=y, \cup_{z \in V} X_0 =z)   \\
+                       & = \sum_{z \in V} \mathbb{P}^x (X_1=y, X_0=z)    \\
+                       & = \sum_{z \in V} \mathcal{P} (y,z) 1_{\{x\}}(z) \\
+                       & = \mathcal{P} (y,x)
+\end{align*}
+One-step transition probability-
+$$ \mathbb{P}(X_n=y | X_{n-1}=z) =\frac{\mathbb{P}(X_n=y, X_{n-1}=z)}{\mathbb{P} (X_{n-1}=z)} =\mathcal{P} (y,z)$$
+The last equality is left as an exercise.\\
+Reversibility-
+$$\mu_x \mathcal{P} (x,y) =\mu_x \frac{\mu_{xy}}{\mu_x} =\mu{yx} =\mu_y \mathcal{P} (y,x)$$
+$(X_n,\mathcal{P})$ markov chain is symmetric with repsect to $\{\mu_x\}_{x \in V}$ \\
+\begin{lemma} Let $x_0, \ldots, x_n \in V$
+  $$\mu_{x_0} \mathbb{P}^{x_0} (X_n=x_n, \ldots, X_0=x_0)=\mu_{x_n} \mathbb{P}^{x_n} (X_n=x_0, \ldots, X_0=x_n)$$
+  The above shows the reversibility of the markov chain wrt $\mu$. \end{lemma}
+\begin{proof}
+  \begin{align*}
+    \mu_{x_0} \mathbb{P}^{x_0} (X_n=x_n, \ldots, X_0=x_0) & = \mu_{x_0} \prod_{i=1}^n \mathcal{P} (x_i,x_{i-1})                       \\
+                                                          & = \mu_{x_0} \prod_{i=1}^n \frac{\mu_{x_i,x_{i-1}}}{\mu_{x_{i-1}}}         \\
+                                                          & = \mu_{x_n} \prod_{i=1}^n \frac{\mu_{x_{n-i},x_{n-i+1}}}{\mu_{x_{n-i+1}}} \\
+                                                          & =\mu_{x_n} \mathbb{P}^{x_n} (X_n=x_0, \ldots, X_0=x_n)
+  \end{align*}
+\end{proof}
+\begin{remark} If $\mu(V) =\sum_{x \in V} \mu_x=1$ and $\mu(A)= \sum_{x \in A}$, then $\mu$ is the reversible distribution for $\{X_n\}_{n \geq 0}$ that is
+  $$\mu_x \mathcal{P} (x,y)= \mu_y \mathcal{P} (y,x)$$
+  Hence $\{\mu_x\}_{x \in V}$ is the stationary distribution.\end{remark}
+
+\begin{definition} $A \subseteq V$. The hitting time of $A$ be given by
+  $$T_A= \min\{n \geq 0 |X_n \in A\}$$
+  By convention, $T_A =\infty$ iff $X_n$ does not visit $A$. \end{definition}
+\begin{definition}
+  The return time of $A$ is defined as -
+  $$T_A^{+}= \min\{n \geq 1 | X_n \in A\}$$
+  Note that $X_0 \notin A \implies ~~ T_A^{+}= T_A$ \end{definition}
+\begin{definition}
+  The exit time of $A$ is-
+  $$\tau_{A}= T_{A^c}$$ \end{definition}
+\begin{theorem} Let $\Gamma$ be H(1) and H(2) and $|V|=\infty$. Then TFAE-
+  \begin{enumerate}
+    \item $\exists~ x \in V$ such that $\mathbb{P}^x(\tau_x^{+} <\infty) <1$ \\
+    \item $\forall~ x \in V$, $\mathbb{P}^x(\tau_x^{+} < \infty) <1$ \\
+    \item $\forall~ x \in V$, $\sum_{n=0}^{\infty} \mathbb{P}^x (X_n=x) < \infty$ \\
+    \item $\forall~ x,y \in V$, $\mathbb{P}^x (\tau_y < \infty) <1$ \\
+    \item $\mathbb{P}^x (\sum_{n \geq 0} 1_{\{X_n=x\}} < \infty) =1 ~~~ \forall x,y \in V$
+  \end{enumerate}
+  If the above is satisfied, the Markov Chain is transient.
+\end{theorem}
+\begin{theorem} Let $\Gamma$ be H(1) and H(2) and $|V|=\infty$. Then TFAE-
+  \begin{enumerate}
+    \item $\exists~ x \in V$ such that $\mathbb{P}^x(\tau_x^{+} <\infty) =1$ \\
+    \item $\forall~ x \in V$, $\mathbb{P}^x(\tau_x^{+} < \infty) =1$ \\
+    \item $\forall~ x \in V$, $\sum_{n=0}^{\infty} \mathbb{P}^x (X_n=x) = \infty$ \\
+    \item $\forall~ x,y \in V$, $\mathbb{P}^x (\tau_y < \infty) =1$ \\
+    \item $\mathbb{P}^x (\sum_{n \geq 0} 1_{\{X_n=x\}} = \infty) =1 ~~~ \forall x,y \in V$
+  \end{enumerate}
+  If the above is satisfied, the Markov Chain is recurrent. \end{theorem}
+
+\begin{definition} If $\{X_n\}_{n \geq 0}$ random walk on $(\Gamma, \mu)$ satisfies
+  \begin{enumerate}
+    \item any statement of theorem 1.6, the graph $(\Gamma, \mu)$ is transient.\\
+    \item any statement of theorem 1.7, the graph $(\Gamma, \mu)$ is recurrent.\\
+  \end{enumerate} \end{definition}
+
+\section{Exercises}
+\begin{enumerate}
+  \item Show that $H_{3},H_{4} \Rightarrow H_{5} $\\
+  \item When is $(\Gamma, \mu)$ transient or recurrent?\\
+        Partial answer- When $|V| < \infty$, $(\Gamma, \mu)$ is recurrent. \\
+  \item \textbf{Kesten Problem-} G is a finitely generated group with generating set $A$.
+        Look at the Cayley graph of $G$. Which groups provide transient graphs? \\
+
+\end{enumerate}
+
+\end{document}
