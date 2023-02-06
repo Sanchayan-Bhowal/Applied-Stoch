@@ -10,36 +10,36 @@
 Origin is from horse-racing (betting system). The dictionary meaning of the word `martingale' is the harness of a horse. \\
 Let $\{Z_n\}_{n \geq 1}$ is a sequence of random variables on $(\Omega, \mathcal{F}, \mathbb{P})$. \\
 \begin{definition} A sequence of random variables $\{Z_n\}_{n \geq 1}$ is said to be a Martingale if
-  \begin{equation} \label{eq:mar-def}
-    \mathbb{E} (Z_{n}|Z_{n-1}=z_{n-1}, \ldots, Z_1=z_1 )= z_{n-1} ~~\forall ~ n \geq 2
-  \end{equation} \end{definition}
+    \begin{equation} \label{eq:mar-def}
+        \mathbb{E} (Z_{n}|Z_{n-1}=z_{n-1}, \ldots, Z_1=z_1 )= z_{n-1} ~~\forall ~ n \geq 2
+    \end{equation} \end{definition}
 
-Things to understand- conditional expectation for discrete and conditional r.v. Reference- Ch6 of Siva's book.\\
+Things to understand- conditional expectation for discrete and conditional random variable \cite{AST-2016}.\\
 Things we will explore-
 \begin{enumerate}
-  \item Examples of $\{Z_n\}_{n \geq 1}$ that are martingales.\\
-  \item How different are martingales from iid sequences and markov chains? \\
-  \item How to interpret \ref{eq:mar-def}?
+    \item Examples of $\{Z_n\}_{n \geq 1}$ that are martingales.\\
+    \item How different are martingales from iid sequences and markov chains? \\
+    \item How to interpret \ref{eq:mar-def}?
 \end{enumerate}
 
 \ex $\{S_n\}_{n \geq 1}$ and $S_0 \equiv 0$.
 \begin{equation*}
-  X_i=
-  \begin{cases}
-    1 ,  & w.p ~~ 1/2 \\
-    -1 , & w.p ~~1/2  \\
-  \end{cases}
+    X_i=
+    \begin{cases}
+        1 ,  & w.p ~~ 1/2 \\
+        -1 , & w.p ~~1/2  \\
+    \end{cases}
 \end{equation*}
 $$S_n=\sum_{i=1}^n X_i$$
 Let $s_{n-1},s_{n-2}, \ldots, s_1 \in \Z$ such that $\mathbb{P} (S_{n-1}=s_{n-1}, \ldots, S_1=s_1)>0$
 \begin{align*}
-  \mathbb{E} (S_n |S_{n-1}=s_{n-1}, \ldots, S_1=s_1) & = \sum_{k \in \Z} k \mathbb{P} (S_n =k |S_{n-1}=s_{n-1}, \ldots, S_1=s_1)                                                                        \\
-                                                     & = \sum_{k \in \Z} k \frac{\mathbb{P}(S_n =k ,S_{n-1}=s_{n-1}, \ldots, S_1=s_1)}{\mathbb{P}(S_{n-1}=s_{n-1}, \ldots, S_1=s_1)}                    \\
-                                                     & = \sum_{k \in \Z} k \frac{\mathbb{P}(S_{n-1} +X_n =k ,S_{n-1}=s_{n-1}, \ldots, S_1=s_1)}{\mathbb{P}(S_{n-1}=s_{n-1}, \ldots, S_1=s_1)}           \\
-                                                     & = \sum_{k \in \Z} k \frac{\mathbb{P}(X_n =k -s_{n-1} ,S_{n-1}=s_{n-1}, \ldots, S_1=s_1)}{\mathbb{P}(S_{n-1}=s_{n-1}, \ldots, S_1=s_1)}           \\
-                                                     & = \sum_{k \in \Z} k \frac{\mathbb{P}(X_n =k-s_{n-1}) \mathbb{P}(S_{n-1}=s_{n-1}, \ldots, S_1=s_1)}{\mathbb{P}(S_{n-1}=s_{n-1}, \ldots, S_1=s_1)} \\
-                                                     & = (s_{n-1}+1) \mathbb{P} (X_n=-1)+ (s_{n-1}-1) \mathbb{P} (X_n=1)                                                                                \\
-                                                     & = (s_{n-1}+1) \frac{1}{2}+ (s_{n-1}-1) \frac{1}{2} =s_{n-1}                                                                                      \\
+    \mathbb{E} (S_n |S_{n-1}=s_{n-1}, \ldots, S_1=s_1) & = \sum_{k \in \Z} k \mathbb{P} (S_n =k |S_{n-1}=s_{n-1}, \ldots, S_1=s_1)                                                                        \\
+                                                       & = \sum_{k \in \Z} k \frac{\mathbb{P}(S_n =k ,S_{n-1}=s_{n-1}, \ldots, S_1=s_1)}{\mathbb{P}(S_{n-1}=s_{n-1}, \ldots, S_1=s_1)}                    \\
+                                                       & = \sum_{k \in \Z} k \frac{\mathbb{P}(S_{n-1} +X_n =k ,S_{n-1}=s_{n-1}, \ldots, S_1=s_1)}{\mathbb{P}(S_{n-1}=s_{n-1}, \ldots, S_1=s_1)}           \\
+                                                       & = \sum_{k \in \Z} k \frac{\mathbb{P}(X_n =k -s_{n-1} ,S_{n-1}=s_{n-1}, \ldots, S_1=s_1)}{\mathbb{P}(S_{n-1}=s_{n-1}, \ldots, S_1=s_1)}           \\
+                                                       & = \sum_{k \in \Z} k \frac{\mathbb{P}(X_n =k-s_{n-1}) \mathbb{P}(S_{n-1}=s_{n-1}, \ldots, S_1=s_1)}{\mathbb{P}(S_{n-1}=s_{n-1}, \ldots, S_1=s_1)} \\
+                                                       & = (s_{n-1}+1) \mathbb{P} (X_n=-1)+ (s_{n-1}-1) \mathbb{P} (X_n=1)                                                                                \\
+                                                       & = (s_{n-1}+1) \frac{1}{2}+ (s_{n-1}-1) \frac{1}{2} =s_{n-1}                                                                                      \\
 \end{align*}
 Note that the summations here are ``finite'' sums.\\
 As $s_{n-1},\ldots, s_1 \in \Z$ were arbitrary, $\{S_n\}_{n \geq 1}$ is a martingale.\\
@@ -50,23 +50,23 @@ and Range($Z_n$) $\subset \R ~~\forall ~~ n \geq 1$. \\
 Let $z_{n-1}, \ldots, z_1 \in \R$ such that $\mathbb{P} (Z_{n-1}=z_{n-1}, \ldots, Z_1=z_1)>0$. Then
 
 \begin{align*}
-  \mathbb{E} (Z_n |Z_{n-1}=z_{n-1}, \ldots, Z_1=z_1) & = \sum_{k \in Range(Z_n)} k \mathbb{P} (Z_n=k |Z_{n-1}=z_{n-1}, \ldots, Z_1=z_1)                                                                           \\
-                                                     & = \sum_{k \in Range(Z_n)} k \frac{\mathbb{P} (Z_n=k ,Z_{n-1}=z_{n-1}, \ldots, Z_1=z_1)}{\mathbb{P} (Z_{n-1}=z_{n-1}, \ldots, Z_1=z_1)}                     \\
-                                                     & =  \sum_{k \in Range(Z_n)} k \frac{\mathbb{P} (Z_{n-1}X_n=k ,Z_{n-1}=z_{n-1}, \ldots, Z_1=z_1)}{\mathbb{P} (Z_{n-1}=z_{n-1}, \ldots, Z_1=z_1)}             \\
-                                                     & =  \sum_{k \in Range(Z_n)} k \frac{\mathbb{P} (z_{n-1}X_n=k ,Z_{n-1}=z_{n-1}, \ldots, Z_1=z_1)}{\mathbb{P} (Z_{n-1}=z_{n-1}, \ldots, Z_1=z_1)}             \\
-                                                     & =  \sum_{k \in Range(Z_n)} k \mathbb{P}(Z_{n-1}X_n=k ) \frac{\mathbb{P} (Z_{n-1}=z_{n-1}, \ldots, Z_1=z_1)}{\mathbb{P} (Z_{n-1}=z_{n-1}, \ldots, Z_1=z_1)} \\
-                                                     & = \sum_{u \in S^1, Range(X_n)=S^1} u z_{n-1} \mathbb{P} (X_n=u)                                                                                            \\
-                                                     & = z_{n-1} \mathbb{E} [X_n] =z_{n-1}                                                                                                                        \\
+    \mathbb{E} (Z_n |Z_{n-1}=z_{n-1}, \ldots, Z_1=z_1) & = \sum_{k \in Range(Z_n)} k \mathbb{P} (Z_n=k |Z_{n-1}=z_{n-1}, \ldots, Z_1=z_1)                                                                           \\
+                                                       & = \sum_{k \in Range(Z_n)} k \frac{\mathbb{P} (Z_n=k ,Z_{n-1}=z_{n-1}, \ldots, Z_1=z_1)}{\mathbb{P} (Z_{n-1}=z_{n-1}, \ldots, Z_1=z_1)}                     \\
+                                                       & =  \sum_{k \in Range(Z_n)} k \frac{\mathbb{P} (Z_{n-1}X_n=k ,Z_{n-1}=z_{n-1}, \ldots, Z_1=z_1)}{\mathbb{P} (Z_{n-1}=z_{n-1}, \ldots, Z_1=z_1)}             \\
+                                                       & =  \sum_{k \in Range(Z_n)} k \frac{\mathbb{P} (z_{n-1}X_n=k ,Z_{n-1}=z_{n-1}, \ldots, Z_1=z_1)}{\mathbb{P} (Z_{n-1}=z_{n-1}, \ldots, Z_1=z_1)}             \\
+                                                       & =  \sum_{k \in Range(Z_n)} k \mathbb{P}(Z_{n-1}X_n=k ) \frac{\mathbb{P} (Z_{n-1}=z_{n-1}, \ldots, Z_1=z_1)}{\mathbb{P} (Z_{n-1}=z_{n-1}, \ldots, Z_1=z_1)} \\
+                                                       & = \sum_{u \in S^1, Range(X_n)=S^1} u z_{n-1} \mathbb{P} (X_n=u)                                                                                            \\
+                                                       & = z_{n-1} \mathbb{E} [X_n] =z_{n-1}                                                                                                                        \\
 \end{align*}
 Note that the sums here might be infinite. In the last step we assume $\mathbb{E}[X_i]=1$. Now since $\{z_i\}_{i=1}^{n-1}$ were arbitrary, $\{Z_n\}_{n \geq 1}$ is a martingale. \\
 
 \ex
 \begin{equation*}
-  X_i=
-  \begin{cases}
-    2 , & w.p ~~ 1/2 \\
-    0 , & w.p ~~1/2  \\
-  \end{cases}
+    X_i=
+    \begin{cases}
+        2 , & w.p ~~ 1/2 \\
+        0 , & w.p ~~1/2  \\
+    \end{cases}
 \end{equation*}
 Then $\mathbb{E} (X_i)=1$. Therefore, $Z_n= \prod_{i=1}^n X_i$ is a martingale. Range ($Z_n$)= $\{2^n,0\}$. Note that the mean stays constant and
 $$\mathbb{P}(Z_n=0)=1-\frac{1}{2^n}$$
@@ -76,5 +76,4 @@ Idea behind Markov Chains -
 $$``X_n | X_{n-1}, \ldots, X_1" \,{\buildrel d \over =}\, X_n|X_{n-1}$$
 Idea behind Martingales -
 Expected value of $Z_n$ conditioned on the past depends only on $Z_{n-1}$. $\{Z_n\}_{n \geq 1}$ in law could depend on the entire past!
-
 \end{document}

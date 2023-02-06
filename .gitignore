@@ -5,3 +5,5 @@
 *.fls
 *.toc
 *.out
+*.bbl
+*.blg
