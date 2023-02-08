@@ -54,6 +54,16 @@
     \vspace*{-1cm}
 }
 
+\newcommand{\chapMart}[2]{
+    \chapter*{\centering \huge{#2}}
+    \addcontentsline{toc}{chapter}{{#1} {#2}}
+    \setcounter{chapter}{#1}
+    \setcounter{section}{0}
+    \setcounter{subsection}{0}
+    \setcounter{theorem}{0}
+    \vspace*{-1cm}
+}
+
 \newcommand{\scribe}[2]{
     \chapter{Finite Length Random Walks on $\Z$}
     \date{{#2}}
@@ -90,6 +100,12 @@
    \begin{center}
           
        {\sc Lecturer: #1 \hfill Scribe: #2}
+      
+   \end{center}
+}
+\newcommand{\lectMart}[4]{
+   \begin{center}
+       { \textbf{Week #1} \hfill \textbf{#2} \\ \sc Lecturer: #3 \hfill Scribe: #4}
       
    \end{center}
 }
