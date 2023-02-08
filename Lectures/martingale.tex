@@ -5,7 +5,7 @@
 \chapPreamble{4}{January 27, 2023}{Discrete Time Martingales}
 %Set chapter name
 
-\lecture{Siva Athreya}{Abhiti Mishra, Devesh Bajaj, Ankan Kar, Atreya Choudhury}
+\lecture{Siva Athreya}{Abhiti Mishra, Devesh Bajaj}
 
 Origin is from horse-racing (betting system). The dictionary meaning of the word `martingale' is the harness of a horse. \\
 Let $\{Z_n\}_{n \geq 1}$ is a sequence of random variables on $(\Omega, \mathcal{F}, \mathbb{P})$. \\
@@ -76,6 +76,9 @@ Idea behind Markov Chains -
 $$``X_n | X_{n-1}, \ldots, X_1" \,{\buildrel d \over =}\, X_n|X_{n-1}$$
 Idea behind Martingales -
 Expected value of $Z_n$ conditioned on the past depends only on $Z_{n-1}$. $\{Z_n\}_{n \geq 1}$ in law could depend on the entire past!
+
+\chapPreamble{5}{February 3, 2023}{Discrete Time Martingales}
+\lecture{Siva Athreya}{Ankan Kar, Atreya Choudhury}
 
 \begin{definition}
     A sequence of random variables $\{Z_n\}_{n \geq 1}$ with $\mathbb{E}[|Z_n|] < \infty$ is said to be martiangle if $\mathbb{E}[Z_n | Z_{n-1}=z_{n-1} , Z_{n-2}=z_{n-2}, . . . , Z_1=z_1] = z_{n-1}$ all are discrete random variables. All $z_i's$ are continuous with appropriate joint deviation.
