@@ -2,44 +2,44 @@
 
 \begin{document}
 %Set chapter counter as week-1
-\chapPreamble{4}{January 27, 2023}{Discrete Time Martingales}
+\chapMart{4}{Discrete Time Martingales}
 %Set chapter name
 
-\lecture{Siva Athreya}{Abhiti Mishra, Devesh Bajaj}
+\lectMart{4}{January 27, 2023}{Siva Athreya}{Abhiti Mishra, Devesh Bajaj}
 
 Origin is from horse-racing (betting system). The dictionary meaning of the word `martingale' is the harness of a horse. \\
 Let $\{Z_n\}_{n \geq 1}$ is a sequence of random variables on $(\Omega, \mathcal{F}, \mathbb{P})$. \\
 \begin{definition} A sequence of random variables $\{Z_n\}_{n \geq 1}$ is said to be a Martingale if
-  \begin{equation} \label{eq:mar-def}
-    \mathbb{E} (Z_{n}|Z_{n-1}=z_{n-1}, \ldots, Z_1=z_1 )= z_{n-1} ~~\forall ~ n \geq 2
-  \end{equation} \end{definition}
+    \begin{equation} \label{eq:mar-def}
+        \mathbb{E} (Z_{n}|Z_{n-1}=z_{n-1}, \ldots, Z_1=z_1 )= z_{n-1} ~~\forall ~ n \geq 2
+    \end{equation} \end{definition}
 
-Things to understand- conditional expectation for discrete and conditional r.v. Reference- Ch6 of Siva's book.\\
+Things to understand- conditional expectation for discrete and conditional random variable \cite{AST-2016}.\\
 Things we will explore-
 \begin{enumerate}
-  \item Examples of $\{Z_n\}_{n \geq 1}$ that are martingales.\\
-  \item How different are martingales from iid sequences and markov chains? \\
-  \item How to interpret \ref{eq:mar-def}?
+    \item Examples of $\{Z_n\}_{n \geq 1}$ that are martingales.\\
+    \item How different are martingales from iid sequences and markov chains? \\
+    \item How to interpret \ref{eq:mar-def}?
 \end{enumerate}
 
 \ex $\{S_n\}_{n \geq 1}$ and $S_0 \equiv 0$.
 \begin{equation*}
-  X_i=
-  \begin{cases}
-    1 ,  & w.p ~~ 1/2 \\
-    -1 , & w.p ~~1/2  \\
-  \end{cases}
+    X_i=
+    \begin{cases}
+        1 ,  & w.p ~~ 1/2 \\
+        -1 , & w.p ~~1/2  \\
+    \end{cases}
 \end{equation*}
 $$S_n=\sum_{i=1}^n X_i$$
 Let $s_{n-1},s_{n-2}, \ldots, s_1 \in \Z$ such that $\mathbb{P} (S_{n-1}=s_{n-1}, \ldots, S_1=s_1)>0$
 \begin{align*}
-  \mathbb{E} (S_n |S_{n-1}=s_{n-1}, \ldots, S_1=s_1) & = \sum_{k \in \Z} k \mathbb{P} (S_n =k |S_{n-1}=s_{n-1}, \ldots, S_1=s_1)                                                                        \\
-                                                     & = \sum_{k \in \Z} k \frac{\mathbb{P}(S_n =k ,S_{n-1}=s_{n-1}, \ldots, S_1=s_1)}{\mathbb{P}(S_{n-1}=s_{n-1}, \ldots, S_1=s_1)}                    \\
-                                                     & = \sum_{k \in \Z} k \frac{\mathbb{P}(S_{n-1} +X_n =k ,S_{n-1}=s_{n-1}, \ldots, S_1=s_1)}{\mathbb{P}(S_{n-1}=s_{n-1}, \ldots, S_1=s_1)}           \\
-                                                     & = \sum_{k \in \Z} k \frac{\mathbb{P}(X_n =k -s_{n-1} ,S_{n-1}=s_{n-1}, \ldots, S_1=s_1)}{\mathbb{P}(S_{n-1}=s_{n-1}, \ldots, S_1=s_1)}           \\
-                                                     & = \sum_{k \in \Z} k \frac{\mathbb{P}(X_n =k-s_{n-1}) \mathbb{P}(S_{n-1}=s_{n-1}, \ldots, S_1=s_1)}{\mathbb{P}(S_{n-1}=s_{n-1}, \ldots, S_1=s_1)} \\
-                                                     & = (s_{n-1}+1) \mathbb{P} (X_n=-1)+ (s_{n-1}-1) \mathbb{P} (X_n=1)                                                                                \\
-                                                     & = (s_{n-1}+1) \frac{1}{2}+ (s_{n-1}-1) \frac{1}{2} =s_{n-1}                                                                                      \\
+    \mathbb{E} (S_n |S_{n-1}=s_{n-1}, \ldots, S_1=s_1) & = \sum_{k \in \Z} k \mathbb{P} (S_n =k |S_{n-1}=s_{n-1}, \ldots, S_1=s_1)                                                                        \\
+                                                       & = \sum_{k \in \Z} k \frac{\mathbb{P}(S_n =k ,S_{n-1}=s_{n-1}, \ldots, S_1=s_1)}{\mathbb{P}(S_{n-1}=s_{n-1}, \ldots, S_1=s_1)}                    \\
+                                                       & = \sum_{k \in \Z} k \frac{\mathbb{P}(S_{n-1} +X_n =k ,S_{n-1}=s_{n-1}, \ldots, S_1=s_1)}{\mathbb{P}(S_{n-1}=s_{n-1}, \ldots, S_1=s_1)}           \\
+                                                       & = \sum_{k \in \Z} k \frac{\mathbb{P}(X_n =k -s_{n-1} ,S_{n-1}=s_{n-1}, \ldots, S_1=s_1)}{\mathbb{P}(S_{n-1}=s_{n-1}, \ldots, S_1=s_1)}           \\
+                                                       & = \sum_{k \in \Z} k \frac{\mathbb{P}(X_n =k-s_{n-1}) \mathbb{P}(S_{n-1}=s_{n-1}, \ldots, S_1=s_1)}{\mathbb{P}(S_{n-1}=s_{n-1}, \ldots, S_1=s_1)} \\
+                                                       & = (s_{n-1}+1) \mathbb{P} (X_n=-1)+ (s_{n-1}-1) \mathbb{P} (X_n=1)                                                                                \\
+                                                       & = (s_{n-1}+1) \frac{1}{2}+ (s_{n-1}-1) \frac{1}{2} =s_{n-1}                                                                                      \\
 \end{align*}
 Note that the summations here are ``finite'' sums.\\
 As $s_{n-1},\ldots, s_1 \in \Z$ were arbitrary, $\{S_n\}_{n \geq 1}$ is a martingale.\\
@@ -50,23 +50,23 @@ and Range($Z_n$) $\subset \R ~~\forall ~~ n \geq 1$. \\
 Let $z_{n-1}, \ldots, z_1 \in \R$ such that $\mathbb{P} (Z_{n-1}=z_{n-1}, \ldots, Z_1=z_1)>0$. Then
 
 \begin{align*}
-  \mathbb{E} (Z_n |Z_{n-1}=z_{n-1}, \ldots, Z_1=z_1) & = \sum_{k \in Range(Z_n)} k \mathbb{P} (Z_n=k |Z_{n-1}=z_{n-1}, \ldots, Z_1=z_1)                                                                           \\
-                                                     & = \sum_{k \in Range(Z_n)} k \frac{\mathbb{P} (Z_n=k ,Z_{n-1}=z_{n-1}, \ldots, Z_1=z_1)}{\mathbb{P} (Z_{n-1}=z_{n-1}, \ldots, Z_1=z_1)}                     \\
-                                                     & =  \sum_{k \in Range(Z_n)} k \frac{\mathbb{P} (Z_{n-1}X_n=k ,Z_{n-1}=z_{n-1}, \ldots, Z_1=z_1)}{\mathbb{P} (Z_{n-1}=z_{n-1}, \ldots, Z_1=z_1)}             \\
-                                                     & =  \sum_{k \in Range(Z_n)} k \frac{\mathbb{P} (z_{n-1}X_n=k ,Z_{n-1}=z_{n-1}, \ldots, Z_1=z_1)}{\mathbb{P} (Z_{n-1}=z_{n-1}, \ldots, Z_1=z_1)}             \\
-                                                     & =  \sum_{k \in Range(Z_n)} k \mathbb{P}(Z_{n-1}X_n=k ) \frac{\mathbb{P} (Z_{n-1}=z_{n-1}, \ldots, Z_1=z_1)}{\mathbb{P} (Z_{n-1}=z_{n-1}, \ldots, Z_1=z_1)} \\
-                                                     & = \sum_{u \in S^1, Range(X_n)=S^1} u z_{n-1} \mathbb{P} (X_n=u)                                                                                            \\
-                                                     & = z_{n-1} \mathbb{E} [X_n] =z_{n-1}                                                                                                                        \\
+    \mathbb{E} (Z_n |Z_{n-1}=z_{n-1}, \ldots, Z_1=z_1) & = \sum_{k \in Range(Z_n)} k \mathbb{P} (Z_n=k |Z_{n-1}=z_{n-1}, \ldots, Z_1=z_1)                                                                           \\
+                                                       & = \sum_{k \in Range(Z_n)} k \frac{\mathbb{P} (Z_n=k ,Z_{n-1}=z_{n-1}, \ldots, Z_1=z_1)}{\mathbb{P} (Z_{n-1}=z_{n-1}, \ldots, Z_1=z_1)}                     \\
+                                                       & =  \sum_{k \in Range(Z_n)} k \frac{\mathbb{P} (Z_{n-1}X_n=k ,Z_{n-1}=z_{n-1}, \ldots, Z_1=z_1)}{\mathbb{P} (Z_{n-1}=z_{n-1}, \ldots, Z_1=z_1)}             \\
+                                                       & =  \sum_{k \in Range(Z_n)} k \frac{\mathbb{P} (z_{n-1}X_n=k ,Z_{n-1}=z_{n-1}, \ldots, Z_1=z_1)}{\mathbb{P} (Z_{n-1}=z_{n-1}, \ldots, Z_1=z_1)}             \\
+                                                       & =  \sum_{k \in Range(Z_n)} k \mathbb{P}(Z_{n-1}X_n=k ) \frac{\mathbb{P} (Z_{n-1}=z_{n-1}, \ldots, Z_1=z_1)}{\mathbb{P} (Z_{n-1}=z_{n-1}, \ldots, Z_1=z_1)} \\
+                                                       & = \sum_{u \in S^1, Range(X_n)=S^1} u z_{n-1} \mathbb{P} (X_n=u)                                                                                            \\
+                                                       & = z_{n-1} \mathbb{E} [X_n] =z_{n-1}                                                                                                                        \\
 \end{align*}
 Note that the sums here might be infinite. In the last step we assume $\mathbb{E}[X_i]=1$. Now since $\{z_i\}_{i=1}^{n-1}$ were arbitrary, $\{Z_n\}_{n \geq 1}$ is a martingale. \\
 
 \ex
 \begin{equation*}
-  X_i=
-  \begin{cases}
-    2 , & w.p ~~ 1/2 \\
-    0 , & w.p ~~1/2  \\
-  \end{cases}
+    X_i=
+    \begin{cases}
+        2 , & w.p ~~ 1/2 \\
+        0 , & w.p ~~1/2  \\
+    \end{cases}
 \end{equation*}
 Then $\mathbb{E} (X_i)=1$. Therefore, $Z_n= \prod_{i=1}^n X_i$ is a martingale. Range ($Z_n$)= $\{2^n,0\}$. Note that the mean stays constant and
 $$\mathbb{P}(Z_n=0)=1-\frac{1}{2^n}$$
@@ -77,64 +77,69 @@ $$``X_n | X_{n-1}, \ldots, X_1" \,{\buildrel d \over =}\, X_n|X_{n-1}$$
 Idea behind Martingales -
 Expected value of $Z_n$ conditioned on the past depends only on $Z_{n-1}$. $\{Z_n\}_{n \geq 1}$ in law could depend on the entire past!
 
-\chapPreamble{5}{February 3, 2023}{Discrete Time Martingales}
-\lecture{Siva Athreya}{Ankan Kar, Atreya Choudhury}
+\lectMart{5}{February 3, 2023}{Siva Athreya}{Atreya Choudhury, Ankan Kar}
 
-\begin{definition}
-    A sequence of random variables $\{Z_n\}_{n \geq 1}$ with $\mathbb{E}[|Z_n|] < \infty$ is said to be martiangle if $\mathbb{E}[Z_n | Z_{n-1}=z_{n-1} , Z_{n-2}=z_{n-2}, . . . , Z_1=z_1] = z_{n-1}$ all are discrete random variables. All $z_i's$ are continuous with appropriate joint deviation.
-\end{definition}
+We define $f: D \subseteq \R^{n-1} \to \R$ where
+$$f(z_1, z_2, \ldots, z_{n-1}) = \E[Z_n|Z_{n-1}=z_{n-1},Z_{n-2}=z_{n-2},\ldots,Z_1=z_1]$$
+Define $Y_n: \Omega \to \R$ where
+\begin{equation}
+    Y_n(\omega) \coloneqq f(Z_1(\omega), Z_2(\omega), \ldots, Z_{n-1}(\omega))
+    \label{eq:y_n}
+\end{equation}
+You can check that $\{Y_n\}$ is a random variable.
+\begin{property} Some properties of $\{Y_n\}$
+    \begin{enumerate}
+        \item
+              $A \coloneqq \{Z_{n-1}=z_{n-1},Z_{n-2}=z_{n-2},\ldots,Z_1=z_1\}$
 
-\textbf{Statement 4.0.1.\ }Let us define $f : \mathbb{R}^{n-1} \rightarrow \mathbb{R}$ such that $f(z_1, z_2,..., z_{n-1}) = \mathbb{E}[Z_n | Z_{n-1}=z_{n-1} , Z_{n-2}=z_{n-2}, . . . , Z_1=z_1]$.
-Then set $Y_n^{(\omega)} = f(z_1^{(\omega)}, z_2^{(\omega)},..., z_{n-1}^{(\omega)})$. We can check that $Y_n$ is a random variable.\\
+              $$\omega \in A \implies Y_n(\omega) = f(z_1, z_2, \ldots, z_{n-1})$$
+        \item
+              $L \coloneqq \{Y_n \leq c\} = \{f(Z_1, Z_2, \ldots, Z_{n-1}) \leq c\}$
 
-\emph{\textbf{Properties:}}
-\begin{enumerate}
-    \item 
-    Take $A = Z_{n-1}=z_{n-1},..., Z_1=z-1\}$ for $z_i's \in \mathbb{R}$ where $1 \leq i \leq n$, then;
-    \[\omega \in A \Rightarrow Y_n^{(\omega)} = f(z_1,..., z_{n-1})\]
-    \item
-    Take $L = \{Y_n \leq c\} = \{f(z_1,..., z_{n-1} \leq c\} \ \  \forall c \in \mathbb{R} \Rightarrow L \in \mathcal{A}_{n-1} \equiv$ observable events upto $n-1$.
-\end{enumerate}
-\[{Statement \  4.0.1.} \iff Y_n \ has \ properties \ 1 \ and \  2\]
-Note that $Y_n = \mathbb{E}[Z_n | \mathcal{A}_{n-1}]$. If $Z_n$ is martiangle then $Y_n = Z_{n-1}$.\\
+              $$L \in \SA_{n-1} \equiv \text{observable events upto }n-1$$
+    \end{enumerate}
+    \eqref{eq:y_n} $\iff \{Y_n\}$ has the above two properties
 
-\textbf{Tower Property : \ } $X, Y, Z$ are discrete random variables. $\mathbb{P}(Y=y) > 0$ and $f(y) = \mathbb{E}[X|Y=y]$ then $\mathbb{E}[X|Y] = f(Y)$. $\mathbb{P}(Y=y,Z=z) > 0$, $h(y,z) = \mathbb{E}[X|Y=y,Z=z]$ then $\mathbb{E}[X|Y,Z] = h(Y,Z) \Longrightarrow \mathbb{E}[\mathbb{E}[X|Y,Z]|Y] = \mathbb{E}[X|Y]$.\\
-
-$\mathbb{E}[\mathbb{E}[X|Y,Z]|Y] = \mathbb{E}[h(Y,Z)|Y] := k(Y)$, $\mathbb{E}[X|Y=y] := l(Y)$ \\
-Let $Y \in \mathbb{R}$, $\mathbb{P}(Y=y) > 0$, 
-\begin{align*}
-    k(y)    & = \mathbb{E}[h(Y,Z)|Y=y]\\
-            & = \sum\limits_{\underset{t \in Range(Z)}{m \in range(Y)}} h(m,t)\mathbb{P}(Y=m,Z=t|Y=y)\\
-            & = \sum\limits_{t \in range(Z)} h(y,t)\mathbb{P}(Z=t,Y=y)\\
-            & = \sum\limits_{t \in Range(Z)}(\sum\limits_{c \in range(X)} c\mathbb{P}(X=x|Y=y,Z=t)\mathbb{P}(Z=t|Y=y))\\
-            & = \sum\limits_{t \in Range(Z)}\sum\limits_{c \in range(X)} c \frac{\mathbb{P}(X=c,Y=y,Z=t)}{\mathbb{P}(Y=y,Z=t)} \frac{\mathbb{P}(Z=t,Y=y)}{\mathbb{P}(Y=y)}\\
-            & = \frac{1}{\mathbb{P}(Y=y)}\sum\limits_{t \in Range(Z)}\sum\limits_{c \in range(X)} c\mathbb{P}(X=c,Z=t,Y=y)\\
-            & = \sum\limits_{c \in Range(X)} \frac{c\mathbb{P}(X=c,Y=y)}{\mathbb{P}(Y=y)}\\
-            & = \mathbb{E}[X|Y=y] \\
-            & = l(y)
-\end{align*}
-$\Longrightarrow k(Y) = l(Y)$\\
-$\Longrightarrow \mathbb{E}[\mathbb{E}[X|Y,Z]|Y] = \mathbb{E}[X|Y]$
-
+    \vspace{2em}
+    If $\{Z_n\}$ is martingale, $Y_n = Z_{n-1}$
+\end{property}
 \begin{lemma}
-Let $\{Z_n\}_{n \geq 1}$ be a martiangle, $1\leq i\leq n$ then; $\mathbb{E}[Z_n | Z_i, Z_{i-1},..., Z_1] = Z_i$
+    Let $\{Y_n\}_{n\geq 1}$ be martingale. Then,
+    $$\forall\;1\leq i\leq n,\;\E[Z_n|Z_i,Z_{i-1},\ldots,Z_1] = Z_i$$
+    \begin{proof}
+        We fix i and prove by induction on n.\\
+        We look at n = i+1. By martingale property,
+        \begin{equation*}
+            \E[Z_{i+1}|Z_i,Z_{i-1},\ldots,Z_1] = Z_i
+            \label{eq:mart_basic}
+        \end{equation*}
+        Let $k>0$ and the statement hold for $n=i+k$.
+        We look at $n=i+k+1$
+        \begin{align*}
+             & \hspace{1.4em}\E[Z_{i+k+1}|Z_i,Z_{i-1},\ldots,Z_1]                                     \\
+             & = \E[\E[Z_{i+k+1}|Z_{i+k},Z_{i+k-1},\ldots,Z_1]|Z_i,Z_{i-1},\ldots,Z_1]                \\
+             & = \E[Z_{i+k}|Z_i,Z_{i-1},\ldots,Z_1] \hspace{3em} [\text{using }\eqref{eq:mart_basic}] \\
+             & = Z_i
+        \end{align*}
+        where the last equality is obtained from the induction hypothesis
+    \end{proof}
 \end{lemma}
-\begin{proof}[\textbf{Proof}]
-    Fix $i \geq 1 .$ For $n = i+1$,
-    \begin{align*}
-        \mathbb{E}[Z_{i+1} | Z_i, Z_{i-1},..., Z_1] & = Z_i
-    \end{align*}
-    Assume for $k \geq 1$, $n=i+k$,
-    \begin{align*}
-        \mathbb{E}[Z_{i+k} | Z_i, Z_{i-1},..., Z_1] & = Z_i
-    \end{align*}
-    Then for $n=i+k+1$, by tower property;
-    \begin{align*}
-        \mathbb{E}[Z_{i+k+1} | Z_i, Z_{i-1},..., Z_1] & = \mathbb{E}[\mathbb{E}[Z_{i+k+1} | Z_{i+k}, Z_{i+k-1},..., Z_1]| Z_i, Z_{i-1},..., Z_1]\\
-                                                    & = \mathbb{E}[Z_{i+k} | Z_i, Z_{i-1},..., Z_1]\\
-                                                    & = Z_i
-    \end{align*}    
-\end{proof}
-
-
+The property used in the first equality is called the Tower property. We now formally state and prove the same.
+\begin{property}[Tower Property]
+    $$\E[\E[X|Y,Z]|Y] = E[X|Y]$$
+    \begin{proof}
+        $$\E[\E[X|Y,Z]|Y] = E[h(Y,Z)|Y] = k(Y)$$
+        Let $y \in \R$ such that $\P(Y=y) > 0$
+        \begin{align*}
+            k(y) & = E[h(Y,Z)|Y]                                                                                                     \\
+                 & = \sum_{\substack{m \in \Range(Y)                                                                                 \\ t \in \Range(Z)}} h(m,t)\P(Y=m,Z=t|Y=y) \\
+                 & = \sum_{t \in \Range(Z)} h(y,t)\P(Z=t|Y=y)                                                                        \\
+                 & = \sum_{t \in \Range(Z)} \sum_{k \in \Range(X)} k \P(X=k|Y=y,Z=t)\P(Z=t|Y=y)                                      \\
+                 & = \sum_{t \in \Range(Z)} \sum_{k \in \Range(X)} k \frac{\P(X=k,Y=y,Z=t)}{\P(Y=y,Z=t)} \frac{\P(Z=t,Y=y)}{\P(Y=y)} \\
+                 & = \sum_{k \in \Range(X)} \sum_{t \in \Range(Z)} k \frac{\P(X=k,Y=y,Z=t)}{\P(Y=y)}                                 \\
+                 & = \sum_{k \in \Range(X)} k \frac{\P(X=k,Y=y)}{\P(Y=y)}                                                            \\
+                 & = \E[X|Y=y]
+        \end{align*}
+    \end{proof}
+\end{property}
 \end{document}
