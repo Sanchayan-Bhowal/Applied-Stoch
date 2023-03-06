@@ -2,9 +2,8 @@
 \usepackage{style}
 \usepackage{mathrsfs}
 \begin{document}
-\chapPreamble{5}{February 17, 2023}{}
+\chapPreamble{5}{February 17, 2023}{Killed process and Green's function}
 \lecture{Siva Athreya}{Aniket Sen, Arun Sharma}
-\part{Killed process and Green's function}
 \section{Introduction}
 
 $(\Gamma, \mu)$ is a weighted graph which is H1(Locally finite) and H2(Connected).$\{X_n\}$ is a simple random walk on it.
@@ -15,19 +14,19 @@ $p_0(x,y)=\frac{\1_x(y)}{\mu_y}$
 
 The transition density satisfies the following:
 \begin{itemize}
-     \item $p_{n+m}(x,y)=\sum_{z \in \V}p_n(x,z)p_m(z,y)\mu_z$  \hspace{1cm} [Chapman-Kolmogorov Equation]
-     \item
-           $p_n(x,y)=p_n(y,x)$ \hspace{4cm} [Symmetry]
-     \item
-           $P(p_n^x(y))=\sum_{z \in \V}p(y,z)p_n^x(z)\mu_z=\sum_{z \in \V}p(y,z)p_n(x,z)\mu_z=p_{n+1}^x(y)$  [\textit{details left as Exercise}]
-     \item
-           $p_t^x(y)=P(t;x,y)=\frac{e^{-(x-y)^2}/2t}{\sqrt{2\pi t}}$
+    \item $p_{n+m}(x,y)=\sum_{z \in \V}p_n(x,z)p_m(z,y)\mu_z$  \hspace{1cm} [Chapman-Kolmogorov Equation]
+    \item
+          $p_n(x,y)=p_n(y,x)$ \hspace{4cm} [Symmetry]
+    \item
+          $P(p_n^x(y))=\sum_{z \in \V}p(y,z)p_n^x(z)\mu_z=\sum_{z \in \V}p(y,z)p_n(x,z)\mu_z=p_{n+1}^x(y)$  [\textit{details left as Exercise}]
+    \item
+          $p_t^x(y)=P(t;x,y)=\frac{e^{-(x-y)^2}/2t}{\sqrt{2\pi t}}$
 
-           $\Leftrightarrow \frac{\delta}{\delta t}p_t^x=\Delta p_t^x=\frac{\delta^2}{\delta y^2}p_t^x$
-     \item
-           $\Delta p_n^x(y)= (P-I)p_n^xy=p_{n+1}^x(y)-p_n^x(y)$
-     \item
-           $\Vert p_n^x\Vert_2^2=\langle p_n^x, p_n^x \rangle=p_{2n}(x,x)=\frac{\P^x(X_2n=x)}{\mu_x} \leq \frac{1}{\mu_x}$
+          $\Leftrightarrow \frac{\delta}{\delta t}p_t^x=\Delta p_t^x=\frac{\delta^2}{\delta y^2}p_t^x$
+    \item
+          $\Delta p_n^x(y)= (P-I)p_n^xy=p_{n+1}^x(y)-p_n^x(y)$
+    \item
+          $\Vert p_n^x\Vert_2^2=\langle p_n^x, p_n^x \rangle=p_{2n}(x,x)=\frac{\P^x(X_2n=x)}{\mu_x} \leq \frac{1}{\mu_x}$
 \end{itemize}
 
 \textbf{Dirichlet form/Energy form}
@@ -37,9 +36,9 @@ $\varepsilon(f,g)=\frac{1}{2} \sum_{x \in \V}\sum_{y \in \V}$
 Domain of $\varepsilon:$  $D(\varepsilon)= \{f:\V \rightarrow \mathbb{R}| \varepsilon(f,f) < \infty\}$
 
 \begin{eqnarray*}
-     \varepsilon(f,g)&=&-\langle \Delta f, g \rangle  \\
-     &=& -\langle (P-I)f, g \rangle \\
-     &=& -\langle Pf, g \rangle + \langle f, g \rangle
+    \varepsilon(f,g)&=&-\langle \Delta f, g \rangle  \\
+    &=& -\langle (P-I)f, g \rangle \\
+    &=& -\langle Pf, g \rangle + \langle f, g \rangle
 \end{eqnarray*}
 where the first equality comes from Discrete Gauss-Green theorem.
 $$\varepsilon \leftrightarrow \Delta \leftrightarrow P \leftrightarrow \{X_n\}_{n \geq 1}$$
@@ -53,30 +52,30 @@ it can be shown that if $f \in D(\varepsilon)$, $-\langle \Delta f, g \rangle_n$
 $$\varepsilon \leftrightarrow \Delta \leftrightarrow \{P_t\}_{t \geq 0} \leftrightarrow \{X_t\}_{t \geq 0}$$
 
 \begin{eqnarray*}
-     \varepsilon(p_n^x, p_m^y)&=&-\langle  \Delta p_n^x, p_m^y \rangle  \\
-     &=& -\langle p_{n+1}^x-p_n^x, p_m^y \rangle \\
-     &=& -\langle p_{n+1}, p_m^y \rangle + \langle p_n^x, p_m^y \rangle \\
-     &=& -p_{n+m+1}(x,y)+p_{n+m}(x,y)
+    \varepsilon(p_n^x, p_m^y)&=&-\langle  \Delta p_n^x, p_m^y \rangle  \\
+    &=& -\langle p_{n+1}^x-p_n^x, p_m^y \rangle \\
+    &=& -\langle p_{n+1}, p_m^y \rangle + \langle p_n^x, p_m^y \rangle \\
+    &=& -p_{n+m+1}(x,y)+p_{n+m}(x,y)
 \end{eqnarray*}
 where the first equality comes from Discrete Gauss-Green theorem. \textit{As an Exercise} check that $p_n^x(.)$ and $p_m^y(.)$ satisfies the hypothesis of Discrete Gauss- Green Theorem.
 
 $x \in  \V$,
 $I_x(z)=
-     \begin{cases}
-          1, z=x \\
-          0, otherwise
-     \end{cases}$
+    \begin{cases}
+        1, z=x \\
+        0, otherwise
+    \end{cases}$
 
 \begin{eqnarray*}
-     \varepsilon(I_x, I_y) &=& - \langle \Delta I_x, I_y \rangle \\
-     &=& - \sum_{z \in \V} I_y(x)\Delta I_x(z) \mu_z \\
-     &=& -\Delta I_x(y) \mu_y \\
-     &=& \mu_y \frac{\sum_{z \in \V}(I_x(z)-I_x(y)\mu_{zy}}{\mu_y} \\
-     &=&
-     \begin{cases}
-          -\mu_{xy}, if y \neq x \\
-          \mu_x - \mu_{xx}, if y=x
-     \end{cases}
+    \varepsilon(I_x, I_y) &=& - \langle \Delta I_x, I_y \rangle \\
+    &=& - \sum_{z \in \V} I_y(x)\Delta I_x(z) \mu_z \\
+    &=& -\Delta I_x(y) \mu_y \\
+    &=& \mu_y \frac{\sum_{z \in \V}(I_x(z)-I_x(y)\mu_{zy}}{\mu_y} \\
+    &=&
+    \begin{cases}
+        -\mu_{xy}, if y \neq x \\
+        \mu_x - \mu_{xx}, if y=x
+    \end{cases}
 \end{eqnarray*}
 \section{Killed Process}
 \underline{Gambler's ruin}
@@ -86,11 +85,11 @@ N: Total capital of 2 players
 $X_k:$ Capital of Player 1 in $k^{th}$ step
 
 $$\P^x(X_{T_{\{0,N\}}}=0)=h(X)\leftrightarrow h(x)=
-     \begin{cases}
-          \frac{1}{2}h(x-1)+\frac{1}{2}h(x+1), 0<x<N \\
-          1, x=0                                     \\
-          1, x=N
-     \end{cases}$$
+    \begin{cases}
+        \frac{1}{2}h(x-1)+\frac{1}{2}h(x+1), 0<x<N \\
+        1, x=0                                     \\
+        1, x=N
+    \end{cases}$$
 
 $$h=Ph \Leftrightarrow \Delta h=0$$
 
@@ -101,29 +100,29 @@ $\tau_A=\tau_{A^c}=inf\{n \geq 1 | X_n \in A^c\}$
 We define the kill density, i.e. the transition density of the random walk until it exits A by: $$p_n^A(x,y)=\frac{\P^x(X_n=y, n<\tau_A}{\mu_y}$$
 
 \begin{itemize}
-     \item
-           if $y \notin A$, then $p_n^A(x,y)=0$ $\forall n \geq 1$
-     \item
-           $I_Af(x)=I_A(x)f(x)$
-     \item
-           $n\geq 1$, $P_n^Af(x)=\sum_{z \in \V} p_n^A(x,z)f(z)\mu_z$= $F^x[f(X_n); n<\tau_A]$
-     \item
-           $\Delta^A:= P^A-I^A$
+    \item
+          if $y \notin A$, then $p_n^A(x,y)=0$ $\forall n \geq 1$
+    \item
+          $I_Af(x)=I_A(x)f(x)$
+    \item
+          $n\geq 1$, $P_n^Af(x)=\sum_{z \in \V} p_n^A(x,z)f(z)\mu_z$= $F^x[f(X_n); n<\tau_A]$
+    \item
+          $\Delta^A:= P^A-I^A$
 \end{itemize}
 \begin{lemma}
-     \begin{enumerate}[label=(\alph*)]
-          \item $p_n^A(x,y)=0$  $\forall x,y \notin A, n \geq 1$ \\
-                \item$ p_{n+1}^A(x,y)=\sum_{z \in \V} p_n^A(x,z)p^A(z,y)\mu_z$ \\
-          \item $\Delta p_n^{A,x}=p_{n+1}^{A,x}-p_n^{A,x}$
+    \begin{enumerate}[label=(\alph*)]
+        \item $p_n^A(x,y)=0$  $\forall x,y \notin A, n \geq 1$ \\
+              \item$ p_{n+1}^A(x,y)=\sum_{z \in \V} p_n^A(x,z)p^A(z,y)\mu_z$ \\
+        \item $\Delta p_n^{A,x}=p_{n+1}^{A,x}-p_n^{A,x}$
 
-                [$p_n^{A,x}=p_n^A(x,y)$]\\
-          \item $ p_n^A(x,y) = p_n^A(y,x)$ $\forall x,y \in \V$ \\
-          \item $P_n^Af(x)=(P^A)^nf(x)$ $\forall n \geq 1$ \\
-          \item $P^Af(x)=I_API_Af(x)$
-     \end{enumerate}
+              [$p_n^{A,x}=p_n^A(x,y)$]\\
+        \item $ p_n^A(x,y) = p_n^A(y,x)$ $\forall x,y \in \V$ \\
+        \item $P_n^Af(x)=(P^A)^nf(x)$ $\forall n \geq 1$ \\
+        \item $P^Af(x)=I_API_Af(x)$
+    \end{enumerate}
 \end{lemma}
 \begin{proof}
-     Left as an Exercise.
+    Left as an Exercise.
 \end{proof}
 \section{Green's function}
 
@@ -133,63 +132,63 @@ $x,y \in \V$.
 
 \begin{notation}
 
-     \begin{itemize}
+    \begin{itemize}
 
-          \item if $A=\V$ then $g_A=g$
-          \item $x \in \V$ fixed, then $g_A^x(y)= g_A(x,y $ $\forall y \in \V$
+        \item if $A=\V$ then $g_A=g$
+        \item $x \in \V$ fixed, then $g_A^x(y)= g_A(x,y $ $\forall y \in \V$
 
-     \end{itemize}
+    \end{itemize}
 
-     \begin{obs}
-          \begin{itemize}
-               \item $g_A(x,y) = g_A(y,x)$ $\forall$ $x,y \in \V$.
-               \item
-                     Define Local time at y before exiting A i.e. time spent by the walk at y before exiting A by $L_{\tau_A}^y$ = $\suminf  \1_{X_n=y}$.
-                     \begin{eqnarray*}
-                          g_A(x,y)&=& \suminf p_n^A(x,y) \\
-                          &=& \frac{\suminf E^x[\1_{X_n=y}; n<\tau_A ]}{\mu_y} \\
-                          &=&\frac{E^x[\suminf (\1_{X_n=y} \1_{n<\tau_A}) ]}{\mu_y} \\
-                          &=&\frac{E^x[\sum_{n=0}^{\tau_A-1} (\1_{X_n=y}) ]}{\mu_y} \\
-                          &=&\frac{E^x[L_{\tau_A}^y]}{\mu_y}.
-                     \end{eqnarray*}
+    \begin{obs}
+        \begin{itemize}
+            \item $g_A(x,y) = g_A(y,x)$ $\forall$ $x,y \in \V$.
+            \item
+                  Define Local time at y before exiting A i.e. time spent by the walk at y before exiting A by $L_{\tau_A}^y$ = $\suminf  \1_{X_n=y}$.
+                  \begin{eqnarray*}
+                      g_A(x,y)&=& \suminf p_n^A(x,y) \\
+                      &=& \frac{\suminf E^x[\1_{X_n=y}; n<\tau_A ]}{\mu_y} \\
+                      &=&\frac{E^x[\suminf (\1_{X_n=y} \1_{n<\tau_A}) ]}{\mu_y} \\
+                      &=&\frac{E^x[\sum_{n=0}^{\tau_A-1} (\1_{X_n=y}) ]}{\mu_y} \\
+                      &=&\frac{E^x[L_{\tau_A}^y]}{\mu_y}.
+                  \end{eqnarray*}
 
-               \item if $A=\V$ and $\V$ is recurrent then $g(x,.)=\infty$
-          \end{itemize}
-     \end{obs}
+            \item if $A=\V$ and $\V$ is recurrent then $g(x,.)=\infty$
+        \end{itemize}
+    \end{obs}
 \end{notation}
 
 \begin{theorem}
-     $A\subset \V$. Suppose either ($\Gamma, \mu)$ is transient or $A \neq V$.Then
-     \begin{enumerate}
-          \item $g_A(x,y)= \mathbb{P} (\tau_y < \tau_A)g_A(y,y)$
-          \item $g_A(y,y)=\frac{1}{\mu_y \mathbb{P}(\tau_a \leq \tau_y^+)}$
-     \end{enumerate}
+    $A\subset \V$. Suppose either ($\Gamma, \mu)$ is transient or $A \neq V$.Then
+    \begin{enumerate}
+        \item $g_A(x,y)= \mathbb{P} (\tau_y < \tau_A)g_A(y,y)$
+        \item $g_A(y,y)=\frac{1}{\mu_y \mathbb{P}(\tau_a \leq \tau_y^+)}$
+    \end{enumerate}
 \end{theorem}
 
 \begin{lemma}
-     Let $x,y \in A$. Then,
-     \begin{enumerate}
-          \item $\mathbf{P}g_A^x(y)= g_A(x,y)-\frac{\1_x(y)}{\mu_x}$
-          \item $\Delta g_A^x(y)=
-                     \begin{cases}
-                          -\frac{1}{\mu_x} \text{  	if y=x} \\
-                          0 \text{ 	 otherwise}             \\
-                     \end{cases}$
-     \end{enumerate}
+    Let $x,y \in A$. Then,
+    \begin{enumerate}
+        \item $\mathbf{P}g_A^x(y)= g_A(x,y)-\frac{\1_x(y)}{\mu_x}$
+        \item $\Delta g_A^x(y)=
+                  \begin{cases}
+                      -\frac{1}{\mu_x} \text{  	if y=x} \\
+                      0 \text{ 	 otherwise}             \\
+                  \end{cases}$
+    \end{enumerate}
 \end{lemma}
 \begin{proof}
-     1.
-     \begin{eqnarray*}
-          Pg_A^x&=& \sum_{z \in \V} p(y,z)g_A^x(z)\mu_z \\
-          &=& \sum_{z \in \V} p(y,z)\mu_z (\suminf p_n^A(xz) \\
-          &=& \suminf \sum_{z \in \V} p(y,z)\mu_z p_n^A(x,z) \\
-          &=& \suminf \sum_{z \in A} p(y,z)\mu_z p_n^A(x,z) \\
-          &=& \suminf \sum_{z \in A} p_1^A(y,z)p_n^A(x,z)\mu_z \\
-          &=& \suminf p_{n+1}^A(x,y) \\
-          &=& g_A(x,y) - p_0^A(x,y) \\
-          \Rightarrow Pg_A^x(y)&=&g_A(x,y)-\frac{\1_x(y)}{\mu_x}
-     \end{eqnarray*}
-     2. follows from definition of $D=P-I$
+    1.
+    \begin{eqnarray*}
+        Pg_A^x&=& \sum_{z \in \V} p(y,z)g_A^x(z)\mu_z \\
+        &=& \sum_{z \in \V} p(y,z)\mu_z (\suminf p_n^A(xz) \\
+        &=& \suminf \sum_{z \in \V} p(y,z)\mu_z p_n^A(x,z) \\
+        &=& \suminf \sum_{z \in A} p(y,z)\mu_z p_n^A(x,z) \\
+        &=& \suminf \sum_{z \in A} p_1^A(y,z)p_n^A(x,z)\mu_z \\
+        &=& \suminf p_{n+1}^A(x,y) \\
+        &=& g_A(x,y) - p_0^A(x,y) \\
+        \Rightarrow Pg_A^x(y)&=&g_A(x,y)-\frac{\1_x(y)}{\mu_x}
+    \end{eqnarray*}
+    2. follows from definition of $D=P-I$
 \end{proof}
 
 \textit{Proof of Theorem.}
@@ -200,10 +199,10 @@ let $\xi$ be a random variable. $h_n(\xi)=E^{\xi} f(X_n)$
 
 1.
 \begin{eqnarray*}
-     g_A(x,y)\mu_y &=& E^x(L_{\tau_A}^y \\
-     &=& E^x(\1_{\tau_y < \tau_A} \times L_{\tau_A}^y \\
-     &=& E^x(\1_{\tau_y < \tau_A} \E^y (L_{\tau_A}^y) \\
-     \Rightarrow g_A(x,y) &=& g_A(y,y)\P^x(\tau_y < \tau_A) \square
+    g_A(x,y)\mu_y &=& E^x(L_{\tau_A}^y \\
+    &=& E^x(\1_{\tau_y < \tau_A} \times L_{\tau_A}^y \\
+    &=& E^x(\1_{\tau_y < \tau_A} \E^y (L_{\tau_A}^y) \\
+    \Rightarrow g_A(x,y) &=& g_A(y,y)\P^x(\tau_y < \tau_A) \square
 \end{eqnarray*}
 2. $p=\P(\tau_y^+<\tau_A)$
 
@@ -212,117 +211,15 @@ if $(\Gamma, \mu)$ is transient then $p<1$ and if recurrent and $A \neq \V$ then
 $\therefore p<1$
 
 \begin{eqnarray*}
-     \P^y(L_{\tau_A}^y=k) &=& p^k(1-p) \\
-     \Rightarrow \mu_y g_A(y,y) &=& E^y(L_{\tau_A}^y) \\
-     &=& \sum_{k=0}^{\infty} p^k(1-p) \\
-     &=& \frac{1}{1-p} \\
-     &=& \frac{1}{\P(\tau_A \leq \tau_y^+)} \\
-     \Rightarrow g_A(y,y) &=& \frac{1}{\mu_y \P(\tau_A \leq \tau_y^+)} \square
+    \P^y(L_{\tau_A}^y=k) &=& p^k(1-p) \\
+    \Rightarrow \mu_y g_A(y,y) &=& E^y(L_{\tau_A}^y) \\
+    &=& \sum_{k=0}^{\infty} p^k(1-p) \\
+    &=& \frac{1}{1-p} \\
+    &=& \frac{1}{\P(\tau_A \leq \tau_y^+)} \\
+    \Rightarrow g_A(y,y) &=& \frac{1}{\mu_y \P(\tau_A \leq \tau_y^+)} \square
 \end{eqnarray*}
 
 Combining 1 and 2, we get $$g_A(x,y)=\frac{\P^x(\tau_y< \tau_A)}{\mu_y \P(\tau_A \leq \tau_y^+)}.$$
-\part{Martingales}
-$\{Z_n\}$ is a Martingale
-
-$E[Z_n|Z_i, Z_{i-1}, ... , Z_1]=Z_i$ where $1 \leq i \leq n ]$
-
-$E[Z_n]=E[Z_1]$
-
-\section{Stopping time and Stopped process}
-\begin{definition}
-     Let $(\Omega, A, \P)$ be a probability space on which $\{Z_n\}_{n\geq 1}$ is defined.
-
-     $\mathscr{A}_k$= events determined by $Z_1, Z_2, ... ,Z_k$.
-
-     $T: \Omega \longrightarrow \mathbb{N} \cup \{\infty\}$ is called a \textbf{stopping time} for $\{Z_n\}_{n\geq 1}$ if $\{T=k\} \in \mathscr{A}_k$, i.e.  $\1_{T=k}=$ "function" of $Z_1, Z_2, ... ,Z_k$.
-\end{definition}
-
-\begin{definition}
-     for any stopping time T, we define the \textbf{stopped process}:
-
-     $Z_n^T(w) = Z_{n \wedge T(w)}(w)=
-          \begin{cases}
-               Z_n \text{ if }n<T \\
-               Z_T \text{ if } n \geq T
-          \end{cases}$
-\end{definition}
-
-\begin{theorem}
-     Given a sequence of random variables $\{Z_n\}_{n\geq 1}$ and $T: \Omega \longrightarrow \mathbb{N} \cup \{\infty\}$, a stopping time of $\{Z_n\}_{n\geq 1}$. Then $\{Z_n^T\}_{n\geq 1}$ is a martingale iff $\{Z_n\}_{n\geq 1}$ is a martingale
-\end{theorem}
-
-\textit{Idea of the proof:}
-$\E(Z_n^T| Z_{n-1}^T, ..., Z_1^T)= \E(Z_{n-1}^T)$
-
-Take $Z_1 = z_1, ... , Z_{n-1} = z_{n-1} \rightarrow$ determine if T has happened by time n-1 or not
-
-$\rightarrow$ if $T \geq n,$  $Z_n^T= Z_n$
-
-\hspace{4mm}	if $T < n, $  $Z_n^T= z_{n-1}$ $\square$
-
-
-
-Let $\{X_i\}, X, Y, Z$ be discrete random variables.
-
-\begin{equation}
-     \E[Y| X=x_1] = \sum_{k \in Range(Y)}k\P(Y=k| X=x_1)
-\end{equation}
-
-\begin{equation}
-     \E[Y| X_1=x_1, ..., X_n=x_n] = \sum_{k \in Range(Y)}k\P(Y=k| X_1=x_1, ..., X_n=x_n)
-\end{equation}
-where $\E[Y| X_1=x_1, ..., X_n=x_n]\equiv f(x_1, x_2,..., x_n)$
-
-$ f: \prod_{i=i}^n Range(X_i) \rightarrow \R$
-
-\begin{eqnarray}
-     \E[Y| X_1, ..., X_n](\omega) = \sum_{x \in Range(X_i)}k\E(Y=k| X_1=x_1, ..., X_n=x_n)\mathbf{1}_{(X_1=x_1, ..., X_n=x_n)}(\omega)
-\end{eqnarray}
-where $\E[Y| X_1, ..., X_n] \equiv \E[Y| \mathscr{A}_n]$, i.e. events observable by time n.
-
-
-\section{Tower Property}
-Let $\mathscr{A}_n \subset \mathscr{A}_m $, $n \leq m$
-then $\E[E[Y|\mathscr{A}_m]|\mathscr{A}_n]= \E[Y|\mathscr{A}_n]$
-\section{Markov property and Strong Markov Property}
-Property for $\{X_n\}$ random walk on $(\Gamma,y)$.
-
-$\Omega=\mathbb{V}^{\mathbb{Z_+}}$.
-
-$X_n: \Omega \rightarrow \mathbb{V}$.
-
-$X_n(\omega)= \omega(n)$.
-
-$\mathscr{A}_n$= events determined by $X_1, ..., X_n$.
-
-$\P^x(X_0=x_0, X_1=x_1,..., X_n=x_n)= \1_{x}(x_0)\prod_{i=0}^n \mathscr{P}(x_{i-1}, x_i)$
-
-$\mathscr{P}(x,y)=\frac{\mu_{xy}}{\mu_y}$
-
-$\xi \rightarrow$ random variable that is determinable by $\mathscr{A}_n$ i.e. $\xi=g(X_1, X_2,..., X_n$ for some g.
-
-$\forall k \geq 1$, $\theta_k: \Omega \rightarrow \mathbb{V}^{\mathbb{Z_+}}$, $\theta_k(\omega)= (\omega(k), \omega(k+1),...)$
-
-Let $\eta: \Omega \rightarrow \R$ be any random variable.
-
-$\E[\xi"\eta$ after time $n"|\mathscr{A}_n]=\E[\xi\E^{X_n}[\eta$ after time $n"]]$
-
-\textbf{Markov Property:}
-\begin{equation}
-     \E[(\xi)\times (\eta.\theta_n)|\mathscr{A}_n ]=\E[\xi\E^{X_n}[\eta]]
-\end{equation}
-
-\textbf{Strong Markov Property:}
-
-T is a stopping time of $\{X_n\}_{n\geq 1}$.
-
-$\mathscr{A}_n \equiv $events determined by time T.
-
-if $\xi$ is determinable by time T, then
-\begin{equation}
-     \E[(\xi)\times (\eta.\theta_T)|\mathscr{A}_T ]=\E[\xi\E^{X_T}[\eta]]
-\end{equation}
-
 
 
 \end{document}

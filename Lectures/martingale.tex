@@ -2,7 +2,7 @@
 
 \begin{document}
 %Set chapter counter as week-1
-\chapMart{4}{Discrete Time Martingales}
+\chapMart{6}{Discrete Time Martingales}
 %Set chapter name
 
 \lectMart{4}{January 27, 2023}{Siva Athreya}{Abhiti Mishra, Devesh Bajaj}
@@ -142,4 +142,108 @@ The property used in the first equality is called the Tower property. We now for
         \end{align*}
     \end{proof}
 \end{property}
+
+\lectMart{6}{February 17, 2023}{Siva Athreya}{Aniket Sen, Arun Sharma}
+
+$\{Z_n\}$ is a Martingale
+
+$E[Z_n|Z_i, Z_{i-1}, ... , Z_1]=Z_i$ where $1 \leq i \leq n$
+
+$E[Z_n]=E[Z_1]$
+
+\section{Stopping time and Stopped process}
+\begin{definition}
+    Let $(\Omega, A, \P)$ be a probability space on which $\{Z_n\}_{n\geq 1}$ is defined.
+
+    $\mathscr{A}_k$= events determined by $Z_1, Z_2, ... ,Z_k$.
+
+    $T: \Omega \longrightarrow \mathbb{N} \cup \{\infty\}$ is called a \textbf{stopping time} for $\{Z_n\}_{n\geq 1}$ if $\{T=k\} \in \mathscr{A}_k$, i.e.  $\1_{T=k}=$ "function" of $Z_1, Z_2, ... ,Z_k$.
+\end{definition}
+
+\begin{definition}
+    for any stopping time T, we define the \textbf{stopped process}:
+
+    $Z_n^T(w) = Z_{n \wedge T(w)}(w)=
+        \begin{cases}
+            Z_n \text{ if }n<T \\
+            Z_T \text{ if } n \geq T
+        \end{cases}$
+\end{definition}
+
+\begin{theorem}
+    Given a sequence of random variables $\{Z_n\}_{n\geq 1}$ and $T: \Omega \longrightarrow \mathbb{N} \cup \{\infty\}$, a stopping time of $\{Z_n\}_{n\geq 1}$. Then $\{Z_n^T\}_{n\geq 1}$ is a martingale iff $\{Z_n\}_{n\geq 1}$ is a martingale
+\end{theorem}
+
+\textit{Idea of the proof:}
+$\E(Z_n^T| Z_{n-1}^T, ..., Z_1^T)= \E(Z_{n-1}^T)$
+
+Take $Z_1 = z_1, ... , Z_{n-1} = z_{n-1} \rightarrow$ determine if T has happened by time n-1 or not
+
+$\rightarrow$ if $T \geq n,$  $Z_n^T= Z_n$
+
+\hspace{4mm}	if $T < n, $  $Z_n^T= z_{n-1}$ $\square$
+
+
+
+Let $\{X_i\}, X, Y, Z$ be discrete random variables.
+
+\begin{equation}
+    \E[Y| X=x_1] = \sum_{k \in Range(Y)}k\P(Y=k| X=x_1)
+\end{equation}
+
+\begin{equation}
+    \E[Y| X_1=x_1, ..., X_n=x_n] = \sum_{k \in Range(Y)}k\P(Y=k| X_1=x_1, ..., X_n=x_n)
+\end{equation}
+where $\E[Y| X_1=x_1, ..., X_n=x_n]\equiv f(x_1, x_2,..., x_n)$
+
+$ f: \prod_{i=i}^n Range(X_i) \rightarrow \R$
+
+\begin{eqnarray}
+    \E[Y| X_1, ..., X_n](\omega) = \sum_{x \in Range(X_i)}k\E(Y=k| X_1=x_1, ..., X_n=x_n)\mathbf{1}_{(X_1=x_1, ..., X_n=x_n)}(\omega)
+\end{eqnarray}
+where $\E[Y| X_1, ..., X_n] \equiv \E[Y| \mathscr{A}_n]$, i.e. events observable by time n.
+
+
+\section{Tower Property}
+Let $\mathscr{A}_n \subset \mathscr{A}_m $, $n \leq m$
+then $\E[E[Y|\mathscr{A}_m]|\mathscr{A}_n]= \E[Y|\mathscr{A}_n]$
+\section{Markov property and Strong Markov Property}
+Property for $\{X_n\}$ random walk on $(\Gamma,y)$.
+
+$\Omega=\mathbb{V}^{\mathbb{Z_+}}$.
+
+$X_n: \Omega \rightarrow \mathbb{V}$.
+
+$X_n(\omega)= \omega(n)$.
+
+$\mathscr{A}_n$= events determined by $X_1, ..., X_n$.
+
+$\P^x(X_0=x_0, X_1=x_1,..., X_n=x_n)= \1_{x}(x_0)\prod_{i=0}^n \mathscr{P}(x_{i-1}, x_i)$
+
+$\mathscr{P}(x,y)=\frac{\mu_{xy}}{\mu_y}$
+
+$\xi \rightarrow$ random variable that is determinable by $\mathscr{A}_n$ i.e. $\xi=g(X_1, X_2,..., X_n$ for some g.
+
+$\forall k \geq 1$, $\theta_k: \Omega \rightarrow \mathbb{V}^{\mathbb{Z_+}}$, $\theta_k(\omega)= (\omega(k), \omega(k+1),...)$
+
+Let $\eta: \Omega \rightarrow \R$ be any random variable.
+
+$\E[\xi"\eta$ after time $n"|\mathscr{A}_n]=\E[\xi\E^{X_n}[\eta$ after time $n"]]$
+
+\textbf{Markov Property:}
+\begin{equation}
+    \E[(\xi)\times (\eta.\theta_n)|\mathscr{A}_n ]=\E[\xi\E^{X_n}[\eta]]
+\end{equation}
+
+\textbf{Strong Markov Property:}
+
+T is a stopping time of $\{X_n\}_{n\geq 1}$.
+
+$\mathscr{A}_n \equiv $events determined by time T.
+
+if $\xi$ is determinable by time T, then
+\begin{equation}
+    \E[(\xi)\times (\eta.\theta_T)|\mathscr{A}_T ]=\E[\xi\E^{X_T}[\eta]]
+\end{equation}
+
 \end{document}
