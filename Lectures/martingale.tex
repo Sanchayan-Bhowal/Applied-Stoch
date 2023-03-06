@@ -5,7 +5,7 @@
 \chapMart{4}{Discrete Time Martingales}
 %Set chapter name
 
-\lectMart{4}{January 27,2023}{Siva Athreya}{Abhiti Mishra, Devesh Bajaj}
+\lectMart{4}{January 27, 2023}{Siva Athreya}{Abhiti Mishra, Devesh Bajaj}
 
 Origin is from horse-racing (betting system). The dictionary meaning of the word `martingale' is the harness of a horse. \\
 Let $\{Z_n\}_{n \geq 1}$ is a sequence of random variables on $(\Omega, \mathcal{F}, \mathbb{P})$. \\
@@ -77,6 +77,69 @@ $$``X_n | X_{n-1}, \ldots, X_1" \,{\buildrel d \over =}\, X_n|X_{n-1}$$
 Idea behind Martingales -
 Expected value of $Z_n$ conditioned on the past depends only on $Z_{n-1}$. $\{Z_n\}_{n \geq 1}$ in law could depend on the entire past!
 
-\lectMart{5}{February 3,2023}{Siva Athreya}{Atreya Choudhury, Ankan Kar}
+\lectMart{5}{February 3, 2023}{Siva Athreya}{Atreya Choudhury, Ankan Kar}
 
+We define $f: D \subseteq \R^{n-1} \to \R$ where
+$$f(z_1, z_2, \ldots, z_{n-1}) = \E[Z_n|Z_{n-1}=z_{n-1},Z_{n-2}=z_{n-2},\ldots,Z_1=z_1]$$
+Define $Y_n: \Omega \to \R$ where
+\begin{equation}
+    Y_n(\omega) \coloneqq f(Z_1(\omega), Z_2(\omega), \ldots, Z_{n-1}(\omega))
+    \label{eq:y_n}
+\end{equation}
+You can check that $\{Y_n\}$ is a random variable.
+\begin{property} Some properties of $\{Y_n\}$
+    \begin{enumerate}
+        \item
+              $A \coloneqq \{Z_{n-1}=z_{n-1},Z_{n-2}=z_{n-2},\ldots,Z_1=z_1\}$
+
+              $$\omega \in A \implies Y_n(\omega) = f(z_1, z_2, \ldots, z_{n-1})$$
+        \item
+              $L \coloneqq \{Y_n \leq c\} = \{f(Z_1, Z_2, \ldots, Z_{n-1}) \leq c\}$
+
+              $$L \in \SA_{n-1} \equiv \text{observable events upto }n-1$$
+    \end{enumerate}
+    \eqref{eq:y_n} $\iff \{Y_n\}$ has the above two properties
+
+    \vspace{2em}
+    If $\{Z_n\}$ is martingale, $Y_n = Z_{n-1}$
+\end{property}
+\begin{lemma}
+    Let $\{Y_n\}_{n\geq 1}$ be martingale. Then,
+    $$\forall\;1\leq i\leq n,\;\E[Z_n|Z_i,Z_{i-1},\ldots,Z_1] = Z_i$$
+    \begin{proof}
+        We fix i and prove by induction on n.\\
+        We look at n = i+1. By martingale property,
+        \begin{equation*}
+            \E[Z_{i+1}|Z_i,Z_{i-1},\ldots,Z_1] = Z_i
+            \label{eq:mart_basic}
+        \end{equation*}
+        Let $k>0$ and the statement hold for $n=i+k$.
+        We look at $n=i+k+1$
+        \begin{align*}
+             & \hspace{1.4em}\E[Z_{i+k+1}|Z_i,Z_{i-1},\ldots,Z_1]                                     \\
+             & = \E[\E[Z_{i+k+1}|Z_{i+k},Z_{i+k-1},\ldots,Z_1]|Z_i,Z_{i-1},\ldots,Z_1]                \\
+             & = \E[Z_{i+k}|Z_i,Z_{i-1},\ldots,Z_1] \hspace{3em} [\text{using }\eqref{eq:mart_basic}] \\
+             & = Z_i
+        \end{align*}
+        where the last equality is obtained from the induction hypothesis
+    \end{proof}
+\end{lemma}
+The property used in the first equality is called the Tower property. We now formally state and prove the same.
+\begin{property}[Tower Property]
+    $$\E[\E[X|Y,Z]|Y] = E[X|Y]$$
+    \begin{proof}
+        $$\E[\E[X|Y,Z]|Y] = E[h(Y,Z)|Y] = k(Y)$$
+        Let $y \in \R$ such that $\P(Y=y) > 0$
+        \begin{align*}
+            k(y) & = E[h(Y,Z)|Y]                                                                                                     \\
+                 & = \sum_{\substack{m \in \Range(Y)                                                                                 \\ t \in \Range(Z)}} h(m,t)\P(Y=m,Z=t|Y=y) \\
+                 & = \sum_{t \in \Range(Z)} h(y,t)\P(Z=t|Y=y)                                                                        \\
+                 & = \sum_{t \in \Range(Z)} \sum_{k \in \Range(X)} k \P(X=k|Y=y,Z=t)\P(Z=t|Y=y)                                      \\
+                 & = \sum_{t \in \Range(Z)} \sum_{k \in \Range(X)} k \frac{\P(X=k,Y=y,Z=t)}{\P(Y=y,Z=t)} \frac{\P(Z=t,Y=y)}{\P(Y=y)} \\
+                 & = \sum_{k \in \Range(X)} \sum_{t \in \Range(Z)} k \frac{\P(X=k,Y=y,Z=t)}{\P(Y=y)}                                 \\
+                 & = \sum_{k \in \Range(X)} k \frac{\P(X=k,Y=y)}{\P(Y=y)}                                                            \\
+                 & = \E[X|Y=y]
+        \end{align*}
+    \end{proof}
+\end{property}
 \end{document}

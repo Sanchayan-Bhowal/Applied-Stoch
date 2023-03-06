@@ -1,0 +1,321 @@
+\documentclass[main]{subfiles}
+
+\begin{document}
+%Set chapter counter as week-4
+\chapPreamble{4}{February 3, 2023}{Energy and Variational Methods}
+%Set chapter name
+
+\lecture{Siva Athreya}{Atreya Choudhury}
+
+\section{Transition densities and Laplacian}
+We can recall that $\P(X_1=y) = \mathcal{P}(x,y) = \frac{\mu_{xy}}{\mu_x}$.
+
+\begin{definition}
+    The transition density w.r.t weights $\mu$ of a random walk $\{X_n\}$ is given by:
+    $$p_n(x,y) = \frac{\P^x(X_n = y)}{\mu_y}:=\frac{\mathcal{P}_n(x,y)}{\mu_y} \hspace{2em} \mu \geq 1$$
+    $p_0(x,y) = \frac{1_{\{x\}}(y)}{\mu_y} = \frac{1_{\{x\}}(y)}{\mu_x}$.\\
+    $p(x,y) \equiv p_1(x,y) = \frac{\mu_{xy}}{\mu_x\mu_y} $
+\end{definition}
+
+\begin{lemma}
+    Let $p_n$ be the transition densities of $\{X_n\}_{n \geq 0}$
+    \begin{enumerate}
+        \item $p_{n+m}(x, y) = \sum_{z \in V} p_n(x, z)p_m(z, y)\mu_z$
+        \item $\forall\;x,y \in V,$ $p_n(x, y) = p_n(y, x)$
+        \item $\forall\;x,y \in V,$ $\sum_{z \in V} p_n(x, z)\mu_z = 1 = \sum_{z \in V} p_n(z, y)\mu_z$
+    \end{enumerate}
+    \label{lem:transitionbasics}
+\end{lemma}
+
+\begin{proof}
+    \begin{enumerate}
+        \item
+              \begin{align*}
+                  p_{n+m}(x, y) & = \frac{\P^x(X_{n+m} = y)}{\mu_y}                                                                                                                                                                        \\
+                                & = \sum_{z \in V} \frac{\P^x(X_{n+m} = y, X_n = z)}{\mu_y}                                                                                                                                                \\
+                                & = \frac{1}{\mu_y} \sum_{z \in V} \sum_{o \leq i < n+m, x_i \in V} 1_{\{x\}}(x_0) \prod_{i=0}^{n-1}\mathcal{P}(x_i, x_{i+1}) 1_{\{z\}}(x_n) \prod_{i=n}^{n+m}\mathcal{P}(x_i, x_{i+1}) 1_{\{y\}}(x_{n+m}) \\
+                                & \stackrel{\text{H1}}{=} \frac{1}{\mu_y} \sum_{z \in V} \P^x(X_n = z)\P^z(X_m = y)                                                                                                                        \\
+                                & = \frac{1}{\mu_y} \sum_{z \in V} p_n(x, z)\mu_z\;p_m(z, y)\mu_y                                                                                                                                          \\
+                                & = \sum_{z \in V} p_n(x, z)p_m(z, y)\mu_z                                                                                                                                                                 \\
+              \end{align*}
+        \item $$p_n(x, y) = \frac{\P^x(X_n = y)}{\mu_y} = \frac{\P^y(X_n = x)}{\mu_x} = p_n(y, x)$$
+              The second equality is obtained by applying the Detailed Balance equations.
+        \item
+              \begin{align*}
+                  \sum_{z \in V} p_n(x, z)\mu_z & = \sum_{z \in V} \P^x(X_n = z) = 1                                 \\
+                  \sum_{z \in V} p_n(z, y)\mu_z & = \sum_{z \in V} p_n(y, z)\mu_z = \sum_{z \in V} \P^y(X_n = z) = 1 \\
+              \end{align*}
+    \end{enumerate}
+\end{proof}
+
+\section{Function Spaces}
+\begin{definition}
+    \begin{align*}
+        C(V)     & = \{f: V \to \R\} = \R^V                                     \\
+        \Co(V)   & = \{f: V \to \R,\;f \neq 0 \text{ on finitely many points}\} \\
+        C_+(V)   & = \{f: f \in C(V),\;f \geq 0\}                               \\
+        \Supp(f) & = \{x: x \in V,\;f(x) \neq 0\}                               \\
+    \end{align*}
+\end{definition}
+\begin{definition}
+    We define the \textbf{norm} of a function as the following
+    \begin{align*}
+        \forall p \in [1,\;\infty),\;\norm{f}{p} & = (\sum_{x \in V}\Mod{f(x)}^p \mu_x)^{\frac{1}{p}} \\
+        \norm{f}{\infty}                         & = \sup\{{\Mod{f(x)}: x \in V}\}
+    \end{align*}
+\end{definition}
+f is said to be $L^p$ on the graph with vertex set V and weights $\mu$ if and only if f is a function defined on the vertex set, V and its p-norm is finite everywhere.
+
+$$f \in L^p(V,\mu) \iff f \in C(V)\text{ and }\norm{f}{p} < \infty$$
+\begin{definition}
+    We define an inner product on the $L^2(V,\;\mu)$ space in the following way
+    $$\ip{f}{g} = \sum_{x \in V} f(x)g(x)\mu_x$$
+    \begin{align*}
+        \E[f(X_n)] & = \sum_{x \in V}f(z) \P^x(X_n = z) \\
+                   & = \sum_{x \in V}f(z) p_n(x,z)\mu_z \\
+                   & = \ip{f}{p_n(x,\;.)}               \\
+    \end{align*}
+\end{definition}
+which brings us to define a new function
+\begin{definition}
+    $\mathcal{P}_n: C(V) \to C(V)$ given by
+    $$\mathcal{P}_nf(x) = \sum_{x \in V}f(z) p_n(x,z)\mu_z = \ip{f}{p_n(x,\;.)}$$
+    where $\Delta: C(V) \to C(V)$ as an ``operation'' on C(V) is
+    $$\Delta  = P - I$$
+\end{definition}
+We write $\mathcal{P}_1f(x)$ as $\mathcal{P}f(x)$ and proceed to look at computations and lemmas involving $\mathcal{P}f$.
+\begin{lemma}
+    $$\forall x \in V,\;\mathcal{P}f(x) - f(x) = \Delta f(x)$$
+    \begin{proof}
+        \begin{align*}
+            \mathcal{P}f(x) - f(x) & = \sum_{x \in V}f(z) p(x,z)\mu_z - f(x)                           \\
+                                   & \stackrel{*}{=} \sum_{x \in V}p(x,z)\mu_z(f(z) - f(x))            \\
+                                   & = \sum_{x \in V}\frac{\mu_{xz}}{\mu_{x}\mu_{z}}\mu_z(f(z) - f(x)) \\
+                                   & = \frac{1}{\mu_{x}}\sum_{x \in V}\mu_{xz}(f(z) - f(x))            \\
+                                   & = \Delta f(x)
+        \end{align*}
+        * is left as an exercise and can be proved using property 2 from \eqref{lem:transitionbasics}
+    \end{proof}
+\end{lemma}
+\begin{corollary}
+    $$\Delta f = 0 \iff f(x) = \mathcal{P}f(x) = \E^x[f(X_1)]$$
+\end{corollary}
+\vspace{1em}
+\begin{definition}
+    We define a function $A: C(V) \to C(V)$ as
+    $$\norm{A}{p \to p} = \sup\{\norm{Af}{p}: \norm{f}{p} \leq 1\}$$
+\end{definition}
+\begin{prop}
+    \begin{enumerate}
+        \item $\mathcal{P}1 = 1$\\
+              where $1(x) = 1$ $\forall x \in V$
+        \item $\Mod{\mathcal{P}f} \leq \mathcal{P}{\Mod{f}}$\\
+              where $f \in C(V)$
+        \item
+              $\norm{\mathcal{P}}{p \to p} \leq 1$\\
+              $\norm{\Delta}{p \to p} \leq 2$\\
+              where $p \in [1, \infty) \cup \{\infty\}$
+    \end{enumerate}
+    \begin{proof}
+        \begin{enumerate}
+            \item $$\mathcal{P}1(x) = \sum_{x \in V}p(x,z)\mu_z = 1 = 1(x)$$
+            \item
+                  \begin{align*}
+                      \Mod{\mathcal{P}f(x)} & = \Mod{\sum_{x \in V}f(z)p(x,z)\mu_z}    \\
+                                            & \leq \sum_{x \in V}\Mod{f(z)}p(x,z)\mu_z \\
+                                            & = \mathcal{P}{\Mod{f}}(x)
+                  \end{align*}
+            \item
+                  \begin{equation}
+                      \begin{aligned}
+                          \norm{\mathcal{P}f}{p}^p             & = \sum_{x \in V}\Mod{\mathcal{P}f(x)}^p\mu_x                                                                                      \\
+                                                               & = \sum_{x \in V}\Mod{\sum_{z \in V}f(z)p(x,z)\mu_z}^p\mu_x                                                                        \\
+                                                               & \stackrel{*}{\leq} \sum_{x \in V}\left(\sum_{z \in V}\Mod{f(z)}^pp(x,z)\mu_z\right)\left(\sum_{z \in V}1^qp(x,z)\mu_z\right)\mu_x \\
+                                                               & = \sum_{x \in V}\left(\sum_{z \in V}\Mod{f(z)}^pp(x,z)\mu_z\right)\mu_x                                                           \\
+                                                               & \stackrel{**}{=} \sum_{z \in V}\Mod{f(z)}^p\mu_z                                                                                  \\
+                                                               & = \norm{f}{p}                                                                                                                     \\
+                          \implies \norm{\mathcal{P}}{p \to p} & \leq 1                                                                                                                            \\
+                      \end{aligned}
+                      \label{pf:Pff}
+                  \end{equation}
+
+                  where $\frac{1}{p} + \frac{1}{q} = 1$\\\\
+                  We leave the proofs of the following as exercises\\
+                  *, which can be proved using Holder's inequality,
+                  ** and the
+                  $p = \infty$ case
+
+                  \begin{align*}
+                      \norm{\Delta f}{p}^p            & = \norm{\mathcal{P}f - f}{p}^p                                                      \\
+                                                      & \leq (\norm{\mathcal{P}f}{p} + \norm{f)}{p})^p                                      \\
+                                                      & \leq 2^{p-1}(\norm{\mathcal{P}f}{p}^p + \norm{f}{p}^p)                              \\
+                                                      & \leq (2\norm{f}{p})^p \hspace{6em}[\because\norm{\mathcal{P}f}{p} \leq \norm{f}{p}] \\
+                      \implies \norm{\Delta}{p \to p} & \leq 1                                                                              \\
+                  \end{align*}
+                  The final inequality is obtained from \eqref{pf:Pff}.
+        \end{enumerate}
+    \end{proof}
+\end{prop}
+\begin{prop}
+    $\mathcal{P}$ is self-adjoint on $L^2(V,\mu)$
+    $$\forall\;f,g \in L^2(V,\mu),\;\ip{\mathcal{P}f}{g} = \ip{f}{\mathcal{P}g}$$
+    \begin{proof}
+        \begin{align*}
+            \ip{\mathcal{P}f}{g} & = \sum_{x \in V}\mathcal{P}f(x)g(x)\mu_x                              \\
+                                 & = \sum_{x \in V}(\sum_{z \in V}f(z)p(x,z)\mu_z)g(x)\mu_x              \\
+                                 & \stackrel{Ex}{=} \sum_{z \in V}f(z)\mu_z\sum_{x \in V}p(z,x)g(x)\mu_x \\
+                                 & = \sum_{z \in V}f(z)\mathcal{P}g(z)\mu_z                              \\
+                                 & = \ip{f}{\mathcal{P}g}
+        \end{align*}
+    \end{proof}
+\end{prop}
+
+\section{Dirichlet forms}
+\begin{definition}
+    We define the quadratic form on $L^2(V,\mu),\; \mathcal{E}$ as
+    $$\mathcal{E}(f,g) = \frac{1}{2}\sum_{x \in V}\sum_{y \in V}(f(x)-f(y))(g(x)-g(y))\mu_{xy}$$
+    whenever the series converges absolutely.
+\end{definition}
+\begin{theorem}[Discrete Green's Theorem]
+    $\forall\;f,g \in C(V)$,
+    \begin{align*}
+         & \sum_{x \in V}\sum_{y \in V}\Mod{f(x)-f(y)}\Mod{g(x)}\mu_x < \infty \\
+         & \implies \mathcal{E}(f,g) = - \ip{\Delta f}{g}
+    \end{align*}
+    \label{thm:dgt}
+\end{theorem}
+We present an application of \eqref{thm:dgt}
+\begin{lemma}
+    Let $(\Gamma,\;\mu)$ be a weighted graph such that $\mu(V) < \infty$.
+    Then, $(\Gamma,\;\mu)$ is \textbf{recurrent}.
+    \begin{proof}
+        Fix $Z \in V$
+        Define $\Phi: V \to \R$ where $\Phi(x) \coloneqq \P^x(\T_z = \infty)$
+        \begin{enumerate}
+            \item Firstly observe that $\Phi(z) = \P^z(\T_z = \infty) = 0$
+            \item $\forall \;n \geq 1, \; x \neq z$\\
+                  $\Phi_n(x) \coloneqq \P^x(\T_z = n) = \sum_{u \in V}\mathcal{P}(x, u)\Phi_{n-1}(x)$\\
+
+                  This holds true from a simple logical argument. Starting from x, hitting z in n steps is equivalent to jumping from x to some vertex u and hitting z in $n-1$ steps.
+            \item $1-\Phi(x) = \P^x(\T_z < \infty) = \sum_{n=0}^\infty\P^x(\T_z=n)=\sum_{n=1}^\infty\Phi_n(x)$
+            \item $\Phi \equiv 0$
+
+                  \begin{align*}
+                      \sum_{n=1}^k\Phi_n(x)               & = \sum_{n=1}^k\sum_{u \in V}\mathcal{P}(x, u)\Phi_{n-1}(u)      \\
+                      \implies \sum_{n=1}^k\Phi_n(x)      & = \sum_{u \in V}\mathcal{P}(x, u)\sum_{n=1}^k\Phi_{n-1}(u)      \\
+                      \implies \sum_{n=1}^\infty\Phi_n(x) & = \sum_{u \in V}\mathcal{P}(x, u)\sum_{n=1}^\infty\Phi_{n-1}(u) \\
+                      \implies 1 - \Phi(x)                & = \sum_{u \in V}\mathcal{P}(x, u)(1 - \Phi(u))                  \\
+                      \implies 1 - \Phi(x)                & = \sum_{u \in V}p(x, u)(1 - \Phi(u))\mu_u                       \\
+                      \implies 1 - \Phi                   & = \mathcal{P}(1 - \Phi )                                        \\
+                      \implies \Delta(1 - \Phi)           & = 0
+                  \end{align*}
+                  Then, by theorem \eqref{thm:dgt},
+                  \begin{align*}
+                       & \hspace{2.5em}\mathcal{E}(1-\Phi,1-\Phi) = \ip{\Delta(1 - \Phi)}{1 - \Phi} = 0  \\
+                       & \implies \frac{1}{2}\sum_{x \in V}\sum_{y \in V}(\Phi(x)-\Phi(y))^2\mu_{xy} = 0 \\
+                       & \implies \Phi(x) = \Phi(y) \hspace{2em} \forall\;x,y \in V                      \\
+                       & \implies \Phi\text{ is constant}                                                \\
+                       & \implies \Phi \equiv 0
+                  \end{align*}
+                  The last equality holds as $\Phi(z) = 0$.
+
+                  Since, $\Phi \equiv 0$ for arbitrary z, $(\Gamma,\;\mu)$ is recurrent.
+        \end{enumerate}
+    \end{proof}
+\end{lemma}
+To proof theorem \eqref{thm:dgt}, we start with some prerequisites.
+\begin{definition}
+    \begin{align*}
+        \mathcal{H}^2(V)        & = \{f: f \in C(v),\; \mathcal{E}(f, f) < \infty\}                                    \\
+        \norm{f}{\mathcal{H}^2} & = \sqrt{\mathcal{E}(f, f) + f^2(\rho)} \hspace{2em} \text{for some fixed }\rho \in V
+    \end{align*}
+\end{definition}
+\begin{prop}
+    Let $(\Gamma,\;\mu)$ be a graph satisfying properties, H1 and H2.
+    \begin{enumerate}
+        \item
+              $\Mod{f(x)-f(y)}\leq\frac{1}{\sqrt{\mu_{xy}}}\sqrt{\mathcal{E}(f,f)}\hspace{2em}\forall\;x\sim y$
+        \item
+              $\mathcal{E}(f, f) = 0 \iff $ f is constant
+        \item
+              $f \in L^2 \implies \mathcal{E}(f, f) \leq 2\norm{f}{2}^2$
+    \end{enumerate}
+    \begin{proof}
+        \begin{enumerate}
+            \item
+                  If $\mathcal{E}(f,f) = \infty$, then we are done
+
+                  Let $\mathcal{E}(f,f)$ be finite
+
+                  \begin{align*}
+                      \mathcal{E}(f,f) & = \frac{1}{2}\sum_{x \in V}\sum_{y \in V}(f(x)-f(y))^2\mu_{xy} \\
+                                       & \geq (f(x)-f(y))^2\mu_{xy} \hspace{2em} \forall\;x,y \in V
+                  \end{align*}
+            \item The forward direction is left as an exercise. The reverse direction follows from the definition.
+            \item \begin{align*}
+                      \mathcal{E}(f,f) & \leq \frac{1}{2}\sum_{x \in V}\sum_{y \in V}(f(x)-f(y))^2\mu_{xy}                  \\
+                                       & \leq \sum_{x \in V}\sum_{y \in V}(\Mod{f(x)}^2+\Mod{f(y)}^2)\mu_{xy}               \\
+                                       & \stackrel{Ex}{=} \sum_{x \in V}\Mod{f(x)}^2\mu_x + \sum_{y \in V}\Mod{f(y)}^2\mu_y \\
+                                       & = 2\norm{f}{2}^2
+                  \end{align*}
+                  The second last equality is left as an exercise.
+        \end{enumerate}
+    \end{proof}
+\end{prop}
+\begin{prop}
+    $Let f \in \mathcal{H}^2(V)$. Then,
+    \[\norm{\Delta f}{2}^2 \leq 2 \mathcal{E}(f,f)\]
+    \begin{proof}
+        \begin{align*}
+            \norm{\Delta f}{2}^2 & = \sum_{x \in V} (\Delta f(x))^2\mu_x                                                                                                  \\
+                                 & =\sum_{x \in V} \left[\frac{1}{\mu_x} \sum_{y \in V}(f(y)-f(x))^2\mu_{xy}\right]^2\mu_x                                                \\
+                                 & = \sum_{x \in V} \frac{1}{\mu_x} \left[\sum_{y \in V}(f(x)-f(y))^2\mu_{xy}\right]^2                                                    \\
+                                 & \stackrel{Ex}{\leq} \sum_{x \in V}\frac{1}{\mu_x} \left[\sum_{y \in V}(f(x)-f(y))^2\mu_{xy}\right]\left[\sum_{y \in V} \mu_{xy}\right] \\
+                                 & = 2 \mathcal{E}(f,f)
+        \end{align*}
+        The second last inequality is an exercise and can be shown using Cauchy-Schwarz inequality.
+    \end{proof}
+\end{prop}
+\begin{proof}[Proof of Discrete Green's Theorem \eqref{thm:dgt}]
+    \begin{align*}
+        \ip{\Delta f}{g} & = \sum_{x \in V} \Delta f(x)g(x)\mu_x                                     \\
+                         & = \sum_{x \in V}\frac{1}{\mu_x}\sum_{y \in V}(f(y)-f(x))\mu_{xy}g(x)\mu_x \\
+                         & = - \sum_{x \in V}\sum_{y \in V}(f(x)-f(y))\mu_{xy}g(x)
+    \end{align*}
+    \begin{align*}
+        \mathcal{E}(f,g) & = \frac{1}{2} \sum_{x \in V}\sum_{y \in V}(f(x)-f(y))(g(x)-g(y))\mu_{xy}                                                           \\
+                         & = \frac{1}{2} \sum_{x \in V}\sum_{y \in V}(f(x)-f(y))g(x)\mu_{xy} - \frac{1}{2}\sum_{x \in V}\sum_{y \in V}(f(x)-f(y))g(y)\mu_{xy} \\
+                         & = -\frac{1}{2}\ip{\Delta f}{g} - \frac{1}{2}\sum_{y \in V}\sum_{x \in V}(f(x)-f(y))g(y)\mu_{xy}                                    \\
+                         & \stackrel{*}{=} -\frac{1}{2}\ip{\Delta f}{g} - \frac{1}{2}\sum_{x \in V}\sum_{y \in V}(f(y)-f(x))g(x)\mu_{yx}                      \\
+                         & = -\frac{1}{2}\ip{\Delta f}{g} + \frac{1}{2}\sum_{x \in V}\sum_{y \in V}(f(x)-f(y))g(x)\mu_{xy}                                    \\
+                         & = -\frac{1}{2}\ip{\Delta f}{g} -\frac{1}{2}\ip{\Delta f}{g}                                                                        \\
+                         & = -\ip{\Delta f}{g}                                                                                                                \\
+    \end{align*}
+    where * is obtained by flipping the labels of x and y.
+\end{proof}
+\ex
+
+Let $V = \N$ and $\mu$ be the usual weights.
+
+Define $f,g:\N \to \R$ such that
+\begin{align*}
+    f(n) & \coloneqq \sum_{i=1}^n\frac{(-1)^i}{i} \\
+    g(n) & \coloneqq 1                            \\
+\end{align*}
+Then,
+\begin{align*}
+    \mathcal{E}(f,f) & = \frac{1}{2}\left[\sum_{k\geq 1}(f(k+1)-f(k))^2 + \sum_{k\geq 1}(f(k-1)-f(k))^2\right] \\
+                     & \leq \sum_{k\geq2}\frac{1}{k^2} < \infty
+\end{align*}
+\begin{align*}
+    \mathcal{E}(g,g) & = 0 \\
+    \mathcal{E}(f,g) & = 0
+\end{align*}
+\begin{align*}
+    \Delta f(n)               & = \frac{1}{2}[f(n+1) + f(n-1) - 2f(n)]                                     \\
+                              & = \frac{(-1)^{n+1}}{2}\frac{2n+1}{n(n+1)}                                  \\
+    \implies \ip{\Delta f}{g} & = \frac{3}{4} + \sum_{n=2}^\infty \frac{(-1)^{n+1}}{2}\frac{2n+1}{n(n+1)}2 \\
+                              & = \frac{3}{4} - \frac{1}{2} \neq 0                                         \\
+\end{align*}
+which contradicts the Discrete Green's Theorem \eqref{thm:dgt}
+\end{document}
