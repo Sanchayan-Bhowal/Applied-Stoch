@@ -1,0 +1,249 @@
+\documentclass[main]{subfiles}
+
+\begin{document}
+%Set chapter counter as week-1
+\chapPreamble{6}{March 3, 2023}{Harmonic Functions}
+%Set chapter name
+
+\lecture{Siva Athreya}{Rahil Miraj, Jainam Khakra}
+
+
+\textbf{Harmonic Functions:}\\
+
+Let $\Gamma=(V,E, \mu)$ be weighted graph and let $A\subseteq V$, $\bar{A}=A\bigcup\partial A$. Then $f:\bar{A}\rightarrow \mathbb{R}$ is said to be:\\
+\textbf{Harmonic} if $\Delta f=0,~i.e.~ (Pf=f)$,\\
+\textbf{Super Harmonic} if $\Delta f\leq 0,~i.e.~ (Pf\leq f)$,\\
+\textbf{Sub Harmonic} if $\Delta f\geq 0,~i.e.~ (Pf\geq f)$.
+
+\textbf{Examples:}\\
+1. For $x,y\in V$ and $A\subseteq V$,
+$$g_A(x,y)=\sum_{n=0}^{\infty}p_n^A(x,y)=\frac{\mathbb{E}[L_{\tau_A}^y]}{\mu_y}.$$
+$$\Delta g_A(x,y)=-\frac{1}{\mu_x}\mathbf{1_{\{x\}}(y)}=
+    \begin{cases}
+        -\frac{1}{\mu_x}, & \text{if $y=x$}      \\
+        0,                & \text{if $y\neq x$}.
+    \end{cases}$$
+Therefore, $g_A(x,\cdot)$ is Harmonic in $A\backslash{x}$ and Super Harmonic in $A$.
+
+2. For $z\in V$ and $x\neq z$,$\phi(x)=\mathbb{P}^x(T_z=\infty)$ is Harmonic in $V\backslash{z}$.
+
+\begin{theorem}
+    (\textbf{Foster's Criteria/Lyapunov Function}): Let $A\subseteq V$ be a finite set. Then $(\Gamma,\mu)$ is recurrent iff there exists a function $h$, which is:\\
+    non negative,
+    Super Harmonic on $V\backslash{A}$ and
+    $|\{x:h(x)<M\}|<\infty~\forall~ M>0$.
+\end{theorem}
+
+\textbf{Proof:}
+
+$(\Rightarrow)$
+
+WLOG, we take $A=\{\rho\}$.
+Suppose $\exists h:V\rightarrow [0,\infty)$ such that $h$ is super harmonic on $V\backslash{\{\rho\}}$ and $|\{x:h(x)<M\}|<\infty~\forall ~M>0$.\\
+$T_{\rho}=min\{n\geq 0|X_n=\rho\}$, $\{X_n\}_{n\geq 0}$ is a random walk on $(\Gamma,\mu)$.
+Let $Y_n=h(X_{n\bigcap T_{\rho}})$ and let $\mathcal{A}_n$ be the observable events upto time $n$. So for $X_0=x$,\\
+\begin{align*}
+    \mathbb{E}^{x}[Y_n|\mathcal{A}_{n-1}] & =\mathbb{E}^{x}[h(X_{n\bigcap T_{\rho}})|\mathcal{A}_{n-1}]   \\
+                                          & =\mathbb{E}^{X_{n-1}}[h(X_{n\bigcap T_{\rho}})],~\text{(SMP)} \\
+                                          & =Ph(X_{n-1\bigcap T_{\rho}}),                                 \\
+                                          & \leq h(X_{n-1\bigcap T_{\rho}}), ~\text{(super harmonic)},    \\
+                                          & = Y_{n-1}.
+\end{align*}
+\textbf{Super Martingle:} Let $\{Z_n\}_{n\geq 1}$ be a sequence of random variables such that $\mathbb{E}[Z_n]<\infty$. Then $\{Z_n\}_{n\geq 1}$ is a super Martingle if $\mathbb{E}[Z_n|Z_{n-1},Z_{n-2},....Z_1]\leq z_{n-1}$.
+
+\begin{theorem}
+    \textbf{(Martingle Convergence Theorem):} Let $Y_n\geq 0$ be Super Martingle, $\exists Y\equiv Y_{\infty}$ such that $Y_n\rightarrow Y_{\infty}$ wp 1 and $\mathbb{E}[Y_{\infty}]\leq\mathbb{E}[Y_0]$ as $n\rightarrow \infty$.
+\end{theorem}
+So, in our case, $Y_0=h(X_{0\bigcap T_{\rho}})=h(X_0)<\infty$.\\
+Therefore, from the above theorem, $Y_{\infty}<\infty$ wp 1.\\
+Now, suppose $(\Gamma,\mu)$ is Transient. Then $\exists x\in V\backslash{\{\rho\}}$ such that $\mathbb{P}^x(T_{\rho)}<1$.\\
+Let $C_n=\{y\in V\backslash{\{\rho\}}|h(y)\geq n\}~\forall~n\geq 1$. Then $|C_n^c|<\infty$.\\
+$N=\{T_\rho=\infty\}\bigcap\{\exists n_k\geq 1: X_{n_k}\in C_k\}$. Let $w\in N$ and $n_k$ be as given by $N$.\\
+$$Y_{n_k}=h(X_{n_k \bigcap T_{\rho}}),$$
+$$\Rightarrow Y_{n_k}\geq k,$$
+$$\Rightarrow N\subseteq \{Y_{\infty}=\infty\},$$
+$\Rightarrow\mathbb{P}(Y_{\infty}=\infty)>0$, which contradicts Martingle Convergence Theorem.\\
+$\Rightarrow\{X_n\}_{n\geq 0}$ can not be Transient.\\
+Hence, $\{X_n\}_{n\geq 0}$ is Recurrent.
+
+$(\Leftarrow)$
+
+Suppose $(\Gamma,\mu)$ is Recurrent. \\
+Let $B(\rho,n)=\{x\in V| d(x,\rho)\leq n\}$ and let $h_n:V\rightarrow[0,1]$ such that
+$$h_n(x)=\mathbb{P}^x({\tau}_{B(\rho,n)}<T_\rho);~{\tau}_{B(\rho,n)}=T_{B(\rho,n)^c}.$$
+$$(SMP)\Rightarrow Ph_n=h_n,~x\neq \rho,$$
+$$\Rightarrow \Delta h_n=0,~\forall~x\neq \rho.$$
+In particular, $h_n(\cdot)$ is super harmonic in  $V\backslash{\{\rho\}}$.\\
+$$\lim_{n\rightarrow\infty}h_n(x)=0,$$
+$$h_n(x)=1~\forall~x\in B(\rho,n)^c.$$
+$\exists \{n_k\}_{k\geq 1} $ such that $h_{n_k}(x)\leq \frac{1}{2^k}~\forall~x\in B(\rho,n).$\\
+Let $x\in V$, $\sum\limits_{k=1}^{\infty}h_{n_k}(x)$ (Ex: $h(\cdot)<\infty$).\\
+(I) $h\geq 0$.\\
+(II) $x\in V\backslash{\{\rho\}}$,
+\begin{align*}
+    Ph(x) & =\sum_{x\sim y} \frac{\mu_{xy}}{\mu_x}h(y),                          \\
+          & =\sum_{x\sim y} \frac{\mu_{xy}}{\mu_x}\sum_{k=1}^{\infty}h_{n_k}(x), \\
+          & =\sum_{k=1}^{\infty}\sum_{x\sim y} \frac{\mu_{xy}}{\mu_x}h_{n_k}(x), \\
+          & =\sum_{k=1}^{\infty}Ph_{n_k}(x),                                     \\
+          & =\sum_{k=1}^{\infty}h_{n_k}(x)=h(x).
+\end{align*}
+
+(III) Let $M>0$ and $U=\{x\in V|h(x)<M\}$.
+$$\forall j\geq h_{n_j}(x)=1~\forall~ x \in B(\rho,n_j)^c.$$
+\textbf{Claim:} $U\subseteq B(\rho,n_m)^c$.\\
+\textbf{Proof:} Given $M>0$, $\exists n_m$ such that\\
+$\forall j\geq h_{n_j}(x)=1~\forall~ x \in B(\rho,n_m)^c,$ for $1\leq j\leq M$.\\
+$$\sum_{j=1}^{m}h_{n_j}(x)=M~\forall ~x \in B(\rho,n_m)^c.$$
+$$\Rightarrow h(x)\geq M ~\forall~ x \in B(\rho,n_m)^c.$$
+
+
+\noindent \textbf{Theorem (Maximum Principle):}
+\\$A \subset V$, connected, $h: V \to \mathbb{R}$ such that $\Delta{h} \geq 0$ on $A$
+    \\
+    \\a) If $\exists x \in A$ such that $h(x)=\smash{\displaystyle\max_{z \in {A} \cup \partial{A} }} h(z)$ then $h$ is constant on $\overline A$
+    \\
+    \\b) $|A| < \infty$,  \space $h(z)=\smash{\displaystyle\max_{z \in \partial {A} }}$ \space $h(z)$
+    \\
+    \\
+    \noindent \textbf{Proof}
+    \\
+    \noindent a) $B=\{y \in \overline A \mid h(y)=h(x)\}$
+    \\$B \neq \emptyset$ as $x \in B$
+\\$y \in B \cap A$, $z \sim y \Rightarrow z_{0} \in \overline A \Rightarrow z_{0} \in B$
+    \\ $h(z_{0}) \leq \smash{\displaystyle\max_{u \in \overline A}}$\space $ h(u)$
+    \\
+    \\$y \in B \cap A$ and $z \sim y$ then
+\\$z_{0} \in \overline A \Rightarrow h(z_{0}) \leq \smash{\displaystyle\max_{u \in \overline A}}$ \space $h(u)=h(x)=h(y)$
+    \\
+    \\But $\Delta{h(y) \geq 0}$
+    \\ $\frac{1}{\mu_{y}} \smash{\displaystyle\Sigma_{z \sim y}}$ \space $\mu_{zy} (h(y)-h(z)) \geq 0$
+    \\Hence if $z \sim y \Rightarrow h(z)=h(y)$
+    \\Inductively, as $A$ is connected, we have that $B=\overline A$
+    \\
+    \\b) $|A| < \infty \Rightarrow \exists x_{0} \in \overline A$, $h(x)=\smash{\displaystyle\max_{z \in A}}$ \space $h(z)$
+    \\
+    \\If $x_{0} \in \partial A \Rightarrow \smash{\displaystyle\max_{u \in \partial A}}$ \space $h(u) = \smash{\displaystyle\max_{z \in \overline A}}$ \space $h(z)$
+    \\
+    \\If $x_{0} \in A \Rightarrow$ (a) $h$ is constant on $\overline A$ and $\smash{\displaystyle\max_{u \in \partial A}}$ \space $h(u) = \smash {\displaystyle\max_{x \in \overline A}}$ \space $h(x)$ \space
+    \\
+    \\
+    \\
+    \noindent \textbf{Liouville Property:}
+$(\Gamma, \mu)$ is said to have the Liouville Property if all bounded harmonic functions are constant.
+    \\
+    \\
+    \noindent \textbf{Strong Liouville Property:}
+    A graph is said to have the strong Liouville Property if all positive harmonic functions are constant.
+    \\
+    \\
+    \noindent \textbf{Theorem:}
+    Let $(\Gamma, \mu)$ be recurrent. Any positive superharmonic function is constant (in particular, $(\Gamma, \mu)$ has the strong Liouville Property).
+    \\
+    \\
+    \noindent \textbf{\underline{Notes for continuation of Martingales}}
+    \\
+
+    Let $\{Z_{n}\}$ be random variables on $(\Omega,\mathcal{F},\mathbb{P})$.\\
+    Let $E[Z_{n}] < \infty$
+    \\
+    \\If $E[Z_{n}| Z_{n-1}, Z_{n-2},..., Z_{1}]=Z_{n-1}$, then $\{Z_{n}\}_{n \geq 1}$ is a martingale. \{$h(.)$ is bounded, harmonic, $X_{n}$ r.v on $(\Gamma, \mu)$, $\{h(X_{n})\}_{n \geq 1}$ \}
+    \\
+    \\If $E[Z_{n}| Z_{n-1}, Z_{n-2},..., Z_{1}] \geq Z_{n-1}$, then $\{Z_{n}\}_{n \geq 1}$ is a submartingale. \{$h(.)$ is bounded, subharmonic, $X_{n}$ r.v on $(\Gamma, \mu)$, $\{h(X_{n})\}_{n \geq 1}$ \}
+    \\
+    \\If $E[Z_{n}| Z_{n-1}, Z_{n-2},..., Z_{1}] \leq Z_{n-1}$, then $\{Z_{n}\}_{n \geq 1}$ is a supermartingale. \{$h(.)$ is bounded, superbharmonic, $X_{n}$ r.v on $(\Gamma, \mu)$, $\{h(X_{n})\}_{n \geq 1}$ \}
+    \\
+    \\
+    \noindent \textbf{Jensen's Inequality}
+    \\
+    \\ Let $f:  \mathbb{R} \to \mathbb{R}$ be such that $\forall a \in \mathbb{R}, \exists c \in \mathbb{R}$ such that $f(x) \geq f(a) + c(x-a)$
+    \\Then $f$ is said to be a convex function.
+    \\
+    \\Let $X$ be a random variable on $(\Omega,\mathcal{F},\mathbb{P})$. Then Jensen's Inequality states that $E[f(X)] \geq f(E[X])$ wherever both expectations are well defined.
+    \\
+    \\
+    \\
+    \\
+    \noindent \textbf{Theorem (Kolmogorov's Maximal Inequality): }Let $\{Z_{n}\}_{n \geq 1}$ be a non-negative submartingale. Then $\mathbb{P} (\smash{\displaystyle\max_{1 \leq i \leq m}}$ \space $Z_{i} \geq a) \leq \frac{E[Z_{m}]}{a}$ \space $\forall a > 0$, $\forall m \geq 1$
+    \\
+    \\
+    \noindent \textbf{Proof:}
+    \\Let $m \in \mathbb{N}$ and $a > 0$ be given.
+    \\$J=min.\{min.\{n \geq 1 | Z_{n} > a\}, m\}$
+\\$\tilde{J} = min.\{n \geq 1 | Z_{n} > a\}$
+    \\It is left as an exercise to show that $J$ is a bounded stopping time. $Z_{J} \geq a \Leftrightarrow Z_{n} \geq a$ for some $n \leq m$
+    \\
+    \\$\mathbb{P}(\smash{\displaystyle\max_{1 \leq i \leq m}}$ \space $Z_{i} \geq a) =\mathbb{P}(Z_{J} \geq a) \leq \frac{E[Z_{J}]}{a}$
+\\
+\\This follows from the Markov Inequality which can be applied here since $Z_{i} \geq 0$
+\\
+\\$Z_{J} = \sum_{k=1} ^{m} Z_{k} \mathbf{1}_{J=k} + Z_{m} \mathbf{1}_{\tilde{J}>m}$
+    \\
+    \\$E[Z_{J}] = \sum_{k=1} ^{m} E[Z_{k} \mathbf{1}_{J=k}] + E[Z_{m} \mathbf{1}_{\tilde{J}>m}]$
+\\Since $\{Z_{k}\}_{k \geq 1}$ is a submartingale, we have that the above is less than or equal to
+\\$ \sum_{k=1} ^{m} E[E[Z_{m}|\mathcal{A}_{k}]\mathbf{1}_{J=k}] + E[Z_{m} \mathbf{1}_{\tilde{J}>m}]$
+    \\The above is equal to
+    \\ $\sum_{k=1} ^{m} E[E[Z_{m}\mathbf{1}_{J=k}|\mathcal{A}_{k}]] + E[Z_{m} \mathbf{1}_{\tilde{J}>m}]$ (Since $E[XY|\mathcal{A}_{Y}] = YE[X|\mathcal{A}_{Y}]$)
+    \\$=\sum_{k=1} ^{m} E[Z_{m} \mathbf{1}_{J=k}] + E[Z_{m} \mathbf{1}_{\tilde{J}>m}]$
+\\$=E[Z_{m} (\sum_{k=1} ^{m} \mathbf{1}_{J=k} + \mathbf{1}_{\tilde{J}>m}]$
+    \\$=E[Z_{m}]=0$ \space
+\\
+\\
+\\
+
+\noindent \textbf{Corollary: }Let $\{Z_{m}\}_{m \geq 1}$ be a martingale.
+\\
+\\1) $E[Z_{m}^2] < \infty$ \space $ \forall m \geq 1, \mathbb{P}(\smash{\displaystyle\max_{1 \leq i \leq m}}$ \space $|Z_{i}| \geq a) \leq \frac{E[|Z_{m}|^2]}{a^2}$
+\\
+\\2) $Z_{m} \geq 0, \mathbb{P} (\smash{\displaystyle\sup_{n \geq 1}}$ \space $Z_{n} > a) \leq \frac{E[Z_{1}]}{a}$
+\\
+\\
+\noindent \textbf{Proof}
+\\For 1) Let $Y_{n}=Z_{n}^2$. Then we apply Kolmogorov's Maximal Inequality. The proof of 2) will be done later. \space
+\\
+\\
+\\
+\\
+\noindent \textbf{Theorem (Martingale Convergence):}
+\\Let $\{Z_{n}\}_{n \geq 1}$ be a martingale and $\smash{\displaystyle\sup_{n \geq 1}}$ \space $E[Z_{n}^2] < \infty$. Then $\exists$ \space $Z$ such that $Z_{n} \rightarrow Z$ w.p. $1$ as $n \rightarrow \infty$
+\\
+\\
+\noindent \textbf{Proof}
+\\$f(x)=x^2$ is a convex function. Hence, Jensen's inequality applies to conditional expectation.
+    \\$E[Z_{n}^2|Z_{n-1}^2, ... , Z_{1}^2] \geq Z_{n-1}^2$ \space $\forall n \geq 2$
+\\
+\\From the Tower Property, it follows that
+\\$E[Z_{n}^2|Z_{i}^2, ... , Z_{1}^2] \geq Z_{i}^2$ \space for $1 \leq i \leq n$
+    \\
+    \\Thus, $E[Z_{n}^2] \geq E[Z_{i}^2]$ \space $\forall 1 \leq i \leq n$
+    \\In particular, $E[Z_{n}^2] \geq E[Z_{n-1}^2]$ and $\smash{\displaystyle\sup_{n \geq 1}}$ \space $E[Z_{n}^2] < \infty$
+    \\
+    \\Thus $\exists$ \space $ \alpha > 0$ such that $E[Z_{n}^2] \rightarrow \alpha$ as $ n\rightarrow \infty$
+    \\
+    \\Let $k \geq 1$, $Y_{m}=Z_{k+m}-Z_{k}$ \space $\forall m \geq 1$
+    \\Exercise: $\{Y_{m}\}_{m \geq 1}$ is also a martingale.
+    \\
+    \\ From the Tower Property, we have that $E[Z_{k+m}Z_{k}]=E[E[Z_{k+m}Z_{k}|\mathcal{A}_{k}]]$ which is equal to $E[Z_{k} E[Z_{k+m}|\mathcal{A}_{k}]]$ which is equal to $E[Z_{k}^2]$ since $\{Z_{n}\}_{n \geq 1}$ is a martingale and $Z_{k}$ is observable in $A_{k}$.
+    \\
+    \\ Hence $E[Y_{m}^2]=E[Z_{k+m}^2]-E[Z_{k}^2]$
+    \\
+    \\By Corollary 1,
+    \\$\mathbb{P}(\smash{\displaystyle\max_{1 \leq i \leq m}}$ \space $|Y_{i}| > a) \leq \frac{E[Z_{m}^2]}{a^2} = \frac{E[Z_{k+m}^2]-E[Z_{k}^2]}{a^2}$
+\\
+\\$\mathbb{P}(\smash{\displaystyle\max_{1 \leq i \leq m}}$ \space $|Y_{i}| > a)= \mathbb{P}(\smash{\displaystyle\max_{1 \leq i \leq m}}$ \space $|Z_{i+k}-Z_{k}|>b)$
+    \\
+    \\Letting $m$ go to $0$ on both sides, we get
+    \\$\mathbb{P}(\smash{\displaystyle\cup_{i \geq 1}}$ \space $|Z_{i+k}-Z_{k}| > a) \leq \frac{\alpha - E[Z_{k}^2]}{a^2}$
+\\
+\\
+\\(Exercise:
+\\i) $0 \leq \mathbb{P}(\smash{\displaystyle\sup_{i \geq 1}}$ \space $|Z_{i+k}-Z_{k}| > a) \leq \frac{\alpha - E[Z_{k}^2]}{a^2}$
+\\
+\\ii) $\smash{\displaystyle\lim_{k \rightarrow \infty}}$ \space $\mathbb{P}(\smash{\displaystyle\cup_{i \geq 1}}$ \space $|Z_{i+k}-Z_{k}| > a) = 0$ \space $ \forall a$)
+\\
+\\
+\\
+\\From ii) above and the Borel Cantelli Lemma, we have that if
+$E=\{\{Z_{k}\}_{k \geq 1}$ is a Cauchy sequence \}
+then $\mathbb{P}(E)=1$.
+\\$\Rightarrow \exists$ \space $Z$ such that $Z_{n} \rightarrow Z$ w.p. $1$ as $n \rightarrow \infty$. \space
+\end{document}
