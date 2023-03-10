@@ -1,0 +1,123 @@
+\documentclass[main]{subfiles}
+
+\begin{document}
+%Set chapter counter as week-8
+\chapPreamble{8}{March 10, 2023}{Isoperimetric Inequalities and Applications}
+%Set chapter name
+
+\lecture{Siva Athreya}{Atreya Choudhury, Srivatsa Balaji}
+
+The focus of this chapter is to look at how the geometry of weighted graph affects the properties of the corresponding random walk on it.
+
+\begin{definition}[Isoperimetric Inequality]
+    Let $A, B \subseteq V, \; \mu_E(A,B) = \sum_{x \in A} \sum_{y \in B} \mu_{xy}$
+    and $\psi: \R_+ \to \R_+$ be an increasing function.
+
+    $(\Gamma,\;\mu)$ is said to satisfy the $\psi-$isoperimetric inequality if $\exists\;c_0>0$ such that
+    \[\frac{\mu_E(A,V\smallsetminus A)}{\psi(\mu(A))} \geq \frac{1}{c_0} \hspace{3em} \forall A \subseteq V \text{ and }\Mod{A} < \infty\]
+    If a weighted graph satisfies the $\psi-$isoperimetric inequality, we say it has the $I_\psi$ property.
+
+    A graph is said to have the property $I_\alpha$ for $\alpha \in [0, \infty)$ when $\psi(t) = t^{1-\frac{1}{\alpha}}$
+    and said to have the property $I_\infty$ when $\psi(t) = t$
+\end{definition}
+
+\ex
+$\R^d$. We look at $A = B(0,r)$
+\begin{align*}
+    S_B                                       \equiv \text{surface area of A} & = c_d r^{d-1}         \\
+    V_B                                       \equiv \text{volume of A}       & = \widetilde{c_d} r^d \\
+    \therefore \frac{S_B}{V_B^\frac{d-1}{d}}                                  & \geq \frac{1}{c_0}
+\end{align*}
+
+We can take $\psi(t) = t^{1-\frac{1}{d}}$
+
+Show that $Z^d$ has the $I_d$ property for all such A such that $\Mod{A} < \infty$\\
+
+\ex
+$\prod_2$, the binary tree has the $I_\infty$ property with $c_0 = 3$
+\begin{obs}
+    If $(\Gamma,\;\mu)$ satisfies $I_{\alpha+\delta}$, then it satisfies $I_\alpha$
+\end{obs}
+\begin{definition}[Nash Inequality]
+    $\alpha \in [1, \infty),\;(\Gamma,\;\mu)$ is said to have the property $N_\alpha$\\
+    if $\forall f \in \L^1(V) \cap \L^2(V)$,
+    \[\SE(f,f) \geq C_N\norm{f}{1}^{-\frac{4}{\alpha}}\norm{f}{2}^{2+\frac{4}{\alpha}}\]
+\end{definition}
+\newpage
+\begin{remark}[]
+    \begin{enumerate}
+        \item $(\Gamma,\;\mu)$ satisfies $I_\alpha$ for $\alpha \in [1, \infty)$
+              $\implies (\Gamma,\;\mu)$ satisfies $N_\alpha$
+        \item $Z^d$ satisfies $N_\alpha$
+    \end{enumerate}
+\end{remark}
+\begin{theorem}
+    Let $\alpha \geq 1.$ Then the following are equivalent
+    \begin{enumerate}
+        \item $(\Gamma,\;\mu)$ satisfies $N_\alpha$
+        \item $\exists\;C_H > 0$ such that
+              \[p_n(x,x) \leq \frac{C_H}{(n\vee1)^\frac{\alpha}{2}} \hspace{3em} \forall\;n \geq 0\text{ and } x \in V\]
+        \item $\exists\;C_H' > 0$ such that
+              \[p_n(x,y) \leq \frac{C_H'}{(n\vee1)^\frac{\alpha}{2}} \hspace{3em} \forall\;n \geq 0\text{ and } x,y \in V\]
+    \end{enumerate}
+\end{theorem}
+\begin{corollary}
+    \label{cor:ubounds}
+    \begin{enumerate}
+        \item Suppose $(\Gamma,\;\mu)$ satisfies $I_\alpha.$ Then, $\exists\;C > 0$ such that
+              \[p_n(x,y) \leq \frac{C}{(n\vee1)^\frac{\alpha}{2}} \hspace{3em} \forall\;n \geq 0\text{ and } x,y \in V\]
+        \item Let V be infinite and $\mu_{xy} \geq c_0 > 0\;\;\forall\;x \sim y.$ Then, $\exists\;C_1 > 0$ such that
+              \[p_n(x,y) \leq \frac{C_1}{(n\vee1)^\frac{1}{2}} \hspace{3em} \forall\;n \geq 0\text{ and } x,y \in V\]
+    \end{enumerate}
+\end{corollary}
+\begin{remark}
+    \begin{enumerate}
+        \item $p_n(x,x) \equiv$ on-diagonal bounds
+        \item Theorem provides global upper bounds
+        \item part b of corollary \ref{cor:ubounds} applied to $V = \Z$\\
+              $\implies$ the shortest possible on-diagonal upper bounds with natural weights
+        \item Let $\Gamma = \Z^d$ have natural weights $\mu_{xy}^{(0)}$ and $\Gamma' = \Z^d$ have natural weights $\mu_{xy}^{(1)}$ such that $\mu_{xy}^{(1)} \geq c_0 \mu_{xy}^{(0)}$
+              Let $(\Gamma,\;\mu^0)$ satisfy $N_d$\\
+              $\implies (\Gamma',\;\mu^1)$ satisfies $N_d$\\
+              $\implies$ the upper bound of the theorem holds
+        \item $\Gamma = \Z^d \cup_{(0, \ldots, 0)} \Z^d$\\
+              $\implies \Gamma$ also satisfies $N^d$
+        \item \ref{cor:ubounds} does not give us any information on upper bounds when we fix $n \geq 0$ and let $d(x,y)$ get large.
+    \end{enumerate}
+\end{remark}
+\begin{theorem}
+    Let $(\Gamma,\;\mu)$ be a weighted graph. Then,
+    \[p_n(x,y) \leq \frac{2}{\sqrt{\mu_x\mu_y}}e^{-\frac{d(x,y)^2}{2n}} \hspace{3em} \forall\;x,y \in V\text{ and }n \geq 1\]
+\end{theorem}
+\ex Consequences for $\Z^d$
+
+We expect
+\[p_n(x,y) \leq \frac{c_1}{n^\frac{d}{2}}e^{-c_2\frac{d(x,y)^2}{n}}\]
+
+$\Z^d$ satisfies $I_d \implies \Z^d$ satisfies $N_d \stackrel{\ref{cor:ubounds}}{\implies} p_n(x,y) \leq \frac{c}{n^\frac{d}{2}} \hspace{3em} \forall\; x,y \in V$ and $n \geq 1$
+
+\[\therefore\;p_n(x,y) \leq \frac{c}{n^\frac{d}{2}} \leq \frac{c}{n^\frac{d}{2}} e^{-\frac{d(x,y)^2}{n}} \hspace{3em}\text{ when }d(x,y)\leq\sqrt{n}\]
+
+When, $d(x,y) \geq \sqrt{2dn\log n},$
+\[p_n(x,y) \leq c_1 e^{-\frac{d(x,y)^2}{n}} = c_1 e^{-\frac{2c_2}{4}\frac{d(x,y)^2}{n}} e^{-\frac{2c_2}{4}\frac{d(x,y)^2}{n}} \leq \frac{\widetilde{c_1}}{n^\frac{d}{2}} e^{-\frac{c_2^2d(x,y)^2}{n}}\]
+\begin{definition}
+    $(\Gamma,\;\mu)$ is said to have \textbf{polynomial volume growth} if $\exists\;C_V$ and $\theta$ such that
+    \[\max\{\Mod{B(x,r)},\;\mu(B(x,r))\} \leq C_Vr^\theta \hspace{3em} \forall\;x \in V\text{ and }r \geq 1\]
+\end{definition}
+\begin{lemma}
+    $(\Gamma,\;\mu)$ has polynomial volume growth with index $\theta.$ Then,
+    \[\P^x(d(x, X_n) > r) \leq cr^\theta e^{-\frac{r^2}{4n}}\]
+    This implies $\exists\;c_2>0$ such that
+    \[d(x, X_n) \leq c_2 \sqrt{n\log n} \hspace{3em} \forall\text{ large }n\text{ w.p. }1\]
+    \begin{proof}
+        We define $\SD_k = B(x,2^kr) \smallsetminus B(x,2^{k-1}r)$
+        \begin{align*}
+            \P^x(d(x, X_n) > r) & \stackrel{Ex}{=} \sum_{k=1}^\infty \sum_{y \in \SD_k} p_n(x,y)\mu_x                                                           \\
+                                & \stackrel{Ex}{\leq} \sum_{k=1}^\infty \sum_{y \in \SD_k} \frac{2}{\sqrt{\mu_x}}\sqrt{\mu_y}e^{-\frac{(2^{k-1}r)^2}{2n}}       \\
+                                & = \sum_{k=1}^\infty \frac{2}{\sqrt{\mu_x}} e^{-\frac{(2^{k-1}r)^2}{2n}} \sum_{y \in \SD_k} \sqrt{\mu_y}                       \\
+                                & \stackrel{Ex}{\leq} \sum_{k=1}^\infty \frac{2}{\sqrt{\mu_x}} e^{-\frac{(2^{k-1}r)^2}{2n}} \sqrt{\Mod{\SD_k}}\sqrt{\mu(\SD_k)} \\
+                                & \stackrel{Ex}{\leq} \sum_{k=1}^\infty \frac{2}{\sqrt{\mu_x}} e^{-\frac{(2^{k-1}r)^2}{2n}} c(2^kr)^\theta                      \\
+        \end{align*}
+    \end{proof}
+\end{lemma}
+\end{document}
