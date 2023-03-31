@@ -1,0 +1,90 @@
+\documentclass[main]{subfiles}
+
+\begin{document}
+%Set chapter counter as week-1
+\chapPreamble{9}{March 31, 2023}{Random walk in trap environment}
+%Set chapter name
+
+\lecture{Siva Athreya}{Sanchayan Bhowal, Ramkrishna Samanta}
+
+\section{Continuous time random walk}
+In this model the random walker wasits an exponential amount of time to perform a jump like a discrete time random walk. Consider $\{V_i : i\geq 1\}$ to be a collection of independent Exponential$(\lambda)$ random variables. Let $\lambda=1$. Define $T_k$ to be the sum of the first $k$ $V_i$'s. Also, define $N_t$ to be the number of $T_k$ less than $t$. Hence,
+\begin{itemize}
+    \item $\P(V_i \leq t)=1-e^{-t}$
+    \item $T_k=\sum_{i=1}^{k}V_i$
+    \item $N_t=\sum_{k=1}^{\infty}\one(T_k\leq t)$
+    \item $\{N_t=k\}=\{T_k\leq T_{k+1}\}$
+\end{itemize}
+\begin{theorem}
+    \begin{enumerate}
+        \item $N_t\sim$ Poisson$(t)$
+        \item $N_t-N_s$ is independent of $N_r$ where $r\leq s \leq t$.
+        \item For $0\leq t_0 \leq t_1 \leq \ldots \leq t_n$
+              $$
+                  \{N_{t_{i+1}}-N_{t_i}: i=0,\ldots, n-1\} \text{ are independent}
+              $$
+              So, $N_{t_{i+1}}-N_{t_i}\sim$ Poisson$(t_{i+1}-t_i)$
+    \end{enumerate}
+\end{theorem}
+\begin{definition}
+    Let $U_n: n\geq 0$ be a random walk on $(\Gamma,\mu)$. Define, a continuous time random walk on $(\Gamma,\mu)$ with rate 1 to be:
+    $$Y_t=U_{N_t} \hfill \forall t\geq 0$$.
+\end{definition}
+\begin{remark}
+    The random variable $Y_t$ is a random step function which is right continuous with left limits.
+\end{remark}
+
+\section{Random walk in trap environment}
+\subsection*{Continuous Time set-up}
+Consider the graph $\Z^d$ with natural weights. Let $\{X_t\}_{t\geq 0}$ be a continuous time random walk on $\Z^d$ starting at 0, with rate $\kappa$. Now, let us set up the traps, i.e., for each $y\in \Z^d$ let $N_y\sim$Poisson$(\rho)$. This $N_y$ denote the number of \textit{traps} at $y$. Each trap($Y^{j,y}$) perform a continuous time random walk$(\{Y^{j,y}_t\}_{t\geq 0})$ with rate $\nu$; where $1\leq j \leq N_y$. The random walk gets killed if it meets a trap. There are two ways of killing viz,
+\begin{itemize}
+    \item [Hard] The walk gets killed upon intersection with any $Y^{j,y}$.
+    \item [Soft] At each site $x$ at time $t\geq 0$, define
+          $$
+              \xi(t,x):=\sum_{y \in \Z^d,1\leq j \leq N_y} \# \{Y^{j,y}\text{ at }x\}.
+          $$
+          Now $X_t$ gets killed at rate $\gamma\xi(t,x)$ where $\gamma \in \R$.
+\end{itemize}
+\begin{remark}
+    Hard killing infact corresponds to $\gamma=\infty$ case of soft killing.
+\end{remark}
+The probability of survival is given by
+\begin{equation*}
+    Z_{\gamma,t}=\E^X[\exp(-\gamma\int_{0}^{t}\xi(s,X(s))ds)]
+\end{equation*}
+\subsection*{Discrete Time set-up}
+Let $\{X_t\}_{t\geq 0}$ be a random walk on $\Z^d$ with natural weights starting at 0. For each $y\in \Z^d$ let $N_y\sim$Poisson$(\rho)$ denotes the number of traps at $y$. Each trap($Y^{j,y}$) perform a lazy random walk$(\{Y^{j,y}_t\}_{t\geq 0})$ on $\Z^d$; where $1\leq j \leq N_y$. The trap kills the random walk with probability $q$ if it meets the random walk; $q \in (0,1)$.
+Let $\xi(n,x)$ denote the number of traps at location $x$, i.e.
+$$
+    \xi(n,x)=\sum_{y \in \Z^d,1\leq j \leq N_y} \delta_x(Y^{j,y}_n).
+$$
+Assume $X_k$ has survived till $k\leq n$. Given $X_n$ the probability that $X_n$ will survive at time $n$ is $(1-q)^{\xi(n,X_n)}$.
+Hence,
+\begin{equation}
+    \begin{aligned}
+        \sigma^X(n,\xi) & =\P(X\text{ has survived till time } n \text{ given } \{Y^{j,y}_m\}_{1\leq j \leq m, y \in \Z^d} \text{ where } m\leq n) \\
+                        & =(1-q)^{\sum_{i=1}^{n}\xi(i,X_i)}.
+    \end{aligned}
+\end{equation}
+\section{Pascal's Theorem}
+The average survival probability of a given trajectory $X$ is given by $\sigma^X(n)=\E^\xi[(1-q)^{\sum_{i=1}^{n}\xi(i,X_i)}]$.
+\begin{theorem}[Pascal]
+    The survival probability is maximized by the trajectory $\zero$ where $\zero_k=0$ for every $k \in \N\cup{0}$, i.e,
+    $$\sigma^X(n)\leq \sigma^\zero(n).$$
+\end{theorem}
+\begin{lemma}
+    $\sigma^X(n)=\exp (-\lambda \sum_{y \in \Z^d}W_X(n,y))$ where $W_X(n,y)=1-\E^y[1-(1-q)^{\sum_{i=1}^{n}\delta(Y_i^y)}]$. The $Y_i^y$ is a random variable with ditribution same as i.i.d. $Y_i^{j,y}$.
+\end{lemma}
+\begin{proof}
+    Let $X:\N\cup {0} \rightarrow \Z^d$ with $X_0=0$ be the trajectory.
+    Now,
+    \begin{equation*}
+        \begin{aligned}
+            \sigma^X(n) & =\E^\xi[(1-q)^{\sum_{i=1}^{n}\xi(i,X_i)}]                                                              \\
+                        & =\E^\xi[(1-q)^{\sum_{i=1}^{n}\sum_{y \in \Z^d}\sum_{1\leq j \leq N_y} \delta_{X_i}(Y^{j,y}_n)}]        \\
+                        & =\prod_{y \in \Z^d}\E^\xi[\prod_{1\leq j \leq N_y}(1-q)^{\sum_{i=1}^{n}\delta_{X_i}(Y^{j,y}_n)}]       \\
+                        & =\prod_{y \in \Z^d}\E^y\E^{N_y}[\prod_{1\leq j \leq N_y}(1-q)^{\sum_{i=1}^{n}\delta_{X_i}(Y^{j,y}_n)}]
+        \end{aligned}
+    \end{equation*}
+\end{proof}
+\end{document}

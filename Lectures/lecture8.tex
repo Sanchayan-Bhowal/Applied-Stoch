@@ -1,41 +1,41 @@
 \documentclass[main]{subfiles}
 
 \begin{document}
-%Set chapter counter as week-8
-\chapPreamble{8}{March 10, 2023}{Large Deviations for Random Walks}
+%Set chapter counter as week-1
+\chapPreamble{8}{March 24, 2023}{Large Deviations for Random Walks}
 %Set chapter name
 
 \lecture{Siva Athreya}{Venkat Trivikram, Srivatsa B}
 
 \subsection*{Nash Inequality (continued)}
 \begin{theorem}
-Let $(\Gamma, \mu)$ be a weighted graph, and let $\alpha\ge1$. TFAE.
-\begin{itemize}
-\item[(a)](Nash Inequality) $(\Gamma, \mu)$ satisfies $(N_{\alpha})$
-\item[(b)](On Diagonal Bounds) There exists $C_H>0 $ such that for every $x\in V$ and $n\ge0$ \[p_n(x,x)\le\frac{C_H}{(n\lor 1)^{\alpha/2}}\]
-\item[(c)](Off Diagonal Bounds) There exists $C_H'>0 $ such that for every $x,y\in V$ and $n\ge0$ \[p_n(x,y)\le\frac{C_H'}{(n\lor 1)^{\alpha/2}}\]
-\end{itemize}
+	Let $(\Gamma, \mu)$ be a weighted graph, and let $\alpha\ge1$. TFAE.
+	\begin{itemize}
+		\item[(a)](Nash Inequality) $(\Gamma, \mu)$ satisfies $(N_{\alpha})$
+		\item[(b)](On Diagonal Bounds) There exists $C_H>0 $ such that for every $x\in V$ and $n\ge0$ \[p_n(x,x)\le\frac{C_H}{(n\lor 1)^{\alpha/2}}\]
+		\item[(c)](Off Diagonal Bounds) There exists $C_H'>0 $ such that for every $x,y\in V$ and $n\ge0$ \[p_n(x,y)\le\frac{C_H'}{(n\lor 1)^{\alpha/2}}\]
+	\end{itemize}
 \end{theorem}
 \begin{proof}
-We provide only a sketch of the proof. From Worksheet 2, $(a) \implies (b)$  holds, and $(c) \implies (b)$ is trivial. First, we show $(b) \implies (c)$. So assume $(b)$.
-Let $m\ge0$. If $n$ is even, with $n=2m$, then for any $x,y\in V$, we have
-\[p_{2m}(x,x)\le\frac{C_H}{(2m\lor 1)^{\alpha/2}}\quad\text{and}\quad p_{2m}(y,y)\le\frac{C_H}{(2m\lor 1)^{\alpha/2}}\]
-As an exercise, show that $p_{2m}(x,y)\le\sqrt{p_{2m}(x,x)p_{2m}(y,y)}$, and using this, we get $(b) \implies (c)$ with $C_H'=C_H$. If $n=2m+1$, then, since $p_{2m+1}(x,y)\le\sqrt{p_{2m}(x,x)p_{2m+2}(y,y)}$ (by a similar exercise), we get \[p_{2m+1}(x,y)\le\sqrt{\frac{C_H^2}{(2m\lor 1)^{\alpha/2}(2m+2\lor 1)^{\alpha/2}}}\le \frac{C'}{(2m+1\lor 1)^{\alpha/2}}\] for some $C'>0$. To show the last inequality above, use the fact that there exists $C_{\alpha}>0$ such that $(2m)^{\alpha/2}(2m+2)^{\alpha/2}\le C_{\alpha}(2m+1)^{\alpha/2}$ (details left as exercises). Thus $(b)\implies (c)$.\\
-Now, we show $(c)\implies (a)$. Assuming $(c)$, observe that (by taking supremum over $x\in V$) \[\Mod{P_nf(x)} \le \sum_{y\in V}p_n(x,y)\Mod{f(y)}\mu_y\implies \norm{P_nf}{\infty} \le \frac{C_H}{(n\lor 1)^{\alpha/2}}\norm{f}{1}\]
-\begin{equation} \label{eq:1}
-	\text{and\quad}\norm{P_nf}{2}^2=\ip{P_nf}{P_nf}=\ip{P_{2n}f}{f}\le\norm{P_{2n}f}{\infty}\norm{f}{1}\le \frac{C_H}{(2n\lor 1)^{\alpha/2}}\norm{f}{1}^2
-\end{equation}
-Now, we make use of the following inequality - (verify!)
-\[\SE(f, f)\ge \frac{1}{2n}[\norm{f}{2}^2-\norm{P_nf}{2}^2]\]
-Using this, and (8.1), we get
-\[\SE(f,f) \ge \frac{1}{2n}\bigg[\norm{f}{2}^2-\frac{C_H}{(2n\lor 1^{\alpha/2})}\norm{f}{1}^2\bigg]\]
-WLOG, assume $\norm{f}{1}=1$, and choose smallest possible $k$ such that
-\[\frac{C_H}{(2n\lor 1)^{\alpha/2}}\le\frac{\norm{f}{2}^2}{2}\text{\quad so that \quad}\SE(f,f)\ge\frac{1}{4k}\norm{f}{2}^2\]
-Since $k\ge 1$, we have $k^{-\alpha/2}\le C^2\norm{f}{2}^2$ for some $C>0$, and hence $k^{-\alpha/2}\le C\norm{f}{2}$. Therefore,
-\[\SE(f,f)\ge \frac{C_2\norm{f}{2}^2}{\norm{f}{2}^{\frac{4}{\alpha}}} = C_2\norm{f}{2}^{2-4/\alpha}\implies (N_{\alpha})\]
+	We provide only a sketch of the proof. From Worksheet 2, $(a) \implies (b)$  holds, and $(c) \implies (b)$ is trivial. First, we show $(b) \implies (c)$. So assume $(b)$.
+	Let $m\ge0$. If $n$ is even, with $n=2m$, then for any $x,y\in V$, we have
+	\[p_{2m}(x,x)\le\frac{C_H}{(2m\lor 1)^{\alpha/2}}\quad\text{and}\quad p_{2m}(y,y)\le\frac{C_H}{(2m\lor 1)^{\alpha/2}}\]
+	As an exercise, show that $p_{2m}(x,y)\le\sqrt{p_{2m}(x,x)p_{2m}(y,y)}$, and using this, we get $(b) \implies (c)$ with $C_H'=C_H$. If $n=2m+1$, then, since $p_{2m+1}(x,y)\le\sqrt{p_{2m}(x,x)p_{2m+2}(y,y)}$ (by a similar exercise), we get \[p_{2m+1}(x,y)\le\sqrt{\frac{C_H^2}{(2m\lor 1)^{\alpha/2}(2m+2\lor 1)^{\alpha/2}}}\le \frac{C'}{(2m+1\lor 1)^{\alpha/2}}\] for some $C'>0$. To show the last inequality above, use the fact that there exists $C_{\alpha}>0$ such that $(2m)^{\alpha/2}(2m+2)^{\alpha/2}\le C_{\alpha}(2m+1)^{\alpha/2}$ (details left as exercises). Thus $(b)\implies (c)$.\\
+	Now, we show $(c)\implies (a)$. Assuming $(c)$, observe that (by taking supremum over $x\in V$) \[\Mod{P_nf(x)} \le \sum_{y\in V}p_n(x,y)\Mod{f(y)}\mu_y\implies \norm{P_nf}{\infty} \le \frac{C_H}{(n\lor 1)^{\alpha/2}}\norm{f}{1}\]
+	\begin{equation} \label{eq:1}
+		\text{and\quad}\norm{P_nf}{2}^2=\ip{P_nf}{P_nf}=\ip{P_{2n}f}{f}\le\norm{P_{2n}f}{\infty}\norm{f}{1}\le \frac{C_H}{(2n\lor 1)^{\alpha/2}}\norm{f}{1}^2
+	\end{equation}
+	Now, we make use of the following inequality - (verify!)
+	\[\SE(f, f)\ge \frac{1}{2n}[\norm{f}{2}^2-\norm{P_nf}{2}^2]\]
+	Using this, and (8.1), we get
+	\[\SE(f,f) \ge \frac{1}{2n}\bigg[\norm{f}{2}^2-\frac{C_H}{(2n\lor 1^{\alpha/2})}\norm{f}{1}^2\bigg]\]
+	WLOG, assume $\norm{f}{1}=1$, and choose smallest possible $k$ such that
+	\[\frac{C_H}{(2n\lor 1)^{\alpha/2}}\le\frac{\norm{f}{2}^2}{2}\text{\quad so that \quad}\SE(f,f)\ge\frac{1}{4k}\norm{f}{2}^2\]
+	Since $k\ge 1$, we have $k^{-\alpha/2}\le C^2\norm{f}{2}^2$ for some $C>0$, and hence $k^{-\alpha/2}\le C\norm{f}{2}$. Therefore,
+	\[\SE(f,f)\ge \frac{C_2\norm{f}{2}^2}{\norm{f}{2}^{\frac{4}{\alpha}}} = C_2\norm{f}{2}^{2-4/\alpha}\implies (N_{\alpha})\]
 \end{proof}
 
-\subsection*{Carne-Varopoulos Bound}
+\section{Carne-Varopoulos Bound}
 We begin with a few lemmas and some results involving Chebyshev polynomials.
 \begin{lemma}
 	Let $\{S_n\}_{n\ge 0}$ denote the simple symmetric random walk on $\Z$ with $S_0=0$. Then
@@ -79,7 +79,7 @@ We begin with a few lemmas and some results involving Chebyshev polynomials.
 	Proved in Worksheet 2.
 \end{proof}
 
-\subsection*{Large Deviations for Random Walks}
+\section{Large Deviations for Random Walks}
 Let $\{\xi_i\}_{i\ge 1}$ be IID $\mathbb{Z}$ valued random variables such that $\E[\xi_1]=\mu$ and $\Var[\xi_1]<\infty$. Define $S_0=0$ and $S_n=\sum_{i=1}^n\xi_i$. Then, the strong law of large numbers (SLLN) and the central limit theorem (CLT) respectively state that
 \[\P\bigg(\lim_{n\to\infty}\frac{S_n}{n}=\mu\bigg)=1\text{\ \ and\ \ }\frac{S_n-n\mu}{\sqrt{n}}\overset{d}{\longrightarrow}\SN(0,1)\]
 Thus, the CLT loosely states that $S_n \approx n\mu + \sqrt{n}Z$, where $Z\sim\SN(0,1)$.
@@ -92,10 +92,10 @@ As an exercise, show that for every $\epsilon > 0$, $\P(A_n^{\epsilon})\to 0$ as
 	\[\lim_{n\to\infty}\frac{1}{n}\log[\P(S_n\ge an)]=-I(a)\]
 	where
 	\[I(z)=
-	\begin{cases}
-		\log 2 + a\log a + (1-a)\log a & \text{ if } 0\le z\le 1\\
-		\infty & \text{ otherwise}
-	\end{cases}
+		\begin{cases}
+			\log 2 + a\log a + (1-a)\log a & \text{ if } 0\le z\le 1 \\
+			\infty                         & \text{ otherwise}
+		\end{cases}
 	\]
 \end{theorem}
 
@@ -103,96 +103,96 @@ As an exercise, show that for every $\epsilon > 0$, $\P(A_n^{\epsilon})\to 0$ as
 \begin{itemize}
 	\item[(1)] Minima of $I(z)$ is achieved at $z=1/2$, and the graph increases from $[1/2, 1]$. This implies rate of exponential decay increases as $1/2\to a\to 1$.
 	\item[(2)] Symmetry of the function $I(\cdot)$ around $1/2$ suggests that for $a<1/2$, (Requires a proof)
-	\[\frac{1}{n}\log[\P(S_n\ge an)]\to -I(a)\]
+		\[\frac{1}{n}\log[\P(S_n\ge an)]\to -I(a)\]
 	\item[(3)] The theorem implies SLLN. The idea of the proof makes use of the following inequality
-	\[\P(S_n>(1/2 + \delta)n)\le\exp\{-I(n(1/2+\delta))\}\]
+		\[\P(S_n>(1/2 + \delta)n)\le\exp\{-I(n(1/2+\delta))\}\]
 \end{itemize}
 
-\begin{proof} 
-	$\\$ 
-	If, $a>1$ then, since $S_n$ can be atmost $n$, $\P(S_n > an)=0$ so the result follows. Now, consider $\frac{1}{2} < a \leq 1$, then 
+\begin{proof}
+	$\\$
+		If, $a>1$ then, since $S_n$ can be atmost $n$, $\P(S_n > an)=0$ so the result follows. Now, consider $\frac{1}{2} < a \leq 1$, then
 	$$\P(S_n > an) = \sum\limits_{an < k \leq n}\P(S_n= k) = \sum\limits_{an < k\leq n} \binom{n}{k} \frac{1}{2^{n}} =  \frac{1}{2^{n}} \sum\limits_{an < k\leq n} \binom{n}{k} $$
-	Let, $Q_n(a) = \max\limits_{an < k \leq n} \dbinom{n}{k}$. So, we have, 
+	Let, $Q_n(a) = \max\limits_{an < k \leq n} \dbinom{n}{k}$. So, we have,
 	\begin{equation}
 		2^{-n}\,Q_{n}(a) \leq \P(S_n > an) \leq 2^{-n}\,Q_{n}(a)\,(n+1)
 	\end{equation}
-	First equality follows from the fact that one summand in the $\sum\limits_{an < k\leq n} \binom{n}{k}$ attains maximum and  the second equality follows since, each summand of $\sum\limits_{0 \leq k\leq n} \binom{n}{k}$ is $\leq Q_{n}(a)$. 
-	
-	\textbf{Claim:} 
+	First equality follows from the fact that one summand in the $\sum\limits_{an < k\leq n} \binom{n}{k}$ attains maximum and  the second equality follows since, each summand of $\sum\limits_{0 \leq k\leq n} \binom{n}{k}$ is $\leq Q_{n}(a)$.
+
+	\textbf{Claim:}
 	\\
-	
+
 	\vspace{-0.25cm}
-	For, $\frac{1}{2} < a < 1$, 
+	For, $\frac{1}{2} < a < 1$,
 	$$\frac{1}{n}\log Q_{n}(a) \xrightarrow[n \rightarrow \infty]{} -a\log a - (1-a)\log (1-a)$$
-	Now, from (8.2), 
+	Now, from (8.2),
 	\begin{equation}
 		-\log 2 + \frac{1}{n}\log Q_{n}(a) \leq \frac{1}{n} \log \P(S_n > an) \leq -\log 2 + \frac{1}{n}\log Q_{n}(a) + \frac{1}{n}\log (n+1)
 	\end{equation}
-	
+
 	assuming the claim as LHS and RHS of (8.3) goes to $-I(a)$, the result follows. We now prove the claim.
 	\\
-	
+
 	\vspace{-0.25cm}
-	
-	\textbf{Proof  of claim:} 
+
+	\textbf{Proof  of claim:}
 	\\
-	
-	\vspace{-0.25cm} 
+
+	\vspace{-0.25cm}
 	Since, $a > \frac{1}{2}$, $\max\limits_{an < k \leq n} \dbinom{n}{k} = \dbinom{n}{\ceil{an}}$. Now, from stirling's approximation
-	
+
 	$$\binom{n}{\ceil{an}} = \frac{n!}{\lceil an \rceil !(n-\ceil{an})!} \sim \frac{n^ne^{-n}\sqrt{2\pi n}}{\ceil{an}^{\ceil{an}}e^{-\ceil{an}}\sqrt{2\pi \ceil{an}}}\cdot \frac{1}{(n-\ceil{an})^{n-\ceil{an}}e^{n-\ceil{an}}\sqrt{2\pi (n-\ceil{an})}}$$
-	
-	For, $a > \frac{1}{2}, a<1$; $\ceil{an} \to \infty$ and $n-\ceil{an} \to \infty$ as $n \to \infty$ (Check!) and 
-	
-	
+
+	For, $a > \frac{1}{2}, a<1$; $\ceil{an} \to \infty$ and $n-\ceil{an} \to \infty$ as $n \to \infty$ (Check!) and
+
+
 	\begin{align*}
-		\frac{1}{n}\log Q_{n}(a) &\sim \frac{1}{n}\left[ (n+\frac{1}{2})\log n - (\ceil{an}+\frac{1}{2})\log \ceil{an} - (n-\ceil{an} + \frac{1}{2})\log(n-\ceil{an})  - \log (\sqrt{2\pi})\right] \\
-		&= \log n + \frac{1}{2n}\log n - \frac{\ceil{an}}{n}\log \ceil{an} - \frac{1}{2n}\log \ceil{an} - \frac{1}{n}\log \sqrt{2\pi}-\frac{n- \ceil{an}}{n} \log (n - \ceil{an}) - \frac{1}{2}\log (n-\ceil{an}) 
+		\frac{1}{n}\log Q_{n}(a) & \sim \frac{1}{n}\left[ (n+\frac{1}{2})\log n - (\ceil{an}+\frac{1}{2})\log \ceil{an} - (n-\ceil{an} + \frac{1}{2})\log(n-\ceil{an})  - \log (\sqrt{2\pi})\right]                                         \\
+		                         & = \log n + \frac{1}{2n}\log n - \frac{\ceil{an}}{n}\log \ceil{an} - \frac{1}{2n}\log \ceil{an} - \frac{1}{n}\log \sqrt{2\pi}-\frac{n- \ceil{an}}{n} \log (n - \ceil{an}) - \frac{1}{2}\log (n-\ceil{an})
 	\end{align*}
-	the second, fourth, fifth and seventh summand of the above equation tends to 0 as $n$ tends to $\infty$ and from the exercise (?) we have that 
-	$$\frac{\ceil{an}}{n}\log \frac{\ceil{an}}{n} \xrightarrow[n \rightarrow \infty]{} a\log a\,\,\,\,\,\,\text{and}\,\,\,\,\,\,\frac{n-\ceil{an}}{n}\log \frac{n-\ceil{an}}{n} \xrightarrow[n \rightarrow \infty]{} (1-a)\log (1-a)$$ 
+	the second, fourth, fifth and seventh summand of the above equation tends to 0 as $n$ tends to $\infty$ and from the exercise (?) we have that
+	$$\frac{\ceil{an}}{n}\log \frac{\ceil{an}}{n} \xrightarrow[n \rightarrow \infty]{} a\log a\,\,\,\,\,\,\text{and}\,\,\,\,\,\,\frac{n-\ceil{an}}{n}\log \frac{n-\ceil{an}}{n} \xrightarrow[n \rightarrow \infty]{} (1-a)\log (1-a)$$
 	which proves the claim.
 \end{proof}
 
 \subsection*{Cramer, 1930's}
-$\{\xi_i\}_{i\geq 1}$ i.i.d random variables with $\E[\xi_i] = \mu < \infty,\,\E[e^{r\xi_i}] < \infty,\,\forall \, r \in \R$. For any $a > \mu$, 
+$\{\xi_i\}_{i\geq 1}$ i.i.d random variables with $\E[\xi_i] = \mu < \infty,\,\E[e^{r\xi_i}] < \infty,\,\forall \, r \in \R$. For any $a > \mu$,
 $$\lim\limits_{n \to \infty} \frac{1}{n}\log \P(S_n > an) = -I(a)$$ where, $I(a) = \sup\limits_{z \in \R}[za-\E[e^{z\xi}]]$
 
-\subsection*{Sanov, 1961 (\texttt{Level 2 of LDP})} 
+\subsection*{Sanov, 1961 (\texttt{Level 2 of LDP})}
 $\P(S_n > an) = \P \circ S_{n}^{-1}((an,\infty)) \coloneqq \mu_{n}((an,\infty))$
 $$-\frac{1}{n}\log \mu_{n}((an,\infty)) \xrightarrow[n \rightarrow \infty]{} \infty$$
 
-\subsection*{Varadhan's LDP setup, 1960's}
+\section{Varadhan's LDP setup}
 Let, $X_n : \Omega \to \R$ be a random variable of $(\Omega, \mathcal{F}, \P)$. $A$ be an event, $\P_{n}(A) \coloneqq \P(S_n \in A)$, then $\P(\cdot)$ is a probability on $\R$. \\
 
 \vspace{-0.25cm}
-A sequence $\{\mathcal{P}_n\}_{n \geq 1}$ of probaility measures on $\R$ (can be any metric space $(X,d)$) is said to satisfy large deviation principle with rate n and rate function $I : \R \to \left[0,\infty\right) \cup \{\infty\}$, if 
+A sequence $\{\mathcal{P}_n\}_{n \geq 1}$ of probaility measures on $\R$ (can be any metric space $(X,d)$) is said to satisfy large deviation principle with rate n and rate function $I : \R \to \left[0,\infty\right) \cup \{\infty\}$, if
 \begin{enumerate}
 	\item $I \not\equiv \infty$, $I$ is lower-semi continuous and has compact level sets.
 	\item $\uplim \limits_{n \to \infty}\frac{1}{n} \log \P_{n}(\mathcal{C}) \leq -I(\mathcal{C})\,\forall\,\text{closed sets}\,\, \mathcal{C}$
 	\item  $\lowlim \limits_{n \to \infty}\frac{1}{n} \log \P_{n}(\mathcal{O}) \geq -I(\mathcal{O})\,\forall\,\text{open sets}\,\, \mathcal{O}$
 \end{enumerate}
-where, $A \subseteq \R$, $I(A)= \inf\limits_{y \in A}I(y)$. 
+where, $A \subseteq \R$, $I(A)= \inf\limits_{y \in A}I(y)$.
 
 \begin{theorem}
 	$\{\mathcal{P}_n\}_{n \geq 1}$ satisfied LDP with rate $n$ then , $I(\cdot)$ is unique.
 \end{theorem}
 \begin{theorem}[Varadhan's lemma]
-	If, $\{\mathcal{P}_n\}_{n \geq 1}$ satisfies LDP with rate $n$ and rate function $I(\cdot)$, let $F_n(x) = \P_{n}(\left(-\infty,n \right])$ for some continuous and bounded above function $F : \R \to \R$, we have 
+	If, $\{\mathcal{P}_n\}_{n \geq 1}$ satisfies LDP with rate $n$ and rate function $I(\cdot)$, let $F_n(x) = \P_{n}(\left(-\infty,n \right])$ for some continuous and bounded above function $F : \R \to \R$, we have
 	$$\int e^{n F(x)} dF_n(x) \xrightarrow[n \to \infty]{} \sup\limits_{x \in \R}[F(x) - I(x)]$$
 \end{theorem}
 \subsection*{Applications}
-For, $\theta \in S^1,\,t \in \R,\,u : S^1 \times \R_{+} \to \R$, 
+For, $\theta \in S^1,\,t \in \R,\,u : S^1 \times \R_{+} \to \R$,
 \begin{align*}
-	\frac{\partial u}{\partial t} &= \frac{1}{2}\frac{\partial^{2} u}{\partial \theta^2} + V(\theta)u \\
-	u(0,\theta) &= 1
+	\frac{\partial u}{\partial t} & = \frac{1}{2}\frac{\partial^{2} u}{\partial \theta^2} + V(\theta)u \\
+	u(0,\theta)                   & = 1
 \end{align*}
 then,  $$\frac{1}{t}\log u(t,\theta) \xrightarrow[t \to \infty]{} \lambda_1 = \sup\limits_{f \in \cdots} \left\{ \int V(\theta)f(\theta)d\theta - \frac{1}{8}\int \frac{(f'(\theta)^2)}{f(\theta)} d\theta \right\}$$
-we can represent this as follows, 
+we can represent this as follows,
 $$u(t,\theta) = \E\,e^{\int\limits_{0}^{t}V(\theta_{s})ds},\,\,\{\theta_{s}\} - \text{brownian motion on}\,S^1$$
 \subsection*{Exercises}
 \begin{enumerate}
-	\item For any $a \in \R$, show that, 
-	$$\frac{\ceil{an}}{n} \xrightarrow[n \to \infty]{} a \,\,\,\text{and}\,\,\,\frac{n-\ceil{an}}{n} \xrightarrow[n \to \infty]{} 1-a$$
+	\item For any $a \in \R$, show that,
+	      $$\frac{\ceil{an}}{n} \xrightarrow[n \to \infty]{} a \,\,\,\text{and}\,\,\,\frac{n-\ceil{an}}{n} \xrightarrow[n \to \infty]{} 1-a$$
 \end{enumerate}
 \end{document}
