@@ -80,11 +80,64 @@ The average survival probability of a given trajectory $X$ is given by $\sigma^X
     Now,
     \begin{equation*}
         \begin{aligned}
-            \sigma^X(n) & =\E^\xi[(1-q)^{\sum_{i=1}^{n}\xi(i,X_i)}]                                                              \\
-                        & =\E^\xi[(1-q)^{\sum_{i=1}^{n}\sum_{y \in \Z^d}\sum_{1\leq j \leq N_y} \delta_{X_i}(Y^{j,y}_n)}]        \\
-                        & =\prod_{y \in \Z^d}\E^\xi[\prod_{1\leq j \leq N_y}(1-q)^{\sum_{i=1}^{n}\delta_{X_i}(Y^{j,y}_n)}]       \\
-                        & =\prod_{y \in \Z^d}\E^y\E^{N_y}[\prod_{1\leq j \leq N_y}(1-q)^{\sum_{i=1}^{n}\delta_{X_i}(Y^{j,y}_n)}]
+            \sigma^X(n) & =\E^\xi[(1-q)^{\sum_{i=1}^{n}\xi(i,X_i)}]                                                                                                       \\
+                        & =\E^\xi[(1-q)^{\sum_{i=1}^{n}\sum_{y \in \Z^d}\sum_{1\leq j \leq N_y} \delta_{X_i}(Y^{j,y}_n)}]                                                 \\
+                        & =\prod_{y \in \Z^d}\E^\xi[\prod_{1\leq j \leq N_y}(1-q)^{\sum_{i=1}^{n}\delta_{X_i}(Y^{j,y}_n)}]                                                \\
+                        & =\prod_{y \in \Z^d}\E^y\E^{N_y}[\prod_{1\leq j \leq N_y}(1-q)^{\sum_{i=1}^{n}\delta_{X_i}(Y^{j,y}_n)}]                                          \\
+                        & =\prod_{y \in \Z^d}\sum_{k=0}^{\infty}\frac{e^{-\lambda}\lambda^k}{k!}\E^y[\prod_{1\leq j \leq k}(1-q)^{\sum_{i=1}^{n}\delta_{X_i}(Y^{j,y}_n)}] \\
+                        & =\prod_{y \in \Z^d}\sum_{k=0}^{\infty}\frac{e^{-\lambda}\lambda^k}{k!}(\prod_{1\leq j \leq k}(1-q)^{\sum_{i=1}^{n}\delta_{X_i}(Y^{j,y}_n)})^k   \\
+                        & =\prod_{y \in \Z^d}e^{-\lambda(1-\E^y((1-q)^{\sum_{i=1}^{n}\delta_{X_i}(Y^{j,y}_n)}))}                                                          \\
+                        & =e^{-\lambda\sum_{y\in\mathbb{Z}^d}W_x(n,y)}.
         \end{aligned}
     \end{equation*}
+
 \end{proof}
+
+\begin{lemma}
+    $W_X(n,y)=1-\E^y[1-(1-q)^{\sum_{i=1}^{n}\delta(Y_i^y)}]=\P_y^{X}(\tau\leq n)$, where $\tau=\text{min}\{i\geq 0| X_i=Y_i, Z_i=1\}$.
+\end{lemma}
+
+
+\begin{lemma}
+    $\sum_{y\in \mathbb{Z}^d}\P_y^{X}(\tau\leq n)\geq \sum_{y\in \mathbb{Z}^d}\P_y^{0}(\tau\leq n)$.
+\end{lemma}
+\begin{proof}
+    Let \begin{equation*}
+        \begin{aligned}
+            q & = \P(Z_n=1)                                           \\
+              & =\P_{X_n}(\bigcup_{y\in\mathbb{Z}^d}\{Z_n=1, Y_n=y\}) \\
+              & = \sum_{y\in\mathbb{Z}^d}\P_{X_n}(Z_n=1, Y_n=y)       \\
+              & = \sum_{y\in\mathbb{Z}^d}\P_{X_n}(Z_n=1, Y_n=X_n)     \\
+              & =
+            \sum_{y\in\mathbb{Z}^d} \big[\P^X(\tau=n)+\sum_{k=0}^{n-1}\P^X_y(\tau=k)p_{n-k}^y(X_n-X_k)q\big]
+        \end{aligned}
+    \end{equation*}
+    \begin{lemma}
+        For a lazy symmetric random walk on $\mathbb{Z}^d.$
+        $$p_n^Y(0)\geq p_n^Y(y), \forall\hfill y\in \mathbb{Z}^d $$ $$p_n^Y(0)\geq p_{n+1}^Y(0).$$
+    \end{lemma}
+    Therefore using the above lemma, we get:
+    $$q\leq \sum_{y\in\mathbb{Z}^d} \big[\P^X(\tau=n)+\sum_{k=0}^{n-1}\P^X_y(\tau=k)p_{n-k}^y(0)q\big].$$
+    Also, replacing $X=\zero$ in $\sum_{y\in\mathbb{Z}^d} \big[\P^X(\tau=n)+\sum_{k=0}^{n-1}\P^X_y(\tau=k)p_{n-k}^y(X_n-X_k)q\big]$, we get:
+    $$q=\sum_{y\in\mathbb{Z}^d} \big[\P^0(\tau=n)+\sum_{k=0}^{n-1}\P^0_y(\tau=k)p_{n-k}^y(0)q\big]$$.
+
+    Let \begin{equation*}
+        \begin{aligned}
+             & S_n^X= \sum_{y\in\mathbb{Z}^d}\P_y^X(\tau\leq n)       \\
+             & S_n^0= \sum_{y\in\mathbb{Z}^d}\P_y^0(\tau\leq n)       \\
+             & S_n^X-S_{n-1}^X= \sum_{y\in\mathbb{Z}^d}\P_y^X(\tau=n) \\
+        \end{aligned}
+    \end{equation*}
+    We define $S_{-1}^X=S_{-1}^0=0$.
+
+    We have \begin{equation*}
+        \begin{aligned}
+             & q= \sum_{y\in\mathbb{Z}^d} \left[\P^X(\tau=n)+\sum_{k=0}^{n-1}\P^X_y(\tau=k)p_{n-k}^y(X_n-X_k)q\right]                       \\
+             & \implies (S_n^X-S_n^0) \geq (1- qp_i^Y(0))(S_{n-1}^X-S_{n-1}^0)+ q\sum_{k=0}^{n-2}(S_k^X-S_k^0)(p_{n-k-1}^Y(0)-p_{n-k}^Y(0))
+        \end{aligned}
+    \end{equation*}
+    Now using induction, we get $S_n^X\geq S_n^0.$
+
+\end{proof}
+
 \end{document}
