@@ -1,4 +1,5 @@
 \documentclass[main]{subfiles}
+\usepackage{tikz}
 
 \begin{document}
 %Set chapter counter as week-1
@@ -142,4 +143,56 @@ The average survival probability of a given trajectory $X$ is given by $\sigma^X
 \begin{remark}
     The continuous case has a similar proof and can be found here \cite{drewitz2011survival}.
 \end{remark}
+\section{Strategy}
+\begin{figure}[ht]
+    \centering
+
+    \tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+    \begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+        %uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+
+        %Shape: Circle [id:dp4944181906976386] 
+        \draw   (219,150.6) .. controls (219,93.38) and (265.38,47) .. (322.6,47) .. controls (379.82,47) and (426.2,93.38) .. (426.2,150.6) .. controls (426.2,207.82) and (379.82,254.2) .. (322.6,254.2) .. controls (265.38,254.2) and (219,207.82) .. (219,150.6) -- cycle ;
+        %Shape: Free Drawing [id:dp9400893360400799] 
+        \draw  [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ][line width=3] [line join = round][line cap = round] (324.2,151) .. controls (326.46,153.26) and (326.14,158.63) .. (328.2,160) .. controls (330.41,161.48) and (340.03,160.95) .. (340.2,161) .. controls (343.25,161.83) and (342.65,171.19) .. (347.2,168) .. controls (348.78,166.89) and (355.57,156.6) .. (359.2,156) .. controls (364.43,155.13) and (369.91,163.22) .. (372.2,151) .. controls (372.81,147.72) and (373.01,144.23) .. (372.2,141) .. controls (371.14,136.75) and (366.39,140.97) .. (365.2,138) .. controls (363.45,133.62) and (369.58,125.24) .. (371.2,122) .. controls (373.46,117.49) and (385.96,123.41) .. (388.2,127) .. controls (388.41,127.34) and (386.87,134.88) .. (387.2,135) .. controls (394.01,137.55) and (399.51,132.39) .. (402.2,127) .. controls (403.29,124.83) and (403.86,122.4) .. (404.2,120) .. controls (404.26,119.56) and (399.97,118.26) .. (399.2,118) .. controls (396.19,117) and (393.25,111.44) .. (390.2,109) .. controls (387.85,107.12) and (385.81,109.23) .. (384.2,106) .. controls (380.81,99.22) and (391.86,95.99) .. (389.2,92) .. controls (386.34,87.7) and (377.73,89.58) .. (372.2,88) .. controls (370.77,87.59) and (373.15,85.05) .. (374.2,84) .. controls (375.83,82.37) and (375.79,80.69) .. (375.2,76) .. controls (374.62,71.32) and (365.9,74.36) .. (361.2,74) ;
+        %Straight Lines [id:da614933324391667] 
+        \draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][line width=3]  [dash pattern={on 7.88pt off 4.5pt}]  (322.6,150.6) -- (219,150.6) ;
+
+        % Text Node
+        \draw (258,130.4) node [anchor=north west][inner sep=0.75pt]    {$R$};
+        % Text Node
+        \draw (340,73.4) node [anchor=north west][inner sep=0.75pt]    {$X_{n}$};
+
+
+    \end{tikzpicture}
+    \caption{Strategy for avoiding traps by not allowing the walk to move outside the ball of radius $R$}
+\end{figure}
+The strategy is to find an event such that $\P^X_{\epsilon}.(\text{event})\approx \sigma^{0}(x)$
+We first define the following events:\\\\
+$G_n=$ \{$X_n$ stays inside $B(0,R_n)$\}\\
+$E_n=$\{no traps in $B(0,R_n)$\}\\
+$F_n=$\{traps outside $B(0,R_n)$ by time $n$\}.\\\\
+We get the probability of the given events as:
+\begin{equation}
+    \P(E_n)=e^{-cR_n^d}
+\end{equation}
+\begin{equation}
+    \begin{aligned}
+        \P(G_n) & =\P(\text{sup}_{0\leq k\leq n}|X_k|\leq R_n) \\
+                & =\P(\tau_{B(0,R_n)}\geq n)                   \\
+                & \geq e^{-cn/{R_n^2}}
+    \end{aligned}
+\end{equation}
+and
+\begin{equation}
+    \begin{aligned}
+        \P(F_n)\geq e^{-c\sqrt{n}}
+    \end{aligned}
+\end{equation}
+Choose $R_n$, s.t.
+$$
+    c_1 R_n^d=c_2 n / R_n^2 \text{ i.e. } R_n=c_1 n^{1 / d+2}
+$$
+This shows that $P(G_n\cap E_n \cap F_n)$ is of the same order as $\sigma^\zero (n)$.
 \end{document}
