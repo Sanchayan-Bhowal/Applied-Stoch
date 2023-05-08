@@ -1,0 +1,107 @@
+\documentclass[main]{subfiles}
+\begin{document}
+%Set chapter counter as week-8
+\chapPreamble{10}{March 10, 2023}{Random Walk in random environment}
+%Set chapter name
+
+\lecture{Siva Athreya}{Ramkrishna Samanta, Venkat Trivikram}
+
+\section{Random walk in random environment}
+\subsection{Sinai's walk}
+Given $\Bar{W}$,
+\begin{align*}
+	\P_{\Bar{W}}(X_{n+1}=z|X_n=y) =
+	\begin{cases}
+		W_z   & \text{if } y=z+1 \\
+		1-W_z & \text{if } y=z-1 \\
+		0   \text{otherwise}
+	\end{cases}
+\end{align*}
+$$\overrightarrow{\E}[X_1]=1.\frac{3}{4}+(-1).\frac{1}{4}=\frac{1}{2}$$
+$$\overleftarrow{\E}[X_1]=1.\frac{1}{3}+(-1).\frac{2}{3}=\frac{-1}{3}.$$
+$$\E[X_1]=p.\frac{1}{2}+(1-p)(\frac{-1}{3})=\frac{1}{6}p-\frac
+	{1}{3}.$$
+$\{X_n\}_{n\geq1}$ Recurrent. Moreover, $\frac{X_a}{(\log n)^2}$is the correct law of large numbers.\\
+
+$\P^x(X_n\in A)=\P(\P^{x}_W(X_n\in A))$\\\\
+\textbf{Quenched} distribution of walk under $\P_W(.)$\\
+Walk is a Markov Chain and tools available.
+\\\\
+\textbf{Averaged:} distribution of walk under as $\P.$
+Although it is not a Markov Chain but is homogenous.
+
+\begin{equation*}
+	\E^0[X_1]=\E[W_0]
+\end{equation*}
+\begin{equation*}
+	\P(X_3=1|X_1=1,X_2=0)=\frac{\P(X_3,X_1=-1,X_2=0)}{\P(X_1=1,X_2=0)}= \frac{\E[W_0^2(1-W_0)]}{\E[W_0(1-W_0)]}.
+\end{equation*}
+$\Gamma=((V,E),\{\mu_{xy}\}_{x\sim y})$ Random conducting network.
+$\P_W(X_n=|X_{n-1}=y)=\frac{\mu_{xy}}{\mu_x},$
+$\{\mu_{xy}\}_{x\sim y}$ iid. collection and $\mu_x$ and $\mu_y$ are not independent.
+
+\subsection{Examples}
+\subsubsection{Random walk in Galton Watson tree}
+
+\emph{Environment} Choose a realization of Galton Watson tree.\\
+\emph{Model1:} Put natural weights.\\
+\emph{Model2:} Biased walk ($\beta$)\\
+$x\in \tau$, has $k$-descendents $k\geq0$
+move to descendent with $\frac{\beta}{1+\beta k}$\\
+move to parent with $\frac{1}{1+\beta k}$.
+
+\subsubsection{Random walk in Percolation clusters}
+Consider $\Z^d$. Now, each edge open with probability $p$ and closed with probability $1-p$. If $p>p_c(d)$ then there exists a infinite connected component. The random walk in such a component is an example of random walk in random environment.
+
+\section{Recurrence/Transience}
+
+\begin{theorem}[1975, Solomon]
+	Under the assumptions,
+	\begin{align}
+		\{\omega_x\}_{x} \text{is an i.i.d sequence} \\
+		\exists\,\epsilon > 0\,\, \text{such that}\,\, \P(\omega \in (\epsilon,1-\epsilon))=1
+	\end{align}
+	the following holds,
+	\begin{align*}
+		\E[\log \rho_{0}] < 0 & \Rightarrow \P(X_n \to \infty) = 1                                                    \\
+		\E[\log \rho_{0}] > 0 & \Rightarrow \P(X_n \to -\infty) = 1                                                   \\
+		\E[\log \rho_{0}] = 0 & \Rightarrow \P(\limsup_{n \to \infty} = \infty, \liminf_{n \to \infty} = -\infty) = 1
+	\end{align*}
+\end{theorem}
+
+\begin{theorem}
+	Under the assumptions, (10.1) and (10.2), the following holds.
+	\begin{align*}
+		\text{if} \,\, \E[\rho_{0}] <1,\,\P\left(\lim_{n \to \infty} \frac{X_n}{n} = \frac{1-\E[\rho_{0}]}{1+\E[\rho_{0}]}\right) = 1                      \\[0.25cm]
+		\text{if} \,\, \E\left[\frac{1}{\rho_{0}}\right] <1,\,\P\left(\lim_{n \to \infty} \frac{X_n}{n} = \frac{1-\E[\rho_{0}]}{1+\E[\rho_{0}]}\right) = 1 \\[0.25cm]
+		\text{if} \,\, \frac{1}{\E[\rho_{0}]} \leq 1 \leq \E\left[\frac{1}{\rho_{0}}\right],\,\P\left(\lim_{n \to \infty} \frac{X_n}{n} = 0\right) = 1
+	\end{align*}
+\end{theorem}
+\begin{lemma}
+	Suppose $\limsup_{n \to \infty} X_n = \infty,\, T_{k} = \inf{n \geq 0 \mid X_n = k}$, then
+	\begin{align*}
+		\lim_{k \to \infty} \frac{T_k}{k} = c \in [1,\infty) \cup \{\infty\} \\[0.25cm]
+		\lim_{n \to \infty} \frac{X_n}{n} =
+		\begin{cases}
+			\frac{1}{c} & \text{if } c < \infty \\
+			0           & \text{if } c = \infty
+		\end{cases}
+	\end{align*}
+\end{lemma}
+\begin{proof}
+	$X_n^{\ast} = \max_{1 \leq k \leq n} X_{k}$, $T_{X_n^{\ast}} \leq n \leq T_{X_n^{\ast}+1}$, we have,
+	$$\frac{T_{X_n^{\ast}}}{X_n^{\ast}} \leq \frac{n}{X_n^{\ast}} < \frac{T_{X_n^{\ast}+1}}{T_{X_n^{\ast}+1}}\frac{X_n^{\ast}+1}{X_n^{\ast}}$$
+	$\Rightarrow \lim_{n \to \infty} \frac{X_n}{n} =
+		\begin{cases}
+			\frac{1}{c} & \text{if } c < \infty \\
+			0           & \text{if } c = \infty
+		\end{cases}$
+	Therefore,
+	\begin{align*}
+		 & \text{if}\,\,c=\infty, \lim_{n \to \infty} \frac{X_n}{n} = 0                                                                       \\[0.25cm]
+		 & \text{if}\,\,c < \infty, \frac{X_n^{\ast}-X_n}{n} \leq \frac{n-T_{X_n^{\ast}}}{n}                                                  \\[0.25cm]
+		 & \Rightarrow \limsup_{n \to \infty} \frac{X_n^{\ast}- X_n}{n}  = \limsup_{n \to \infty} \left(1- \frac{T_{X_n^{\ast}}}{n}\right) =0
+	\end{align*}
+
+\end{proof}
+\end{document}
